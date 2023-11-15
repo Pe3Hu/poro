@@ -1,0 +1,54 @@
+[
+ {
+  "rank": 0,
+  "vigor peak": 21,
+  "standard peak": 16,
+  "fatigue peak": 11,
+  "vigor normal": 13,
+  "standard normal": 9,
+  "fatigue normal": 5,
+  "vigor minimum": 7,
+  "standard minimum": 4,
+  "fatigue minimum": 1,
+  "predispositions": 5
+ },
+ {
+  "rank": 1,
+  "vigor peak": 35,
+  "standard peak": 30,
+  "fatigue peak": 25,
+  "vigor normal": 20,
+  "standard normal": 15,
+  "fatigue normal": 10,
+  "vigor minimum": 15,
+  "standard minimum": 10,
+  "fatigue minimum": 5,
+  "predispositions": "6|8"
+ },
+ {
+  "rank": 2,
+  "vigor peak": 45,
+  "standard peak": 36,
+  "fatigue peak": 27,
+  "vigor normal": 32,
+  "standard normal": 24,
+  "fatigue normal": 16,
+  "vigor minimum": 23,
+  "standard minimum": 16,
+  "fatigue minimum": 9,
+  "predispositions": "5|7|9"
+ },
+ {
+  "rank": 3,
+  "vigor peak": 55,
+  "standard peak": 50,
+  "fatigue peak": 45,
+  "vigor normal": 40,
+  "standard normal": 35,
+  "fatigue normal": 30,
+  "vigor minimum": 36,
+  "standard minimum": 25,
+  "fatigue minimum": 16,
+  "predispositions": "5|6|7|8|9"
+ }
+]
