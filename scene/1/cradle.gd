@@ -3,11 +3,11 @@ extends MarginContainer
 
 @onready var teams = $Teams
 
-var sketch = null
+var game = null
 
 
 func set_attributes(input_: Dictionary) -> void:
-	sketch  = input_.sketch
+	game  = input_.game
 	
 	init_teams()
 

@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://oisk5g1hmf8y"]
+
+[ext_resource type="Script" path="res://scene/2/championship.gd" id="1_n7g2e"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7paps"]
+
+[node name="Championship" type="MarginContainer"]
+custom_minimum_size = Vector2(5, 5)
+offset_right = 40.0
+offset_bottom = 40.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_n7g2e")
+
+[node name="BG" type="Panel" parent="."]
+visible = false
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_7paps")
+
+[node name="Tournaments" type="VBoxContainer" parent="."]
+layout_mode = 2
+alignment = 1

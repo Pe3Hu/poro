@@ -16,6 +16,11 @@ func init_gladiators() -> void:
 	for _i in 1:
 		var input = {}
 		input.team = self
+		input.rank = 0
+		input.primary = "strength"
+		input.predispositions = {}
+		input.predispositions["strength"] = 5
+		input.predispositions["dexterity"] = 10 - input.predispositions["strength"]
 	
 		var gladiator = Global.scene.gladiator.instantiate()
 		gladiators.add_child(gladiator)

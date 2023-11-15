@@ -1,0 +1,50 @@
+[gd_scene load_steps=13 format=3 uid="uid://c68chhpn3prav"]
+
+[ext_resource type="Texture2D" uid="uid://m4mwlidb4rfv" path="res://asset/png/icon/hex/0.png" id="1_s7moe"]
+[ext_resource type="Script" path="res://scene/2/half.gd" id="1_yyvx2"]
+[ext_resource type="Texture2D" uid="uid://2j5g6c5k2rav" path="res://asset/png/icon/hex/1.png" id="2_gn3mn"]
+[ext_resource type="Texture2D" uid="uid://cxsk6qchamx41" path="res://asset/png/icon/hex/2.png" id="3_vbe5s"]
+[ext_resource type="Texture2D" uid="uid://c75jthu80a1sp" path="res://asset/png/icon/hex/left.png" id="4_lcirw"]
+[ext_resource type="Texture2D" uid="uid://dklwoeqi01a4t" path="res://asset/png/icon/hex/right.png" id="5_n5vit"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qcu7s"]
+texture = ExtResource("1_s7moe")
+texture_region_size = Vector2i(512, 512)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fd70w"]
+texture = ExtResource("2_gn3mn")
+texture_region_size = Vector2i(512, 512)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7wrtb"]
+texture = ExtResource("3_vbe5s")
+texture_region_size = Vector2i(512, 512)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0iaxn"]
+texture = ExtResource("4_lcirw")
+texture_region_size = Vector2i(512, 512)
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wusbf"]
+texture = ExtResource("5_n5vit")
+texture_region_size = Vector2i(512, 512)
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_jy1jx"]
+tile_shape = 3
+tile_offset_axis = 1
+tile_size = Vector2i(512, 512)
+sources/17 = SubResource("TileSetAtlasSource_qcu7s")
+sources/18 = SubResource("TileSetAtlasSource_fd70w")
+sources/19 = SubResource("TileSetAtlasSource_7wrtb")
+sources/20 = SubResource("TileSetAtlasSource_0iaxn")
+sources/21 = SubResource("TileSetAtlasSource_wusbf")
+
+[node name="Half" type="TileMap"]
+tile_set = SubResource("TileSet_jy1jx")
+format = 2
+layer_0/name = "0"
+layer_0/tile_data = PackedInt32Array(262149, 21, 0, 131077, 21, 0, 327687, 20, 0, 196615, 20, 0, 65543, 20, 0, 393225, 21, 0, 262153, 21, 0, 131081, 21, 0, 9, 21, 0, 11, 20, 0, 65549, 20, 0, 131083, 20, 0, 262155, 20, 0, 327693, 20, 0, 393227, 20, 0, 196611, 20, 0, 196609, 17, 0, 0, 17, 0, 2, 17, 0)
+script = ExtResource("1_yyvx2")

@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://dpq0g6jrlkuea"]
+[gd_scene load_steps=4 format=3 uid="uid://dpq0g6jrlkuea"]
 
 [ext_resource type="Script" path="res://scene/0/game.gd" id="1_ic1eh"]
-[ext_resource type="PackedScene" uid="uid://c8p8p11wpyu27" path="res://scene/0/sketch.tscn" id="2_wumqn"]
+[ext_resource type="PackedScene" uid="uid://tiu625irnnwp" path="res://scene/1/cradle.tscn" id="2_675c0"]
+[ext_resource type="PackedScene" uid="uid://oisk5g1hmf8y" path="res://scene/2/championship.tscn" id="3_res75"]
 
 [node name="Game" type="Node"]
 script = ExtResource("1_ic1eh")
@@ -11,4 +12,6 @@ visible = false
 offset_right = 40.0
 offset_bottom = 23.0
 
-[node name="Sketch" parent="." instance=ExtResource("2_wumqn")]
+[node name="Cradle" parent="." instance=ExtResource("2_675c0")]
+
+[node name="Championship" parent="." instance=ExtResource("3_res75")]

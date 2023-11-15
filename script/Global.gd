@@ -27,6 +27,7 @@ func init_arr() -> void:
 	arr.state = ["vigor", "standard", "fatigue"]
 	arr.effort = ["peak", "normal", "minimum"]
 	arr.aspect = ["strength", "dexterity"]
+	arr.side = ["left", "right"]
 
 
 func init_num() -> void:
@@ -104,6 +105,9 @@ func init_emptyjson() -> void:
 func init_aspect() -> void:
 	dict.aspect = {}
 	dict.aspect.rank = {}
+	dict.aspect.reflection = {}
+	dict.aspect.reflection["strength"] = "dexterity"
+	dict.aspect.reflection["dexterity"] = "strength"
 	
 	var path = "res://asset/json/poro_aspect.json"
 	var array = load_data(path)
@@ -156,6 +160,11 @@ func init_scene() -> void:
 	scene.team = load("res://scene/1/team.tscn")
 	scene.gladiator = load("res://scene/1/gladiator.tscn")
 	scene.performance = load("res://scene/1/performance.tscn")
+	
+	scene.tournament = load("res://scene/2/tournament.tscn")
+	scene.stadium = load("res://scene/2/stadium.tscn")
+	scene.marker = load("res://scene/2/marker.tscn")
+	
 
 
 func init_vec():
@@ -164,9 +173,7 @@ func init_vec():
 	vec.size.icon = Vector2(48, 48)
 	vec.size.number = Vector2(5, 32)
 	
-	vec.size.aspect = Vector2(32, 32)
-	vec.size.box = Vector2(100, 100)
-	vec.size.bar = Vector2(120, 12)
+	vec.size.marker = Vector2(64, 64) * 4
 	
 	init_window_size()
 
@@ -180,6 +187,7 @@ func init_window_size():
 
 func init_color():
 	var h = 360.0
+	
 	color.indicator = {}
 	color.indicator.health = {}
 	color.indicator.health.fill = Color.from_hsv(0, 1, 0.9)

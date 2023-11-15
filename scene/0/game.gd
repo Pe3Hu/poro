@@ -1,12 +1,19 @@
 extends Node
 
 
-@onready var sketch = $Sketch
+@onready var cradle = $Cradle
+@onready var championship = $Championship
 
 
 func _ready() -> void:
 	#datas.sort_custom(func(a, b): return a.value < b.value)
 	#012 description
+	
+	
+	var input = {}
+	input.game = self
+	cradle.set_attributes(input)
+	championship.set_attributes(input)
 	pass
 
 
@@ -18,5 +25,5 @@ func _input(event) -> void:
 					pass
 
 
-func _process(delta_) -> void:
-	$FPS.text = str(Engine.get_frames_per_second())
+#func _process(delta_) -> void:
+#	$FPS.text = str(Engine.get_frames_per_second())

@@ -1,7 +1,8 @@
 extends MarginContainer
 
 
-@onready var cradle = $Cradle
+@onready var cradle = $HBox/Cradle
+@onready var championship = $Championship
 
 
 func _ready() -> void:
@@ -15,3 +16,4 @@ func _ready() -> void:
 	var input = {}
 	input.sketch = self
 	cradle.set_attributes(input)
+	championship.set_attributes(input)
