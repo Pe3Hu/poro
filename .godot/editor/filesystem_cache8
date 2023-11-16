@@ -1,5 +1,5 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1700048788
+::res://::1700102757
 ::res://asset/::1700025450
 default_env.tres::Environment::-1::1690116911::0::1::::<><>::
 icon.png::CompressedTexture2D::2432420761471245026::1690116911::1690116911::1::::<><>::
@@ -34,7 +34,7 @@ hexs 1024.png::CompressedTexture2D::440301081456874549::1700045779::1700045906::
 hexs.png::CompressedTexture2D::3352899694593440967::1700047718::1700047718::1::::<><>::
 left.png::CompressedTexture2D::7081396479536470283::1700045347::1700047579::1::::<><>::
 right.png::CompressedTexture2D::7885219652918001229::1700045321::1700047579::1::::<><>::
-::res://asset/png/icon/marker/::1700049312
+::res://asset/png/icon/marker/::1700049314
 blue 1.png::CompressedTexture2D::8103224637802763767::1700048945::1700049294::1::::<><>::
 blue 2.png::CompressedTexture2D::2548808673375800007::1700048960::1700049294::1::::<><>::
 blue 3.png::CompressedTexture2D::4443988623840647686::1700048966::1700049294::1::::<><>::
@@ -52,36 +52,36 @@ fatigue.png::CompressedTexture2D::3601885004146458483::1700029944::1700030033::1
 standard.png::CompressedTexture2D::7974896469076057804::1700029755::1700030033::1::::<><>::
 vigor.png::CompressedTexture2D::8429183489509408985::1700029766::1700030033::1::::<><>::
 ::res://scene/::1700046444
-::res://scene/0/::1700047862
+::res://scene/0/::1700050138
 blank.tscn::PackedScene::706186300528003691::1700028778::0::1::::<><>::
 game.gd::GDScript::-1::1700047157::0::1::::<>Node<>::
-game.tscn::PackedScene::8246655032211948728::1700047862::0::1::::<><>::res://scene/0/game.gd<>uid://tiu625irnnwp::::res://scene/1/cradle.tscn<>uid://oisk5g1hmf8y::::res://scene/2/championship.tscn
-icon.gd::GDScript::-1::1700033559::0::1::::<>MarginContainer<>::
+game.tscn::PackedScene::8246655032211948728::1700050138::0::1::::<><>::res://scene/0/game.gd<>uid://tiu625irnnwp::::res://scene/1/cradle.tscn<>uid://oisk5g1hmf8y::::res://scene/2/championship.tscn
+icon.gd::GDScript::-1::1700049517::0::1::::<>MarginContainer<>::
 icon.tscn::PackedScene::5381527879177219912::1700046731::0::1::::<><>::res://scene/0/icon.gd<>uid://deu2vlj4q8un0::::res://asset/font/letter/Chunk Five Print.otf
 sketch.gd::GDScript::-1::1700047066::0::1::::<>MarginContainer<>::
 sketch.tscn::PackedScene::7122070728214644470::1700047226::0::1::::<><>::res://scene/0/sketch.gd<>uid://tiu625irnnwp::::res://scene/1/cradle.tscn<>uid://oisk5g1hmf8y::::res://scene/2/championship.tscn
-::res://scene/1/::1700047862
+::res://scene/1/::1700050138
 aspect.gd::GDScript::-1::1700035627::0::1::::<>MarginContainer<>::
-aspect.tscn::PackedScene::8951340908821561963::1700047862::0::1::::<><>::res://scene/1/aspect.gd
+aspect.tscn::PackedScene::8951340908821561963::1700050138::0::1::::<><>::res://scene/1/aspect.gd
 cradle.gd::GDScript::-1::1700047172::0::1::::<>MarginContainer<>::
-cradle.tscn::PackedScene::1351374215482788775::1700047862::0::1::::<><>::res://scene/1/cradle.gd
+cradle.tscn::PackedScene::1351374215482788775::1700050138::0::1::::<><>::res://scene/1/cradle.gd
 gladiator.gd::GDScript::-1::1700035152::0::1::::<>MarginContainer<>::
-gladiator.tscn::PackedScene::5832777378910515197::1700047861::0::1::::<><>::res://scene/1/gladiator.gd<>uid://d0sdjofw8ildj::::res://scene/1/aspect.tscn
+gladiator.tscn::PackedScene::5832777378910515197::1700050138::0::1::::<><>::res://scene/1/gladiator.gd<>uid://d0sdjofw8ildj::::res://scene/1/aspect.tscn
 performance.gd::GDScript::-1::1700035213::0::1::::<>MarginContainer<>::
 performance.tscn::PackedScene::4687888309027161839::1700032533::0::1::::<><>::uid://ciw38iqel0v5a
 team.gd::GDScript::-1::1700035098::0::1::::<>MarginContainer<>::
-team.tscn::PackedScene::9015607196052262330::1700047861::0::1::::<><>::res://scene/1/team.gd
-::res://scene/2/::1700048873
+team.tscn::PackedScene::9015607196052262330::1700050138::0::1::::<><>::res://scene/1/team.gd
+::res://scene/2/::1700052666
 championship.gd::GDScript::-1::1700047165::0::1::::<>MarginContainer<>::
-championship.tscn::PackedScene::1000271182934261662::1700047862::0::1::::<><>::res://scene/2/championship.gd
-half.gd::GDScript::-1::1700048707::0::1::::<>TileMap<>::
-half.tscn::PackedScene::7016954312056250225::1700048707::0::1::::<><>::uid://m4mwlidb4rfv::::res://asset/png/icon/hex/0.png<>res://scene/2/half.gd<>uid://2j5g6c5k2rav::::res://asset/png/icon/hex/1.png<>uid://cxsk6qchamx41::::res://asset/png/icon/hex/2.png<>uid://c75jthu80a1sp::::res://asset/png/icon/hex/left.png<>uid://dklwoeqi01a4t::::res://asset/png/icon/hex/right.png
-marker.tscn::PackedScene::8285340244234210275::1700048873::0::1::::<><>::res://scene/2/marker.gd<>uid://ciw38iqel0v5a::::res://scene/0/icon.tscn
-marker.gd::GDScript::-1::1700048873::0::1::::<>MarginContainer<>::
-spot.tscn::PackedScene::9131087105026517130::1700047862::0::1::::<><>::
-stadium.gd::GDScript::-1::1700046930::0::1::::<>MarginContainer<>::
-stadium.tscn::PackedScene::6187039993128047557::1700047862::0::1::::<><>::res://scene/2/stadium.gd<>uid://c68chhpn3prav::::res://scene/2/half.tscn
+championship.tscn::PackedScene::1000271182934261662::1700052666::0::1::::<><>::res://scene/2/championship.gd
+half.gd::GDScript::-1::1700050516::0::1::::<>TileMap<>::
+half.tscn::PackedScene::7016954312056250225::1700052666::0::1::::<><>::uid://m4mwlidb4rfv::::res://asset/png/icon/hex/0.png<>res://scene/2/half.gd<>uid://2j5g6c5k2rav::::res://asset/png/icon/hex/1.png<>uid://cxsk6qchamx41::::res://asset/png/icon/hex/2.png<>uid://c75jthu80a1sp::::res://asset/png/icon/hex/left.png<>uid://dklwoeqi01a4t::::res://asset/png/icon/hex/right.png
+marker.gd::GDScript::-1::1700052666::0::1::::<>MarginContainer<>::
+marker.tscn::PackedScene::8285340244234210275::1700052666::0::1::::<><>::res://scene/2/marker.gd<>uid://ciw38iqel0v5a::::res://scene/0/icon.tscn
+spot.tscn::PackedScene::9131087105026517130::1700050138::0::1::::<><>::
+stadium.gd::GDScript::-1::1700052500::0::1::::<>MarginContainer<>::
+stadium.tscn::PackedScene::6187039993128047557::1700052666::0::1::::<><>::res://scene/2/stadium.gd<>uid://c68chhpn3prav::::res://scene/2/half.tscn
 tournament.gd::GDScript::-1::1700046663::0::1::::<>MarginContainer<>::
-tournament.tscn::PackedScene::7417962966324561829::1700047862::0::1::::<><>::res://scene/2/tournament.gd
-::res://script/::1700046634
-Global.gd::GDScript::-1::1700046634::0::1::::<>Node<>::
+tournament.tscn::PackedScene::7417962966324561829::1700052666::0::1::::<><>::res://scene/2/tournament.gd
+::res://script/::1700052336
+Global.gd::GDScript::-1::1700052336::0::1::::<>Node<>::

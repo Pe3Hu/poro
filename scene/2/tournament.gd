@@ -20,4 +20,3 @@ func init_stadiums() -> void:
 		var stadium = Global.scene.stadium.instantiate()
 		stadiums.add_child(stadium)
 		stadium.set_attributes(input)
-

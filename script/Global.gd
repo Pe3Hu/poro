@@ -32,6 +32,15 @@ func init_arr() -> void:
 
 func init_num() -> void:
 	num.index = {}
+	
+	num.spot = {}
+	num.spot.r = 32
+	num.spot.h = num.spot.r * sqrt(3)
+	num.spot.w = num.spot.r * 2
+	
+	num.field = {}
+	num.field.rows = 7
+	num.field.cols = 13
 
 
 func init_dict() -> void:
@@ -163,6 +172,7 @@ func init_scene() -> void:
 	
 	scene.tournament = load("res://scene/2/tournament.tscn")
 	scene.stadium = load("res://scene/2/stadium.tscn")
+	scene.spot = load("res://scene/2/spot.tscn")
 	scene.marker = load("res://scene/2/marker.tscn")
 	
 
@@ -174,6 +184,7 @@ func init_vec():
 	vec.size.number = Vector2(5, 32)
 	
 	vec.size.marker = Vector2(64, 64) * 4
+	vec.size.spot = Vector2(num.spot.w * 0.75, num.spot.h)
 	
 	init_window_size()
 
@@ -198,6 +209,12 @@ func init_color():
 	color.indicator.barrier = {}
 	color.indicator.barrier.fill = Color.from_hsv(0.5, 1, 0.9)
 	color.indicator.barrier.background = Color.from_hsv(0.5, 0.25, 0.9)
+	
+	color.spot = {}
+	color.spot.attack = Color.from_hsv(0.0 / h, 0.8, 0.9)
+	color.spot.defense = Color.from_hsv(210.0 / h, 0.8, 0.9)
+	color.spot.goal = Color.from_hsv(270.0 / h, 0.8, 0.9)
+	
 
 
 func save(path_: String, data_: String):
