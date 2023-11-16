@@ -41,11 +41,15 @@ func init_num() -> void:
 	num.field = {}
 	num.field.rows = 7
 	num.field.cols = 13
+	
+	num.anchor = {}
+	num.anchor.r = num.spot.r / 3
 
 
 func init_dict() -> void:
 	init_neighbor()
 	init_aspect()
+	init_clash()
 
 
 func init_neighbor() -> void:
@@ -98,7 +102,7 @@ func init_emptyjson() -> void:
 	dict.emptyjson = {}
 	dict.emptyjson.title = {}
 	
-	var path = "res://asset/json/.json"
+	var path = "res://asset/json/_emptyjson.json"
 	var array = load_data(path)
 	
 	for emptyjson in array:
@@ -159,6 +163,32 @@ func init_aspect() -> void:
 					dict.aspect.rank[aspect.rank].predispositions[value].states[state][effort] = ceil(description.states[state][effort] * multiplier)
 
 
+func init_clash() -> void:
+	dict.clash = {}
+	dict.clash.side = {}
+	
+	var path = "res://asset/json/poro_clash.json"
+	var array = load_data(path)
+	
+	for clash in array:
+		if !dict.clash.side.has(clash.side):
+			dict.clash.side[clash.side] = []
+		
+		var data = {}
+		
+		for key in clash:
+			if key != "index" and key != "side":
+				var words = []
+				words = key.split(" ")
+				
+				if !data.has(words[0]):
+					data[words[0]] = Vector2()
+				
+				data[words[0]][words[1]] += clash[key]
+		
+		dict.clash.side[clash.side].append(data)
+
+
 func init_node() -> void:
 	node.game = get_node("/root/Game")
 
@@ -173,7 +203,10 @@ func init_scene() -> void:
 	scene.tournament = load("res://scene/2/tournament.tscn")
 	scene.stadium = load("res://scene/2/stadium.tscn")
 	scene.spot = load("res://scene/2/spot.tscn")
+	scene.clash = load("res://scene/2/clash.tscn")
 	scene.marker = load("res://scene/2/marker.tscn")
+	
+	
 	
 
 
@@ -215,6 +248,7 @@ func init_color():
 	color.spot.defense = Color.from_hsv(210.0 / h, 0.8, 0.9)
 	color.spot.goal = Color.from_hsv(270.0 / h, 0.8, 0.9)
 	
+	color.anchor = Color.from_hsv(120.0 / h, 0.8, 0.9)
 
 
 func save(path_: String, data_: String):

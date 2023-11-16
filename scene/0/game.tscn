@@ -4,14 +4,29 @@
 [ext_resource type="PackedScene" uid="uid://tiu625irnnwp" path="res://scene/1/cradle.tscn" id="2_675c0"]
 [ext_resource type="PackedScene" uid="uid://oisk5g1hmf8y" path="res://scene/2/championship.tscn" id="3_res75"]
 
-[node name="Game" type="Node"]
+[node name="Game" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_ic1eh")
 
 [node name="FPS" type="Label" parent="."]
 visible = false
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
 
-[node name="Cradle" parent="." instance=ExtResource("2_675c0")]
-
 [node name="Championship" parent="." instance=ExtResource("3_res75")]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -20.0
+offset_bottom = 20.0
+grow_vertical = 2
+
+[node name="Cradle" parent="." instance=ExtResource("2_675c0")]
+layout_mode = 1

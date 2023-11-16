@@ -10,3 +10,8 @@ res://scene/2/stadium.tscn
 res://scene/2/marker.tscn
 res://scene/2/stadium.gd
 res://scene/2/tournament.gd
+res://scene/0/game.tscn
+res://scene/2/сlash.tscn
+res://scene/2/сlash.gd
+res://scene/2/clash.tscn
+res://scene/2/clash.gd

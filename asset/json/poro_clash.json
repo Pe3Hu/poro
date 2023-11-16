@@ -1,0 +1,258 @@
+[
+ {
+  "index": 0,
+  "side": "left",
+  "attack x": 10,
+  "attack y": 0,
+  "defense x": 8,
+  "defense y": 0
+ },
+ {
+  "index": 1,
+  "side": "left",
+  "attack x": 10,
+  "attack y": 2,
+  "defense x": 8,
+  "defense y": 2
+ },
+ {
+  "index": 2,
+  "side": "left",
+  "attack x": 10,
+  "attack y": 4,
+  "defense x": 8,
+  "defense y": 4
+ },
+ {
+  "index": 3,
+  "side": "left",
+  "attack x": 10,
+  "attack y": 6,
+  "defense x": 8,
+  "defense y": 6
+ },
+ {
+  "index": 4,
+  "side": "left",
+  "attack x": 6,
+  "attack y": 1,
+  "defense x": 8,
+  "defense y": 0
+ },
+ {
+  "index": 5,
+  "side": "left",
+  "attack x": 6,
+  "attack y": 1,
+  "defense x": 8,
+  "defense y": 2
+ },
+ {
+  "index": 6,
+  "side": "left",
+  "attack x": 6,
+  "attack y": 3,
+  "defense x": 8,
+  "defense y": 2
+ },
+ {
+  "index": 7,
+  "side": "left",
+  "attack x": 6,
+  "attack y": 3,
+  "defense x": 8,
+  "defense y": 4
+ },
+ {
+  "index": 8,
+  "side": "left",
+  "attack x": 6,
+  "attack y": 5,
+  "defense x": 8,
+  "defense y": 4
+ },
+ {
+  "index": 9,
+  "side": "left",
+  "attack x": 6,
+  "attack y": 5,
+  "defense x": 8,
+  "defense y": 6
+ },
+ {
+  "index": 10,
+  "side": "left",
+  "attack x": 6,
+  "attack y": 1,
+  "defense x": 4,
+  "defense y": 2
+ },
+ {
+  "index": 11,
+  "side": "left",
+  "attack x": 6,
+  "attack y": 3,
+  "defense x": 4,
+  "defense y": 2
+ },
+ {
+  "index": 12,
+  "side": "left",
+  "attack x": 6,
+  "attack y": 3,
+  "defense x": 4,
+  "defense y": 4
+ },
+ {
+  "index": 13,
+  "side": "left",
+  "attack x": 6,
+  "attack y": 5,
+  "defense x": 4,
+  "defense y": 4
+ },
+ {
+  "index": 14,
+  "side": "left",
+  "attack x": 2,
+  "attack y": 3,
+  "defense x": 4,
+  "defense y": 2
+ },
+ {
+  "index": 15,
+  "side": "left",
+  "attack x": 2,
+  "attack y": 3,
+  "defense x": 4,
+  "defense y": 4
+ },
+ {
+  "index": 16,
+  "side": "right",
+  "attack x": 2,
+  "attack y": 0,
+  "defense x": 4,
+  "defense y": 0
+ },
+ {
+  "index": 17,
+  "side": "right",
+  "attack x": 2,
+  "attack y": 2,
+  "defense x": 4,
+  "defense y": 2
+ },
+ {
+  "index": 18,
+  "side": "right",
+  "attack x": 2,
+  "attack y": 4,
+  "defense x": 4,
+  "defense y": 4
+ },
+ {
+  "index": 19,
+  "side": "right",
+  "attack x": 2,
+  "attack y": 6,
+  "defense x": 4,
+  "defense y": 6
+ },
+ {
+  "index": 20,
+  "side": "right",
+  "attack x": 6,
+  "attack y": 1,
+  "defense x": 4,
+  "defense y": 0
+ },
+ {
+  "index": 21,
+  "side": "right",
+  "attack x": 6,
+  "attack y": 1,
+  "defense x": 4,
+  "defense y": 2
+ },
+ {
+  "index": 22,
+  "side": "right",
+  "attack x": 6,
+  "attack y": 3,
+  "defense x": 4,
+  "defense y": 2
+ },
+ {
+  "index": 23,
+  "side": "right",
+  "attack x": 6,
+  "attack y": 3,
+  "defense x": 4,
+  "defense y": 4
+ },
+ {
+  "index": 24,
+  "side": "right",
+  "attack x": 6,
+  "attack y": 5,
+  "defense x": 4,
+  "defense y": 4
+ },
+ {
+  "index": 25,
+  "side": "right",
+  "attack x": 6,
+  "attack y": 5,
+  "defense x": 4,
+  "defense y": 6
+ },
+ {
+  "index": 26,
+  "side": "right",
+  "attack x": 6,
+  "attack y": 1,
+  "defense x": 8,
+  "defense y": 2
+ },
+ {
+  "index": 27,
+  "side": "right",
+  "attack x": 6,
+  "attack y": 3,
+  "defense x": 8,
+  "defense y": 2
+ },
+ {
+  "index": 28,
+  "side": "right",
+  "attack x": 6,
+  "attack y": 3,
+  "defense x": 8,
+  "defense y": 4
+ },
+ {
+  "index": 29,
+  "side": "right",
+  "attack x": 6,
+  "attack y": 5,
+  "defense x": 8,
+  "defense y": 4
+ },
+ {
+  "index": 30,
+  "side": "right",
+  "attack x": 10,
+  "attack y": 3,
+  "defense x": 8,
+  "defense y": 2
+ },
+ {
+  "index": 31,
+  "side": "right",
+  "attack x": 10,
+  "attack y": 3,
+  "defense x": 8,
+  "defense y": 4
+ }
+]

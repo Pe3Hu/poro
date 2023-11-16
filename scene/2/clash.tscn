@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://coprsms4ueqao"]
+
+[ext_resource type="Script" path="res://scene/2/clash.gd" id="1_a7ntu"]
+
+[node name="Сlash" type="Node2D"]
+script = ExtResource("1_a7ntu")
+
+[node name="Anchor" type="Polygon2D" parent="."]

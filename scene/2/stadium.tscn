@@ -1,17 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://cufbv6lhirrcv"]
+[gd_scene load_steps=4 format=3 uid="uid://cufbv6lhirrcv"]
 
 [ext_resource type="Script" path="res://scene/2/stadium.gd" id="1_5sxjt"]
-[ext_resource type="PackedScene" uid="uid://c68chhpn3prav" path="res://scene/2/half.tscn" id="1_iv2x2"]
 [ext_resource type="PackedScene" uid="uid://dgldxp78jbgie" path="res://scene/2/field.tscn" id="3_1rkxa"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7paps"]
 
 [node name="Stadium" type="MarginContainer"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
@@ -23,13 +20,8 @@ visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_7paps")
 
-[node name="Left" parent="." instance=ExtResource("1_iv2x2")]
-visible = false
-
-[node name="Right" parent="." instance=ExtResource("1_iv2x2")]
-visible = false
-
 [node name="Field" parent="." instance=ExtResource("3_1rkxa")]
+layout_mode = 2
 
 [node name="Markers" type="Control" parent="."]
 layout_mode = 2

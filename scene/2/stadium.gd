@@ -1,8 +1,6 @@
 extends MarginContainer
 
 
-@onready var left = $Left
-@onready var right = $Right
 @onready var field = $Field
 @onready var markers = $Markers
 
@@ -13,13 +11,6 @@ var offset = null
 
 func set_attributes(input_: Dictionary) -> void:
 	tournament  = input_.tournament
-	
-	for side in Global.arr.side:
-		var input = {}
-		input.stadium = self
-		input.side = side
-		var half = get(side)
-		half.set_attributes(input)
 	
 	var input = {}
 	input.stadium = self

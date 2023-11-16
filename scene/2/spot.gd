@@ -3,14 +3,22 @@ extends Polygon2D
 
 var field = null
 var grid = null
+var clashs = {}
 
 
 func set_attributes(input_: Dictionary) -> void:
 	field = input_.field
 	
 	set_gird(input_.grid)
+	
+	if remove_check():
+		field.spots.remove_child(self)
+		queue_free()
+		return
+	
+	field.grids.spots[grid] = self
 	init_vertexs()
-	update_color()
+	set_color_based_on_side("right")
 
 
 func init_vertexs() -> void:
@@ -35,18 +43,43 @@ func set_gird(grid_: Vector2) -> void:
 	position = (grid + shift) * Global.vec.size.spot
 
 
-func update_color() -> void:
-	#left right
-	if field.grids.right.goal == grid:
+func remove_check() -> bool:
+	for side in Global.arr.side:
+		if field.grids[side].goal == grid:
+			return false
+		
+		if field.grids[side].attacks.has(grid):
+			return false
+		
+		if field.grids[side].defenses.has(grid):
+			return false
+	
+	return true
+
+
+func set_color_based_on_side(side_: String) -> void:
+	visible = true
+	
+	if field.grids[side_].goal == grid:
 		color = Global.color.spot.goal
+		#print("goal")
 		return
 	
-	if field.grids.right.attacks.has(grid):
+	if field.grids[side_].attacks.has(grid):
+		#print("attack")
 		color = Global.color.spot.attack
 		return
 	
-	if field.grids.right.defenses.has(grid):
+	if field.grids[side_].defenses.has(grid):
+		#print("defense")
 		color = Global.color.spot.defense
 		return
 	
 	visible = false
+
+
+func add_clash(clash_: Node2D) -> void:
+	if !clashs.has(clash_.side):
+		clashs[clash_.side] = {}
+	
+	clashs[clash_.side][clash_] = clash_.get_opponent(self)

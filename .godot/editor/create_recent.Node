@@ -1,6 +1,8 @@
-Node2D
 Polygon2D
 Control
+Panel
+MarginContainer
+Node2D
 TileMap
 VBoxContainer
 HBoxContainer
