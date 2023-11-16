@@ -14,8 +14,8 @@ func set_attributes(input_: Dictionary) -> void:
 	spots = input_.spots
 	side = input_.side
 	
-	position = (spots.attack.position + spots.defense.position) / 2
-	position += Vector2(Global.num.spot.w, Global.num.spot.h) * 0.5
+	position = (spots.attack.center + spots.defense.center) / 2
+	#position += Vector2(Global.num.spot.w, Global.num.spot.h) * 0.5
 	init_vertexs()
 	anchor.color = Global.color.anchor
 	

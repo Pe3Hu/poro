@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cimhx6uar6llp"]
+
+[ext_resource type="Script" path="res://scene/2/path.gd" id="1_5mek4"]
+
+[node name="Path" type="Line2D"]
+width = 32.0
+default_color = Color(1, 1, 0, 1)
+script = ExtResource("1_5mek4")

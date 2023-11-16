@@ -50,6 +50,7 @@ func init_dict() -> void:
 	init_neighbor()
 	init_aspect()
 	init_clash()
+	init_path()
 
 
 func init_neighbor() -> void:
@@ -189,6 +190,38 @@ func init_clash() -> void:
 		dict.clash.side[clash.side].append(data)
 
 
+func init_path() -> void:
+	dict.path = {}
+	dict.path.side = {}
+	
+	var path_ = "res://asset/json/poro_path.json"
+	var array = load_data(path_)
+	
+	for path in array:
+		if !dict.path.side.has(path.side):
+			dict.path.side[path.side] = []
+		
+		var data = {}
+		data.indexs = {}
+		data.grids = []
+		
+		for key in path:
+			if key != "index" and key != "side":
+				var words = []
+				words = key.split(" ")
+				
+				if !data.indexs.has(words[0]):
+					data.indexs[words[0]] = Vector2()
+				
+				data.indexs[words[0]][words[1]] += path[key]
+		
+		for index in data.indexs:
+			var grid = Vector2(data.indexs[index].x, data.indexs[index].y)
+			data.grids.append(grid)
+		
+		dict.path.side[path.side].append(data.grids)
+
+
 func init_node() -> void:
 	node.game = get_node("/root/Game")
 
@@ -204,6 +237,7 @@ func init_scene() -> void:
 	scene.stadium = load("res://scene/2/stadium.tscn")
 	scene.spot = load("res://scene/2/spot.tscn")
 	scene.clash = load("res://scene/2/clash.tscn")
+	scene.path = load("res://scene/2/path.tscn")
 	scene.marker = load("res://scene/2/marker.tscn")
 	
 	

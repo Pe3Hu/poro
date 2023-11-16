@@ -3,6 +3,7 @@ extends Polygon2D
 
 var field = null
 var grid = null
+var center = null
 var clashs = {}
 
 
@@ -41,6 +42,7 @@ func set_gird(grid_: Vector2) -> void:
 		shift.y += 0.5
 	
 	position = (grid + shift) * Global.vec.size.spot
+	center = position + Vector2(Global.num.spot.w, Global.num.spot.h) * 0.5
 
 
 func remove_check() -> bool:

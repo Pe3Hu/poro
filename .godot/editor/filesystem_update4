@@ -15,3 +15,6 @@ res://scene/2/сlash.tscn
 res://scene/2/сlash.gd
 res://scene/2/clash.tscn
 res://scene/2/clash.gd
+res://scene/2/path.tscn
+res://scene/2/path.gd
+res://asset/json/poro_path.json

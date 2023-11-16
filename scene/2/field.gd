@@ -3,6 +3,7 @@ extends MarginContainer
 
 @onready var spots = $Spots
 @onready var clashs = $Clashs
+@onready var paths = $Paths
 
 var stadium = null
 var grids = {} 
@@ -15,13 +16,14 @@ func set_attributes(input_: Dictionary) -> void:
 	init_grids()
 	init_spots()
 	init_clashs()
+	init_paths()
 	
 	custom_minimum_size = Vector2(Global.num.field.cols + 1.0 / 3, Global.num.field.rows) * Global.vec.size.spot
 	spots.position += Vector2(Global.num.spot.w, Global.num.spot.h) * 0.5
 	
 	var spot = grids.spots[Vector2(10, 3)]
 	
-	var side = "left"
+	var side = "right"
 	
 #	for side_ in spot.clashs:
 #		if side_ == side:
@@ -85,105 +87,6 @@ func init_spots() -> void:
 
 
 func init_clashs() -> void:
-#	var datas = []
-#	var data = {}
-#	data.side = "left"
-#	data.attack = grids.spots[Vector2(10, 0)]
-#	data.defense = grids.spots[Vector2(8, 0)]
-#	datas.append(data)
-#
-#	data = {}
-#	data.side = "left"
-#	data.attack = grids.spots[Vector2(10, 2)]
-#	data.defense = grids.spots[Vector2(8, 2)]
-#	datas.append(data)
-#
-#	data = {}
-#	data.side = "left"
-#	data.attack = grids.spots[Vector2(10, 4)]
-#	data.defense = grids.spots[Vector2(8, 4)]
-#	datas.append(data)
-#
-#	data = {}
-#	data.side = "left"
-#	data.attack = grids.spots[Vector2(10, 6)]
-#	data.defense = grids.spots[Vector2(8, 6)]
-#	datas.append(data)
-#
-#	data = {}
-#	data.side = "left"
-#	data.attack = grids.spots[Vector2(6, 1)]
-#	data.defense = grids.spots[Vector2(8, 0)]
-#	datas.append(data)
-#
-#	data = {}
-#	data.side = "left"
-#	data.attack = grids.spots[Vector2(6, 1)]
-#	data.defense = grids.spots[Vector2(8, 2)]
-#	datas.append(data)
-#
-#	data = {}
-#	data.side = "left"
-#	data.attack = grids.spots[Vector2(6, 3)]
-#	data.defense = grids.spots[Vector2(8, 2)]
-#	datas.append(data)
-#
-#	data = {}
-#	data.side = "left"
-#	data.attack = grids.spots[Vector2(6, 3)]
-#	data.defense = grids.spots[Vector2(8, 4)]
-#	datas.append(data)
-#
-#
-#	data = {}
-#	data.side = "left"
-#	data.attack = grids.spots[Vector2(6, 5)]
-#	data.defense = grids.spots[Vector2(8, 4)]
-#	datas.append(data)
-#
-#	data = {}
-#	data.side = "left"
-#	data.attack = grids.spots[Vector2(6, 5)]
-#	data.defense = grids.spots[Vector2(8, 6)]
-#	datas.append(data)
-#
-#	data = {}
-#	data.side = "left"
-#	data.attack = grids.spots[Vector2(6, 1)]
-#	data.defense = grids.spots[Vector2(4, 2)]
-#	datas.append(data)
-#
-#	data = {}
-#	data.side = "left"
-#	data.attack = grids.spots[Vector2(6, 3)]
-#	data.defense = grids.spots[Vector2(4, 2)]
-#	datas.append(data)
-#
-#	data = {}
-#	data.side = "left"
-#	data.attack = grids.spots[Vector2(6, 3)]
-#	data.defense = grids.spots[Vector2(4, 4)]
-#	datas.append(data)
-#
-#	data = {}
-#	data.side = "left"
-#	data.attack = grids.spots[Vector2(6, 5)]
-#	data.defense = grids.spots[Vector2(4, 4)]
-#	datas.append(data)
-#
-#	data = {}
-#	data.side = "left"
-#	data.attack = grids.spots[Vector2(2, 3)]
-#	data.defense = grids.spots[Vector2(4, 2)]
-#	datas.append(data)
-#
-#	data = {}
-#	data.side = "left"
-#	data.attack = grids.spots[Vector2(2, 3)]
-#	data.defense = grids.spots[Vector2(4, 4)]
-#	datas.append(data)
-
-	
 	for side in Global.dict.clash.side:
 		for data in Global.dict.clash.side[side]:
 			var input = {}
@@ -198,9 +101,28 @@ func init_clashs() -> void:
 			clash.set_attributes(input)
 
 
+func init_paths() -> void:
+	for side in Global.dict.path.side:
+		for grids_ in Global.dict.path.side[side]:
+			var input = {}
+			input.field = self
+			input.side = side
+			input.spots = []
+			
+			for grid in grids_:
+				input.spots.append(grids.spots[grid])
+			
+			var path = Global.scene.path.instantiate()
+			paths.add_child(path)
+			path.set_attributes(input)
+
+
 func set_visible_side(side_: String) -> void:
 	for spot in spots.get_children():
 		spot.set_color_based_on_side(side_)
 		
 	for clash in clashs.get_children():
 		clash.visible = clash.side == side_
+	
+	for path in paths.get_children():
+		path.visible = path.side == side_

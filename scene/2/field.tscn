@@ -23,6 +23,8 @@ script = ExtResource("1_0hbps")
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_m51nc")
 
+[node name="Paths" type="Node2D" parent="."]
+
 [node name="Spots" type="Node2D" parent="."]
 
 [node name="Clashs" type="Node2D" parent="."]
