@@ -1,36 +1,58 @@
 extends MarginContainer
 
 
-@onready var field = $Field
-@onready var markers = $Markers
+@onready var hbox = $HBox
+@onready var field = $HBox/VBox/Field
+@onready var encounter = $HBox/VBox/Encounter
+
 
 var tournament = null
-var cell = null
-var offset = null
+var teams = []
+var keeper = null
+var guest = null
 
 
 func set_attributes(input_: Dictionary) -> void:
-	tournament  = input_.tournament
+	tournament = input_.tournament
+	
+	for team in input_.teams:
+		add_team(team)
 	
 	var input = {}
 	input.stadium = self
 	field.set_attributes(input)
-	#cell.y = cell.x * sqrt(3) / 2
-	offset = Vector2()#Vector2(cell.x * 0.125, cell.y * 0.25)#9.0 / 32
 	
-	#var input = {}
-	input.stadium = self
-	input.gladiator = null
-	input.grid = Vector2(0, 0)
-	#var cells = left.get_used_cells(0)
-	#var a = left.map_to_local(input.grid)
-	#var b = Vector2.to_global(a)
-	#print(cell)
-	#add_marker(input)
+	switch_roles()
+	switch_roles()
+	markers_walkout()
 
 
-func add_marker(input_: Dictionary) -> void:
-	var marker = Global.scene.marker.instantiate()
-	markers.add_child(marker)
-	marker.set_attributes(input_)
-	print(marker.position)
+func add_team(team_: MarginContainer) -> void:
+	team_.cradle.teams.remove_child(team_)
+	hbox.add_child(team_)
+	
+	if teams.is_empty():
+		keeper = team_
+		team_.status = "keeper"
+		hbox.move_child(team_, 0)
+	else:
+		guest = team_
+		team_.status = "guest"
+	
+	teams.append(team_)
+	team_.stadium = self
+
+
+func switch_roles() -> void:
+	for team in teams:
+		team.switch_role()
+
+
+func markers_walkout() -> void:
+	for team in teams:
+		var arrangements = team.arrangements[field.side][team.role]
+		
+		for gladiator in team.mains:
+			var grid = arrangements[gladiator.marker.order]
+			var spot = field.grids.spot[grid]
+			gladiator.marker.set_spot(spot)

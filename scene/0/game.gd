@@ -1,8 +1,8 @@
 extends Node
 
 
-@onready var cradle = $Cradle
-@onready var championship = $Championship
+@onready var cradle = $Sketch/HBox/Cradle
+@onready var championship = $Sketch/HBox/Championship
 
 
 func _ready() -> void:

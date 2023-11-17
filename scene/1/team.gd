@@ -4,16 +4,24 @@ extends MarginContainer
 @onready var gladiators = $Gladiators
 
 var cradle = null
+var stadium = null
+var status = null
+var role = null
+var mains = []
+var substitutes = []
+var arrangements = {}
 
 
 func set_attributes(input_: Dictionary) -> void:
 	cradle  = input_.cradle
 	
 	init_gladiators()
+	init_arrangements()
+	fill_main_gladiators()
 
 
 func init_gladiators() -> void:
-	for _i in 1:
+	for _i in Global.num.team.markers:
 		var input = {}
 		input.team = self
 		input.rank = 0
@@ -25,3 +33,35 @@ func init_gladiators() -> void:
 		var gladiator = Global.scene.gladiator.instantiate()
 		gladiators.add_child(gladiator)
 		gladiator.set_attributes(input)
+
+
+func init_arrangements() -> void:
+	for side in Global.arr.side:
+		arrangements[side] = {}
+		
+		for role in Global.arr.role:
+			arrangements[side][role] = {}
+			
+			for _i in Global.num.team.markers:
+				for _j in Global.dict.spot.index:
+					var description = Global.dict.spot.index[_j]
+					#print(description)
+					if description.side == side and description.role == role and description.order == _i + 1:
+						arrangements[side][role][_i + 1] = description.grid
+						break
+
+
+func fill_main_gladiators() -> void:
+	for gladiator in gladiators.get_children():
+		mains.append(gladiator)
+
+
+func switch_role() -> void:
+	if role == null:
+		match status:
+			"keeper":
+				role = "defense"
+			"guest":
+				role = "attack"
+	else:
+		role = Global.dict.mirror.role[role]

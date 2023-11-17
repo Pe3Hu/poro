@@ -5,6 +5,7 @@ extends MarginContainer
 @onready var dexterity = $Aspects/Dexterity
 
 var team = null
+var marker = null
 var rank = null
 var predispositions = {}
 

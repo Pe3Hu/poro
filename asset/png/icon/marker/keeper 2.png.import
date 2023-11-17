@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bckwrhqdjdpwx"
-path="res://.godot/imported/blue 2.png-7883d243cf2dcf7eae367004b5869818.ctex"
+uid="uid://da0wntvy5ewbc"
+path="res://.godot/imported/keeper 2.png-1cf38ca14bb333d0f12631fbef97de6e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://asset/png/icon/marker/blue 2.png"
-dest_files=["res://.godot/imported/blue 2.png-7883d243cf2dcf7eae367004b5869818.ctex"]
+source_file="res://asset/png/icon/marker/keeper 2.png"
+dest_files=["res://.godot/imported/keeper 2.png-1cf38ca14bb333d0f12631fbef97de6e.ctex"]
 
 [params]
 

@@ -1,0 +1,206 @@
+[
+ {
+  "index": 0,
+  "grid x": 0,
+  "grid y": 3,
+  "left goal": 0
+ },
+ {
+  "index": 1,
+  "grid x": 2,
+  "grid y": 3,
+  "left attack": 0
+ },
+ {
+  "index": 2,
+  "grid x": 6,
+  "grid y": 1,
+  "left attack": 0
+ },
+ {
+  "index": 3,
+  "grid x": 6,
+  "grid y": 3,
+  "left attack": 0
+ },
+ {
+  "index": 4,
+  "grid x": 6,
+  "grid y": 5,
+  "left attack": 0
+ },
+ {
+  "index": 5,
+  "grid x": 10,
+  "grid y": 0,
+  "left attack": 3
+ },
+ {
+  "index": 6,
+  "grid x": 10,
+  "grid y": 2,
+  "left attack": 4
+ },
+ {
+  "index": 7,
+  "grid x": 10,
+  "grid y": 4,
+  "left attack": 5
+ },
+ {
+  "index": 8,
+  "grid x": 10,
+  "grid y": 6,
+  "left attack": 6
+ },
+ {
+  "index": 9,
+  "grid x": 12,
+  "grid y": 1,
+  "left attack": 1
+ },
+ {
+  "index": 10,
+  "grid x": 12,
+  "grid y": 5,
+  "left attack": 2
+ },
+ {
+  "index": 11,
+  "grid x": 4,
+  "grid y": 2,
+  "left defense": 1
+ },
+ {
+  "index": 12,
+  "grid x": 4,
+  "grid y": 4,
+  "left defense": 2
+ },
+ {
+  "index": 13,
+  "grid x": 8,
+  "grid y": 0,
+  "left defense": 3
+ },
+ {
+  "index": 14,
+  "grid x": 8,
+  "grid y": 2,
+  "left defense": 4
+ },
+ {
+  "index": 15,
+  "grid x": 8,
+  "grid y": 4,
+  "left defense": 5
+ },
+ {
+  "index": 16,
+  "grid x": 8,
+  "grid y": 6,
+  "left defense": 6
+ },
+ {
+  "index": 17,
+  "grid x": 12,
+  "grid y": 3,
+  "right goal": 0
+ },
+ {
+  "index": 18,
+  "grid x": 10,
+  "grid y": 3,
+  "right attack": 0
+ },
+ {
+  "index": 19,
+  "grid x": 6,
+  "grid y": 1,
+  "right attack": 0
+ },
+ {
+  "index": 20,
+  "grid x": 6,
+  "grid y": 3,
+  "right attack": 0
+ },
+ {
+  "index": 21,
+  "grid x": 6,
+  "grid y": 5,
+  "right attack": 0
+ },
+ {
+  "index": 22,
+  "grid x": 2,
+  "grid y": 0,
+  "right attack": 3
+ },
+ {
+  "index": 23,
+  "grid x": 2,
+  "grid y": 2,
+  "right attack": 4
+ },
+ {
+  "index": 24,
+  "grid x": 2,
+  "grid y": 4,
+  "right attack": 5
+ },
+ {
+  "index": 25,
+  "grid x": 2,
+  "grid y": 6,
+  "right attack": 6
+ },
+ {
+  "index": 26,
+  "grid x": 0,
+  "grid y": 1,
+  "right attack": 1
+ },
+ {
+  "index": 27,
+  "grid x": 0,
+  "grid y": 5,
+  "right attack": 2
+ },
+ {
+  "index": 28,
+  "grid x": 8,
+  "grid y": 2,
+  "right defense": 1
+ },
+ {
+  "index": 29,
+  "grid x": 8,
+  "grid y": 4,
+  "right defense": 2
+ },
+ {
+  "index": 30,
+  "grid x": 4,
+  "grid y": 0,
+  "right defense": 3
+ },
+ {
+  "index": 31,
+  "grid x": 4,
+  "grid y": 2,
+  "right defense": 4
+ },
+ {
+  "index": 32,
+  "grid x": 4,
+  "grid y": 4,
+  "right defense": 5
+ },
+ {
+  "index": 33,
+  "grid x": 4,
+  "grid y": 6,
+  "right defense": 6
+ }
+]

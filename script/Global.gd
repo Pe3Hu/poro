@@ -28,6 +28,8 @@ func init_arr() -> void:
 	arr.effort = ["peak", "normal", "minimum"]
 	arr.aspect = ["strength", "dexterity"]
 	arr.side = ["left", "right"]
+	arr.role = ["attack", "defense"]
+	arr.status = ["keeper", "guest"]
 
 
 func init_num() -> void:
@@ -44,13 +46,33 @@ func init_num() -> void:
 	
 	num.anchor = {}
 	num.anchor.r = num.spot.r / 3
+	
+	num.team = {}
+	num.team.markers = 6
 
 
 func init_dict() -> void:
 	init_neighbor()
+	init_mirror()
 	init_aspect()
+	init_spot()
 	init_clash()
 	init_path()
+	
+
+func init_mirror() -> void:
+	dict.mirror = {}
+	dict.mirror.role = {}
+	dict.mirror.role["attack"] = "defense"
+	dict.mirror.role["defense"] = "attack"
+	
+	dict.mirror.side = {}
+	dict.mirror.side["left"] = "rigth"
+	dict.mirror.side["rigth"] = "left"
+	
+#	dict.mirror.role = {}
+#	dict.mirror.role[""] = ""
+#	dict.mirror.role[""] = ""
 
 
 func init_neighbor() -> void:
@@ -164,6 +186,34 @@ func init_aspect() -> void:
 					dict.aspect.rank[aspect.rank].predispositions[value].states[state][effort] = ceil(description.states[state][effort] * multiplier)
 
 
+func init_spot() -> void:
+	dict.spot = {}
+	dict.spot.index = {}
+	
+	var path = "res://asset/json/poro_spot.json"
+	var array = load_data(path)
+	
+	for spot in array:
+		var data = {}
+		data.grid = Vector2()
+		
+		for key in spot:
+			if key != "index":
+				var words = []
+				words = key.split(" ")
+				
+				if words.has("grid"):
+					data.grid[words[1]] = spot[key]
+					
+					data[words[0]][words[1]] = spot[key]
+				else:
+					data.side = words[0]
+					data.role = words[1]
+					data.order = spot[key]
+				
+		dict.spot.index[spot.index] = data
+
+
 func init_clash() -> void:
 	dict.clash = {}
 	dict.clash.side = {}
@@ -240,8 +290,6 @@ func init_scene() -> void:
 	scene.path = load("res://scene/2/path.tscn")
 	scene.marker = load("res://scene/2/marker.tscn")
 	
-	
-	
 
 
 func init_vec():
@@ -250,7 +298,7 @@ func init_vec():
 	vec.size.icon = Vector2(48, 48)
 	vec.size.number = Vector2(5, 32)
 	
-	vec.size.marker = Vector2(64, 64) * 4
+	vec.size.marker = Vector2(64, 64) * 0.75
 	vec.size.spot = Vector2(num.spot.w * 0.75, num.spot.h)
 	
 	init_window_size()

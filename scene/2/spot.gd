@@ -17,7 +17,7 @@ func set_attributes(input_: Dictionary) -> void:
 		queue_free()
 		return
 	
-	field.grids.spots[grid] = self
+	field.grids.spot[grid] = self
 	init_vertexs()
 	set_color_based_on_side("right")
 
@@ -47,13 +47,13 @@ func set_gird(grid_: Vector2) -> void:
 
 func remove_check() -> bool:
 	for side in Global.arr.side:
-		if field.grids[side].goal == grid:
+		if field.grids[side].goal.front() == grid:
 			return false
 		
-		if field.grids[side].attacks.has(grid):
+		if field.grids[side].attack.has(grid):
 			return false
 		
-		if field.grids[side].defenses.has(grid):
+		if field.grids[side].defense.has(grid):
 			return false
 	
 	return true
@@ -62,17 +62,17 @@ func remove_check() -> bool:
 func set_color_based_on_side(side_: String) -> void:
 	visible = true
 	
-	if field.grids[side_].goal == grid:
+	if field.grids[side_].goal.front() == grid:
 		color = Global.color.spot.goal
 		#print("goal")
 		return
 	
-	if field.grids[side_].attacks.has(grid):
+	if field.grids[side_].attack.has(grid):
 		#print("attack")
 		color = Global.color.spot.attack
 		return
 	
-	if field.grids[side_].defenses.has(grid):
+	if field.grids[side_].defense.has(grid):
 		#print("defense")
 		color = Global.color.spot.defense
 		return

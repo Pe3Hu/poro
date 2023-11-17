@@ -67,8 +67,8 @@ func set_performances() -> void:
 				input.value = description[predisposition].states[input.state][input.effort]
 			else:
 				var reflection = gladiator.get(Global.dict.aspect.reflection[title])
-				var primary = reflection.get_performance(input.state, input.effort).get_value()
-				input.value = description[10].states[input.state][input.effort] - primary
+				var primary_ = reflection.get_performance(input.state, input.effort).get_value()
+				input.value = description[10].states[input.state][input.effort] - primary_
 			
 			performance.set_attributes(input)
 

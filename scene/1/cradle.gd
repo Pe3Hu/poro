@@ -13,7 +13,7 @@ func set_attributes(input_: Dictionary) -> void:
 
 
 func init_teams() -> void:
-	for _i in 1:
+	for _i in 2:
 		var input = {}
 		input.cradle = self
 	

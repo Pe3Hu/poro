@@ -26,6 +26,7 @@ visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_7paps")
 
-[node name="Gladiators" type="HBoxContainer" parent="."]
+[node name="Gladiators" type="VBoxContainer" parent="."]
+visible = false
 layout_mode = 2
 alignment = 1

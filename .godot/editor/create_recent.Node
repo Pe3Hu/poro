@@ -1,10 +1,11 @@
+VBoxContainer
+HBoxContainer
+Sprite2D
+MarginContainer
 Line2D
 Polygon2D
 Control
 Panel
-MarginContainer
 Node2D
 TileMap
-VBoxContainer
-HBoxContainer
 GridContainer

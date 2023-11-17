@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://cufbv6lhirrcv"]
+[gd_scene load_steps=5 format=3 uid="uid://cufbv6lhirrcv"]
 
 [ext_resource type="Script" path="res://scene/2/stadium.gd" id="1_5sxjt"]
 [ext_resource type="PackedScene" uid="uid://dgldxp78jbgie" path="res://scene/2/field.tscn" id="3_1rkxa"]
+[ext_resource type="PackedScene" uid="uid://hetf20d6go8n" path="res://scene/2/encounter.tscn" id="3_g0kot"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7paps"]
 
@@ -20,10 +21,16 @@ visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_7paps")
 
-[node name="Field" parent="." instance=ExtResource("3_1rkxa")]
+[node name="HBox" type="HBoxContainer" parent="."]
+layout_mode = 2
+alignment = 1
+
+[node name="VBox" type="VBoxContainer" parent="HBox"]
+layout_mode = 2
+alignment = 1
+
+[node name="Field" parent="HBox/VBox" instance=ExtResource("3_1rkxa")]
 layout_mode = 2
 
-[node name="Markers" type="Control" parent="."]
+[node name="Encounter" parent="HBox/VBox" instance=ExtResource("3_g0kot")]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
