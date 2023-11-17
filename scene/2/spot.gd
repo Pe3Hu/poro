@@ -2,9 +2,11 @@ extends Polygon2D
 
 
 var field = null
+var marker = null
 var grid = null
 var center = null
-var clashs = {}
+var clashes = {}
+var neighbors = {}
 
 
 func set_attributes(input_: Dictionary) -> void:
@@ -20,6 +22,9 @@ func set_attributes(input_: Dictionary) -> void:
 	field.grids.spot[grid] = self
 	init_vertexs()
 	set_color_based_on_side("right")
+	
+	for side in Global.arr.side:
+		neighbors[side] = []
 
 
 func init_vertexs() -> void:
@@ -81,7 +86,7 @@ func set_color_based_on_side(side_: String) -> void:
 
 
 func add_clash(clash_: Node2D) -> void:
-	if !clashs.has(clash_.side):
-		clashs[clash_.side] = {}
+	if !clashes.has(clash_.side):
+		clashes[clash_.side] = {}
 	
-	clashs[clash_.side][clash_] = clash_.get_opponent(self)
+	clashes[clash_.side][clash_] = clash_.get_opponent_spot(self)

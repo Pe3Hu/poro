@@ -15,12 +15,11 @@ func set_attributes(input_: Dictionary) -> void:
 	side = input_.side
 	
 	position = (spots.attack.center + spots.defense.center) / 2
-	#position += Vector2(Global.num.spot.w, Global.num.spot.h) * 0.5
 	init_vertexs()
 	anchor.color = Global.color.anchor
 	
-	for type in spots:
-		var spot = spots[type]
+	for role in spots:
+		var spot = spots[role]
 		spot.add_clash(self)
 
 
@@ -36,7 +35,7 @@ func init_vertexs() -> void:
 	anchor.set_polygon(vertexs)
 
 
-func get_opponent(spot_: Polygon2D) -> Variant:
+func get_opponent_spot(spot_: Polygon2D) -> Variant:
 	for type in spots:
 		var spot = spots[type]
 		

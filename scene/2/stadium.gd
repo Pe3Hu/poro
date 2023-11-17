@@ -21,10 +21,13 @@ func set_attributes(input_: Dictionary) -> void:
 	var input = {}
 	input.stadium = self
 	field.set_attributes(input)
+	encounter.set_attributes(input)
 	
 	switch_roles()
 	switch_roles()
 	markers_walkout()
+	load_balance()
+	field.roll_clashes()
 
 
 func add_team(team_: MarginContainer) -> void:
@@ -56,3 +59,10 @@ func markers_walkout() -> void:
 			var grid = arrangements[gladiator.marker.order]
 			var spot = field.grids.spot[grid]
 			gladiator.marker.set_spot(spot)
+
+
+func load_balance() -> void:
+	for team in teams:
+		for gladiator in team.mains:
+			gladiator.exert_effort()
+

@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://hetf20d6go8n"]
+[gd_scene load_steps=4 format=3 uid="uid://hetf20d6go8n"]
 
 [ext_resource type="Script" path="res://scene/2/encounter.gd" id="1_32f62"]
+[ext_resource type="PackedScene" uid="uid://ciw38iqel0v5a" path="res://scene/0/icon.tscn" id="2_kuscj"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7paps"]
 
@@ -25,3 +26,39 @@ script = ExtResource("1_32f62")
 visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_7paps")
+
+[node name="Gladiators" type="HBoxContainer" parent="."]
+layout_mode = 2
+alignment = 1
+
+[node name="Left" type="VBoxContainer" parent="Gladiators"]
+layout_mode = 2
+alignment = 1
+
+[node name="Marker" parent="Gladiators/Left" instance=ExtResource("2_kuscj")]
+layout_mode = 2
+
+[node name="Max" parent="Gladiators/Left" instance=ExtResource("2_kuscj")]
+layout_mode = 2
+
+[node name="Roll" parent="Gladiators/Left" instance=ExtResource("2_kuscj")]
+layout_mode = 2
+
+[node name="Winner" parent="Gladiators/Left" instance=ExtResource("2_kuscj")]
+layout_mode = 2
+
+[node name="Right" type="VBoxContainer" parent="Gladiators"]
+layout_mode = 2
+alignment = 1
+
+[node name="Marker" parent="Gladiators/Right" instance=ExtResource("2_kuscj")]
+layout_mode = 2
+
+[node name="Max" parent="Gladiators/Right" instance=ExtResource("2_kuscj")]
+layout_mode = 2
+
+[node name="Roll" parent="Gladiators/Right" instance=ExtResource("2_kuscj")]
+layout_mode = 2
+
+[node name="Winner" parent="Gladiators/Right" instance=ExtResource("2_kuscj")]
+layout_mode = 2

@@ -2,7 +2,7 @@ extends MarginContainer
 
 
 @onready var spots = $Spots
-@onready var clashs = $Clashs
+@onready var clashes = $Clashes
 @onready var paths = $Paths
 @onready var markers = $Markers
 
@@ -17,16 +17,15 @@ func set_attributes(input_: Dictionary) -> void:
 	
 	init_grids()
 	init_spots()
-	init_clashs()
+	init_clashes()
 	init_paths()
 	init_markers()
-	place_markers()
+	set_visible_side()
+	#place_markers()
 	
 	custom_minimum_size = Vector2(Global.num.field.cols + 1.0 / 3, Global.num.field.rows) * Global.vec.size.spot
 	spots.position += Vector2(Global.num.spot.w, Global.num.spot.h) * 0.5
 	#markers.position += Vector2(Global.num.spot.w, Global.num.spot.h) * 0.5
-	
-	set_visible_side(side)
 
 
 func init_grids() -> void:
@@ -55,29 +54,41 @@ func init_spots() -> void:
 			var spot = Global.scene.spot.instantiate()
 			spots.add_child(spot)
 			spot.set_attributes(input)
+	
+	init_spot_neighbors()
 
 
-func init_clashs() -> void:
-	for side_ in Global.dict.clash.side:
-		for data in Global.dict.clash.side[side_]:
+func init_spot_neighbors() -> void:
+	for _side in Global.dict.path.side:
+		for path in Global.dict.path.side[_side]:
+			for _i in path.size() - 1:
+				var spot = grids.spot[path[_i]]
+				var neighbor = grids.spot[path[_i + 1]]
+				spot.neighbors[_side].append(neighbor)
+				neighbor.neighbors[_side].append(spot)
+
+
+func init_clashes() -> void:
+	for _side in Global.dict.clash.side:
+		for data in Global.dict.clash.side[_side]:
 			var input = {}
 			input.field = self
-			input.side = side_
+			input.side = _side
 			input.spots = {}
 			input.spots.attack = grids.spot[data.attack]
 			input.spots.defense = grids.spot[data.defense]
 			
 			var clash = Global.scene.clash.instantiate()
-			clashs.add_child(clash)
+			clashes.add_child(clash)
 			clash.set_attributes(input)
 
 
 func init_paths() -> void:
-	for side_ in Global.dict.path.side:
-		for grids_ in Global.dict.path.side[side_]:
+	for _side in Global.dict.path.side:
+		for grids_ in Global.dict.path.side[_side]:
 			var input = {}
 			input.field = self
-			input.side = side_
+			input.side = _side
 			input.spots = []
 			
 			for grid in grids_:
@@ -107,19 +118,32 @@ func place_markers() -> void:
 			var marker = team.mains[_i].marker
 
 
-func set_visible_side(side_: String) -> void:
+func set_visible_side() -> void:
 	for spot in spots.get_children():
-		spot.set_color_based_on_side(side_)
+		spot.set_color_based_on_side(side)
 		
-	for clash in clashs.get_children():
-		clash.visible = clash.side == side_
+	for clash in clashes.get_children():
+		clash.visible = clash.side == side
 	
 	for path in paths.get_children():
-		path.visible = path.side == side_
+		path.visible = path.side == side
 
 
-#func get_spot_based_on_grid() -> Polygon2D:
-#	var spot = null
-#
-#
-#	return spot
+func switch_side() -> void:
+	side = Global.dict.mirror.side[side]
+	set_visible_side()
+
+
+func roll_clashes() -> void:
+	var gladiator = stadium.teams.front().mains.back()
+	var clashes_ = []
+	
+	for _side in gladiator.marker.spot.clashes:
+		for clash in gladiator.marker.spot.clashes[_side]:
+			var spot = clash.get_opponent_spot(gladiator.marker.spot)
+			
+			if spot.marker != null:
+				clashes_.append(clash)
+	
+	stadium.encounter.set_clash(clashes_.front())
+

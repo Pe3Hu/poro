@@ -28,6 +28,6 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_m51nc")
 
 [node name="Spots" type="Node2D" parent="."]
 
-[node name="Clashs" type="Node2D" parent="."]
+[node name="Clashes" type="Node2D" parent="."]
 
 [node name="Markers" type="Node2D" parent="."]

@@ -3,204 +3,238 @@
   "index": 0,
   "grid x": 0,
   "grid y": 3,
-  "left goal": 0
+  "left goal": 0,
+  "left layer": 0
  },
  {
   "index": 1,
   "grid x": 2,
   "grid y": 3,
-  "left attack": 0
+  "left attack": 0,
+  "left layer": 1
  },
  {
   "index": 2,
   "grid x": 6,
   "grid y": 1,
-  "left attack": 0
+  "left attack": 0,
+  "left layer": 3
  },
  {
   "index": 3,
   "grid x": 6,
   "grid y": 3,
-  "left attack": 0
+  "left attack": 0,
+  "left layer": 3
  },
  {
   "index": 4,
   "grid x": 6,
   "grid y": 5,
-  "left attack": 0
+  "left attack": 0,
+  "left layer": 3
  },
  {
   "index": 5,
   "grid x": 10,
   "grid y": 0,
-  "left attack": 3
+  "left attack": 3,
+  "left layer": 5
  },
  {
   "index": 6,
   "grid x": 10,
   "grid y": 2,
-  "left attack": 4
+  "left attack": 4,
+  "left layer": 5
  },
  {
   "index": 7,
   "grid x": 10,
   "grid y": 4,
-  "left attack": 5
+  "left attack": 5,
+  "left layer": 5
  },
  {
   "index": 8,
   "grid x": 10,
   "grid y": 6,
-  "left attack": 6
+  "left attack": 6,
+  "left layer": 5
  },
  {
   "index": 9,
   "grid x": 12,
   "grid y": 1,
-  "left attack": 1
+  "left attack": 1,
+  "left layer": 6
  },
  {
   "index": 10,
   "grid x": 12,
   "grid y": 5,
-  "left attack": 2
+  "left attack": 2,
+  "left layer": 6
  },
  {
   "index": 11,
   "grid x": 4,
   "grid y": 2,
-  "left defense": 1
+  "left defense": 1,
+  "left layer": 2
  },
  {
   "index": 12,
   "grid x": 4,
   "grid y": 4,
-  "left defense": 2
+  "left defense": 2,
+  "left layer": 2
  },
  {
   "index": 13,
   "grid x": 8,
   "grid y": 0,
-  "left defense": 3
+  "left defense": 3,
+  "left layer": 4
  },
  {
   "index": 14,
   "grid x": 8,
   "grid y": 2,
-  "left defense": 4
+  "left defense": 4,
+  "left layer": 4
  },
  {
   "index": 15,
   "grid x": 8,
   "grid y": 4,
-  "left defense": 5
+  "left defense": 5,
+  "left layer": 4
  },
  {
   "index": 16,
   "grid x": 8,
   "grid y": 6,
-  "left defense": 6
+  "left defense": 6,
+  "left layer": 4
  },
  {
   "index": 17,
   "grid x": 12,
   "grid y": 3,
-  "right goal": 0
+  "right goal": 0,
+  "right layer": 0
  },
  {
   "index": 18,
   "grid x": 10,
   "grid y": 3,
-  "right attack": 0
+  "right attack": 0,
+  "right layer": 1
  },
  {
   "index": 19,
   "grid x": 6,
   "grid y": 1,
-  "right attack": 0
+  "right attack": 0,
+  "right layer": 3
  },
  {
   "index": 20,
   "grid x": 6,
   "grid y": 3,
-  "right attack": 0
+  "right attack": 0,
+  "right layer": 3
  },
  {
   "index": 21,
   "grid x": 6,
   "grid y": 5,
-  "right attack": 0
+  "right attack": 0,
+  "right layer": 3
  },
  {
   "index": 22,
   "grid x": 2,
   "grid y": 0,
-  "right attack": 3
+  "right attack": 3,
+  "right layer": 5
  },
  {
   "index": 23,
   "grid x": 2,
   "grid y": 2,
-  "right attack": 4
+  "right attack": 4,
+  "right layer": 5
  },
  {
   "index": 24,
   "grid x": 2,
   "grid y": 4,
-  "right attack": 5
+  "right attack": 5,
+  "right layer": 5
  },
  {
   "index": 25,
   "grid x": 2,
   "grid y": 6,
-  "right attack": 6
+  "right attack": 6,
+  "right layer": 5
  },
  {
   "index": 26,
   "grid x": 0,
   "grid y": 1,
-  "right attack": 1
+  "right attack": 1,
+  "right layer": 6
  },
  {
   "index": 27,
   "grid x": 0,
   "grid y": 5,
-  "right attack": 2
+  "right attack": 2,
+  "right layer": 6
  },
  {
   "index": 28,
   "grid x": 8,
   "grid y": 2,
-  "right defense": 1
+  "right defense": 1,
+  "right layer": 2
  },
  {
   "index": 29,
   "grid x": 8,
   "grid y": 4,
-  "right defense": 2
+  "right defense": 2,
+  "right layer": 2
  },
  {
   "index": 30,
   "grid x": 4,
   "grid y": 0,
-  "right defense": 3
+  "right defense": 3,
+  "right layer": 4
  },
  {
   "index": 31,
   "grid x": 4,
   "grid y": 2,
-  "right defense": 4
+  "right defense": 4,
+  "right layer": 4
  },
  {
   "index": 32,
   "grid x": 4,
   "grid y": 4,
-  "right defense": 5
+  "right defense": 5,
+  "right layer": 4
  },
  {
   "index": 33,
   "grid x": 4,
   "grid y": 6,
-  "right defense": 6
+  "right defense": 6,
+  "right layer": 4
  }
 ]

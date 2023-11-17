@@ -67,7 +67,7 @@ func set_performances() -> void:
 				input.value = description[predisposition].states[input.state][input.effort]
 			else:
 				var reflection = gladiator.get(Global.dict.aspect.reflection[title])
-				var primary_ = reflection.get_performance(input.state, input.effort).get_value()
+				var primary_ = reflection.get_performance_value(input.state, input.effort)
 				input.value = description[10].states[input.state][input.effort] - primary_
 			
 			performance.set_attributes(input)
@@ -79,9 +79,14 @@ func get_icon(grid_: Vector2) -> Variant:
 	return icon
 
 
-func get_performance(state_: String, effort_: String) -> Variant:
+func get_performance(state_: String, effort_: String) -> MarginContainer:
 	var x = Global.arr.state.find(state_) + 1
 	var y = Global.arr.effort.find(effort_) + 1
 	var index = icons.columns * y + x
 	var icon = icons.get_child(index)
 	return icon
+
+
+func get_performance_value(state_: String, effort_: String) -> int:
+	var performance = get_performance(state_, effort_)
+	return performance.icon.get_number()

@@ -18,6 +18,3 @@ func set_attributes(input_: Dictionary) -> void:
 	input.subtype = input_.value
 	icon.set_attributes(input)
 
-
-func get_value() -> int:
-	return icon.get_number()

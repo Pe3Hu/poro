@@ -58,7 +58,8 @@ func init_dict() -> void:
 	init_spot()
 	init_clash()
 	init_path()
-	
+	init_temperament()
+
 
 func init_mirror() -> void:
 	dict.mirror = {}
@@ -70,9 +71,10 @@ func init_mirror() -> void:
 	dict.mirror.side["left"] = "rigth"
 	dict.mirror.side["rigth"] = "left"
 	
-#	dict.mirror.role = {}
-#	dict.mirror.role[""] = ""
-#	dict.mirror.role[""] = ""
+	dict.effort = {}
+	dict.effort.peak = 5
+	dict.effort.normal = 3
+	dict.effort.minimum = 2
 
 
 func init_neighbor() -> void:
@@ -119,23 +121,6 @@ func init_neighbor() -> void:
 			Vector2( 0,-1)
 		]
 	]
-
-
-func init_emptyjson() -> void:
-	dict.emptyjson = {}
-	dict.emptyjson.title = {}
-	
-	var path = "res://asset/json/_emptyjson.json"
-	var array = load_data(path)
-	
-	for emptyjson in array:
-		var data = {}
-		
-		for key in emptyjson:
-			if key != "title":
-				data[key] = emptyjson[key]
-		
-		dict.emptyjson.title[emptyjson.title] = data
 
 
 func init_aspect() -> void:
@@ -206,12 +191,14 @@ func init_spot() -> void:
 					data.grid[words[1]] = spot[key]
 					
 					data[words[0]][words[1]] = spot[key]
+				elif words.has("layer"):
+					data.layer = spot[key]
 				else:
 					data.side = words[0]
 					data.role = words[1]
 					data.order = spot[key]
 				
-		dict.spot.index[spot.index] = data
+		dict.spot.index[int(spot.index)] = data
 
 
 func init_clash() -> void:
@@ -270,6 +257,33 @@ func init_path() -> void:
 			data.grids.append(grid)
 		
 		dict.path.side[path.side].append(data.grids)
+
+
+func init_temperament() -> void:
+	dict.temperament = {}
+	dict.temperament.title = {}
+	
+	var path = "res://asset/json/poro_temperament.json"
+	var array = load_data(path)
+	
+	for temperament in array:
+		var data = {}
+		data.chances = {}
+		
+		for key in temperament:
+			if key != "title":
+				var words = []
+				words = key.split(" ")
+				
+				if arr.state.has(words[0]):
+					if !data.chances.has(words[0]):
+						data.chances[words[0]] = {}
+					
+					data.chances[words[0]][words[1]] = temperament[key]
+				else:
+					data[key] = temperament[key]
+		
+		dict.temperament.title[temperament.title] = data
 
 
 func init_node() -> void:
