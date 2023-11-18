@@ -1,4 +1,4 @@
-extends Polygon2D
+extends Sprite2D
 
 
 var field = null
@@ -20,23 +20,11 @@ func set_attributes(input_: Dictionary) -> void:
 		return
 	
 	field.grids.spot[grid] = self
-	init_vertexs()
-	set_color_based_on_side("right")
+	update_based_on_side()
 	
 	for side in Global.arr.side:
 		neighbors[side] = []
 
-
-func init_vertexs() -> void:
-	var n = 6
-	var vertexs = []
-	var angle = PI * 2 / n
-	
-	for _i in n:
-		var vertex = Vector2.from_angle(angle * _i) * Global.num.spot.r
-		vertexs.append(vertex)
-	
-	set_polygon(vertexs)
 
 
 func set_gird(grid_: Vector2) -> void:
@@ -64,29 +52,32 @@ func remove_check() -> bool:
 	return true
 
 
-func set_color_based_on_side(side_: String) -> void:
+func update_based_on_side() -> void:
 	visible = true
+	var key = null
+
+	if field.grids[field.side].goal.front() == grid:
+		key = "goal"
+
+	if field.grids[field.side].attack.has(grid):
+		key = "attack"
+
+	if field.grids[field.side].defense.has(grid):
+		key = "defense"
 	
-	if field.grids[side_].goal.front() == grid:
-		color = Global.color.spot.goal
-		#print("goal")
-		return
-	
-	if field.grids[side_].attack.has(grid):
-		#print("attack")
-		color = Global.color.spot.attack
-		return
-	
-	if field.grids[side_].defense.has(grid):
-		#print("defense")
-		color = Global.color.spot.defense
-		return
-	
-	visible = false
+	if key != null:
+		var path = "res://asset/png/icon/hex/" + key + ".png"
+		texture = load(path)
+		
+		if scale == Vector2.ONE:
+			scale = Global.vec.size.hex / Vector2(texture.get_width(), texture.get_height())
+	else:
+		visible = false
 
 
 func add_clash(clash_: Node2D) -> void:
 	if !clashes.has(clash_.side):
 		clashes[clash_.side] = {}
 	
-	clashes[clash_.side][clash_] = clash_.get_opponent_spot(self)
+	if !clashes[clash_.side].has(clash_):
+		clashes[clash_.side][clash_] = clash_.get_opponent_spot(self)

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bn1f1d6uuo28j"
-path="res://.godot/imported/hexs.png-5375cabb6d5c60dbf6d38c7a216a377c.ctex"
+uid="uid://0cctdc5ka372"
+path="res://.godot/imported/dodge.png-e9be8fcc13656c7f6d76cc0186fcbf4a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://asset/png/icon/hex/hexs.png"
-dest_files=["res://.godot/imported/hexs.png-5375cabb6d5c60dbf6d38c7a216a377c.ctex"]
+source_file="res://asset/png/icon/action/dodge.png"
+dest_files=["res://.godot/imported/dodge.png-e9be8fcc13656c7f6d76cc0186fcbf4a.ctex"]
 
 [params]
 

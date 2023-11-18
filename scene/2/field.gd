@@ -13,7 +13,7 @@ var side = null
 
 func set_attributes(input_: Dictionary) -> void:
 	stadium = input_.stadium
-	side = "left"
+	side = "right"
 	
 	init_grids()
 	init_spots()
@@ -21,11 +21,9 @@ func set_attributes(input_: Dictionary) -> void:
 	init_paths()
 	init_markers()
 	set_visible_side()
-	#place_markers()
 	
 	custom_minimum_size = Vector2(Global.num.field.cols + 1.0 / 3, Global.num.field.rows) * Global.vec.size.spot
 	spots.position += Vector2(Global.num.spot.w, Global.num.spot.h) * 0.5
-	#markers.position += Vector2(Global.num.spot.w, Global.num.spot.h) * 0.5
 
 
 func init_grids() -> void:
@@ -81,6 +79,22 @@ func init_clashes() -> void:
 			var clash = Global.scene.clash.instantiate()
 			clashes.add_child(clash)
 			clash.set_attributes(input)
+	
+	for _side in Global.arr.side:
+		for role in grids[_side]:
+			if role != "goal":
+				for grid in grids[_side][role]:
+					var input = {}
+					var a = grids[_side][role]
+					input.field = self
+					input.side = _side
+					input.spots = {}
+					input.spots.attack = grids.spot[grid]
+					input.spots.defense = grids.spot[grid]
+					
+					var clash = Global.scene.clash.instantiate()
+					clashes.add_child(clash)
+					clash.set_attributes(input)
 
 
 func init_paths() -> void:
@@ -120,7 +134,7 @@ func place_markers() -> void:
 
 func set_visible_side() -> void:
 	for spot in spots.get_children():
-		spot.set_color_based_on_side(side)
+		spot.update_based_on_side()
 		
 	for clash in clashes.get_children():
 		clash.visible = clash.side == side
@@ -140,10 +154,11 @@ func roll_clashes() -> void:
 	
 	for _side in gladiator.marker.spot.clashes:
 		for clash in gladiator.marker.spot.clashes[_side]:
-			var spot = clash.get_opponent_spot(gladiator.marker.spot)
-			
-			if spot.marker != null:
-				clashes_.append(clash)
+			if !clash.single:
+				var spot = clash.get_opponent_spot(gladiator.marker.spot)
+				
+				if spot.marker != null:
+					clashes_.append(clash)
 	
 	stadium.encounter.set_clash(clashes_.front())
 

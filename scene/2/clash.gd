@@ -1,4 +1,4 @@
-extends Node2D
+extends Sprite2D
 
 
 @onready var anchor = $Anchor
@@ -7,6 +7,8 @@ extends Node2D
 var field = null
 var spots = null
 var side = null
+var action = null
+var single = false
 
 
 func set_attributes(input_: Dictionary) -> void:
@@ -15,12 +17,22 @@ func set_attributes(input_: Dictionary) -> void:
 	side = input_.side
 	
 	position = (spots.attack.center + spots.defense.center) / 2
-	init_vertexs()
-	anchor.color = Global.color.anchor
+	
+	if spots.attack == spots.defense:
+		position.y += Global.num.spot.h
+		single = true
+	
+	set_action("empty")
 	
 	for role in spots:
 		var spot = spots[role]
 		spot.add_clash(self)
+
+
+func set_action(action_: String) -> void:
+	var path = "res://asset/png/icon/action/" + action_ + ".png"
+	texture = load(path)
+	scale = Global.vec.size.action / Vector2(texture.get_width(), texture.get_height())
 
 
 func init_vertexs() -> void:
@@ -35,7 +47,10 @@ func init_vertexs() -> void:
 	anchor.set_polygon(vertexs)
 
 
-func get_opponent_spot(spot_: Polygon2D) -> Variant:
+func get_opponent_spot(spot_: Sprite2D) -> Variant:
+	if single:
+		return spot_
+	
 	for type in spots:
 		var spot = spots[type]
 		

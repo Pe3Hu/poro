@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://b0ybpg4j18e1e"]
+[gd_scene load_steps=3 format=3 uid="uid://b0ybpg4j18e1e"]
 
+[ext_resource type="Texture2D" uid="uid://bqcgpvo1q4j0" path="res://asset/png/icon/hex/goal.png" id="1_htejl"]
 [ext_resource type="Script" path="res://scene/2/spot.gd" id="1_p4xno"]
 
-[node name="Spot" type="Polygon2D"]
+[node name="Spot" type="Sprite2D"]
+texture = ExtResource("1_htejl")
 script = ExtResource("1_p4xno")

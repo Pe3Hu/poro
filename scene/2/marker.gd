@@ -25,7 +25,7 @@ func set_gladiator(gladiator_: MarginContainer) -> void:
 	gladiator.marker = self
 
 
-func set_spot(spot_: Polygon2D) -> void:
+func set_spot(spot_: Sprite2D) -> void:
 	if spot != null:
 		spot.marker = null
 	

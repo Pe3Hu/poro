@@ -36,12 +36,12 @@ func init_num() -> void:
 	num.index = {}
 	
 	num.spot = {}
-	num.spot.r = 32
+	num.spot.r = 48
 	num.spot.h = num.spot.r * sqrt(3)
 	num.spot.w = num.spot.r * 2
 	
 	num.field = {}
-	num.field.rows = 7
+	num.field.rows = 8
 	num.field.cols = 13
 	
 	num.anchor = {}
@@ -313,6 +313,8 @@ func init_vec():
 	vec.size.number = Vector2(5, 32)
 	
 	vec.size.marker = Vector2(64, 64) * 0.75
+	vec.size.hex = Vector2(64, 64) * 1.66
+	vec.size.action = Vector2(64, 64) * 0.75
 	vec.size.spot = Vector2(num.spot.w * 0.75, num.spot.h)
 	
 	init_window_size()
