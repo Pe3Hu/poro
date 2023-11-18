@@ -30,6 +30,7 @@ func init_arr() -> void:
 	arr.side = ["left", "right"]
 	arr.role = ["attack", "defense"]
 	arr.status = ["keeper", "guest"]
+	arr.phase = ["onslaught", "movement", "ambition"]
 
 
 func init_num() -> void:
@@ -59,6 +60,8 @@ func init_dict() -> void:
 	init_clash()
 	init_path()
 	init_temperament()
+	init_tactic()
+	init_action()
 
 
 func init_mirror() -> void:
@@ -286,6 +289,55 @@ func init_temperament() -> void:
 		dict.temperament.title[temperament.title] = data
 
 
+func init_tactic() -> void:
+	dict.tactic = {}
+	dict.tactic.role = {}
+	dict.tactic.role.attack = {}
+	dict.tactic.role.defense = {}
+	
+	var path = "res://asset/json/poro_tactic.json"
+	var array = load_data(path)
+	
+	for tactic in array:
+		if !dict.tactic.role[tactic.role].has(tactic.title):
+			dict.tactic.role[tactic.role][tactic.title] = {}
+		
+		var data = {}
+		
+		for key in tactic:
+			var words = []
+			words = key.split(" ")
+			
+			if words.has("marker"):
+				var actions = []
+				actions = tactic[key].split("/")
+				data[int(words[1])] = actions
+		
+		dict.tactic.role[tactic.role][tactic.title][tactic.turn] = data
+
+
+func init_action() -> void:
+	dict.action = {}
+	dict.action.title = {}
+	arr.order = []
+	
+	
+	var path = "res://asset/json/poro_action.json"
+	var array = load_data(path)
+	
+	for action in array:
+		var data = {}
+		
+		for key in action:
+			if key != "title":
+				data[key] = action[key]
+		
+		dict.action.title[action.title] = data
+		arr.order.append(action.title)
+	
+	arr.order.sort_custom(func(a, b): return dict.action.title[a].order < dict.action.title[b].order)
+
+
 func init_node() -> void:
 	node.game = get_node("/root/Game")
 
@@ -386,3 +438,13 @@ func get_random_key(dict_: Dictionary):
 	
 	print("!bug! index_r error in get_random_key func")
 	return null
+
+
+func get_paths_based_on_side_and_grid(side_: String, grid_: Vector2) -> Array:
+	var paths = []
+	
+	for path in dict.path.side[side_]:
+		if path.front() == grid_:
+			paths.append(path)
+	
+	return paths

@@ -33,6 +33,7 @@ func set_action(action_: String) -> void:
 	var path = "res://asset/png/icon/action/" + action_ + ".png"
 	texture = load(path)
 	scale = Global.vec.size.action / Vector2(texture.get_width(), texture.get_height())
+	visible = true
 
 
 func init_vertexs() -> void:
@@ -58,3 +59,4 @@ func get_opponent_spot(spot_: Sprite2D) -> Variant:
 			return spot
 	
 	return null
+

@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://d1phy6yq760oc"]
+[gd_scene load_steps=4 format=3 uid="uid://d1phy6yq760oc"]
 
 [ext_resource type="Script" path="res://scene/1/team.gd" id="1_4yu5j"]
+[ext_resource type="PackedScene" uid="uid://13kvol86inyk" path="res://scene/1/coach.tscn" id="2_87k28"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7paps"]
 
@@ -26,7 +27,15 @@ visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_7paps")
 
-[node name="Gladiators" type="VBoxContainer" parent="."]
+[node name="HBox" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 2
+
+[node name="Gladiators" type="VBoxContainer" parent="HBox"]
 visible = false
 layout_mode = 2
 alignment = 1
+
+[node name="Coach" parent="HBox" instance=ExtResource("2_87k28")]
+layout_mode = 2

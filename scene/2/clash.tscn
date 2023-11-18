@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://scene/2/clash.gd" id="1_a7ntu"]
 
 [node name="Сlash" type="Sprite2D"]
+visible = false
 script = ExtResource("1_a7ntu")
 
 [node name="Anchor" type="Polygon2D" parent="."]

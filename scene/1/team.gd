@@ -1,7 +1,8 @@
 extends MarginContainer
 
 
-@onready var gladiators = $Gladiators
+@onready var gladiators = $HBox/Gladiators
+@onready var coach = $HBox/Coach
 
 var cradle = null
 var stadium = null
@@ -14,6 +15,10 @@ var arrangements = {}
 
 func set_attributes(input_: Dictionary) -> void:
 	cradle  = input_.cradle
+	
+	var input = {}
+	input.team = self
+	coach.set_attributes(input)
 	
 	init_gladiators()
 	init_arrangements()
@@ -65,3 +70,4 @@ func switch_role() -> void:
 				role = "attack"
 	else:
 		role = Global.dict.mirror.role[role]
+

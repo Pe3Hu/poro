@@ -11,3 +11,10 @@ res://script/Global.gd
 res://scene/2/clash.gd
 res://scene/2/marker.gd
 res://scene/2/field.gd
+res://scene/1/team.gd
+res://scene/1/coach.tscn
+res://scene/2/stadium.gd
+res://scene/1/team.tscn
+res://scene/1/coach.gd
+res://scene/1/gladiator.gd
+res://asset/json/poro_tactic.json

@@ -95,6 +95,7 @@ func init_clashes() -> void:
 					var clash = Global.scene.clash.instantiate()
 					clashes.add_child(clash)
 					clash.set_attributes(input)
+					grids.spot[grid].clash = clash
 
 
 func init_paths() -> void:
@@ -137,7 +138,7 @@ func set_visible_side() -> void:
 		spot.update_based_on_side()
 		
 	for clash in clashes.get_children():
-		clash.visible = clash.side == side
+		clash.visible = false#clash.side == side
 	
 	for path in paths.get_children():
 		path.visible = path.side == side
@@ -162,3 +163,11 @@ func roll_clashes() -> void:
 	
 	stadium.encounter.set_clash(clashes_.front())
 
+
+func get_clash_based_on_spots(spots_: Array) -> Variant:
+	for clash in clashes.get_children():
+		if clash.side == side:
+			if (spots_.front() == clash.spots.attack and spots_.back() == clash.spots.defense) or (spots_.back() == clash.spots.attack and spots_.front() == clash.spots.defense):
+				return clash
+	
+	return null

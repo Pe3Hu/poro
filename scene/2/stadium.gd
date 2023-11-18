@@ -10,6 +10,7 @@ var tournament = null
 var teams = []
 var keeper = null
 var guest = null
+var counter = {}
 
 
 func set_attributes(input_: Dictionary) -> void:
@@ -23,11 +24,8 @@ func set_attributes(input_: Dictionary) -> void:
 	field.set_attributes(input)
 	encounter.set_attributes(input)
 	
-	switch_roles()
-	switch_roles()
-	markers_walkout()
-	load_balance()
-	field.roll_clashes()
+	counter.round = 0
+	next_round()
 
 
 func add_team(team_: MarginContainer) -> void:
@@ -46,9 +44,24 @@ func add_team(team_: MarginContainer) -> void:
 	team_.stadium = self
 
 
-func switch_roles() -> void:
+func next_round() -> void:
+	counter.round += 1
+	counter.turn = 0
+	
 	for team in teams:
 		team.switch_role()
+		team.coach.provide_guidance()
+	
+	markers_walkout()
+	
+	next_turn()
+
+
+func next_turn() -> void:
+	counter.turn += 1
+	
+	load_balance()
+	field.roll_clashes()
 
 
 func markers_walkout() -> void:
@@ -64,5 +77,6 @@ func markers_walkout() -> void:
 func load_balance() -> void:
 	for team in teams:
 		for gladiator in team.mains:
+			gladiator.select_action()
 			gladiator.exert_effort()
 

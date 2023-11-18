@@ -3,8 +3,10 @@ extends Sprite2D
 
 var field = null
 var marker = null
+var clash = null
 var grid = null
 var center = null
+var declaration = null
 var clashes = {}
 var neighbors = {}
 
@@ -24,7 +26,6 @@ func set_attributes(input_: Dictionary) -> void:
 	
 	for side in Global.arr.side:
 		neighbors[side] = []
-
 
 
 func set_gird(grid_: Vector2) -> void:
