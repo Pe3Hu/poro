@@ -16,8 +16,5 @@ func set_attributes(input_: Dictionary) -> void:
 	input.type = "number"
 	input.subtype = value
 	icon.set_attributes(input)
-	#var style = StyleBoxFlat.new()
-	#bg.set("theme_override_styles/panel", style)
-	#icon.label.text = str(value)
 	custom_minimum_size = Vector2(Global.vec.size.facet)
 

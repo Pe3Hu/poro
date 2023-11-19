@@ -22,7 +22,7 @@ func _input(event) -> void:
 		match event.keycode:
 			KEY_SPACE:
 				if event.is_pressed() && !event.is_echo():
-					pass
+					championship.tournaments.get_child(0).stadiums.get_child(0).next_clash()
 
 
 #func _process(delta_) -> void:

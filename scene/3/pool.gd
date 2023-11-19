@@ -60,3 +60,10 @@ func update_result() -> void:
 	data.value = result
 	encounter.results.append(data)
 	encounter.check_results()
+
+
+func reset() -> void:
+	while dices.get_child_count() > 0:
+		var dice = dices.get_child(0)
+		dices.remove_child(dice)
+		dice.queue_free()

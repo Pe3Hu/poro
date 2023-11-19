@@ -11,6 +11,8 @@ var teams = []
 var keeper = null
 var guest = null
 var counter = {}
+var clashes = {}
+var phase = null
 
 
 func set_attributes(input_: Dictionary) -> void:
@@ -23,6 +25,9 @@ func set_attributes(input_: Dictionary) -> void:
 	input.stadium = self
 	field.set_attributes(input)
 	encounter.set_attributes(input)
+	
+	for action in Global.arr.order:
+		clashes[action] = []
 	
 	counter.round = 0
 	next_round()
@@ -53,15 +58,16 @@ func next_round() -> void:
 		team.coach.provide_guidance()
 	
 	markers_walkout()
-	
 	next_turn()
 
 
 func next_turn() -> void:
 	counter.turn += 1
+	phase = null
 	
+	next_phase()
 	load_balance()
-	field.roll_clashes()
+	next_clash()
 
 
 func markers_walkout() -> void:
@@ -80,3 +86,39 @@ func load_balance() -> void:
 			gladiator.select_action()
 			gladiator.exert_effort()
 
+
+#func end_of_clash(clash_: Sprite2D) -> void:
+#	#clashes[clash_.action].erase(clash_)
+#	if clashes[clash_.action].is_empty():
+#		next_phase()
+
+
+func next_phase() -> void:
+	if phase == Global.arr.order.back():
+		phase = null
+		return
+	
+	if phase == null:
+		phase = Global.arr.order.front()
+	else:
+		var index = Global.arr.order.find(phase) + 1
+		phase = Global.arr.order[index]
+
+
+func next_clash() -> void:
+	if phase != null:
+		if clashes[phase].is_empty():
+			next_phase()
+			next_clash()
+		else:
+			var clash = clashes[phase].pop_front()
+			encounter.set_clash(clash)
+	else:
+		end_of_turn()
+
+
+func end_of_turn() -> void:
+	if counter.turn == Global.num.round.turns:
+		next_turn()
+	else:
+		next_round()

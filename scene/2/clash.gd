@@ -30,10 +30,14 @@ func set_attributes(input_: Dictionary) -> void:
 
 
 func set_action(action_: String) -> void:
-	var path = "res://asset/png/icon/action/" + action_ + ".png"
+	action = action_
+	var path = "res://asset/png/icon/action/" + action + ".png"
 	texture = load(path)
 	scale = Global.vec.size.action / Vector2(texture.get_width(), texture.get_height())
 	visible = true
+	
+	if action != "empty" and !field.stadium.clashes[action].has(self):
+		field.stadium.clashes[action].append(self)
 
 
 func init_vertexs() -> void:
@@ -60,3 +64,9 @@ func get_opponent_spot(spot_: Sprite2D) -> Variant:
 	
 	return null
 
+
+func reset() -> void:
+	action = null
+	set_action("empty")
+	visible = false
+	#field.stadium.end_of_clash(self)

@@ -148,20 +148,20 @@ func switch_side() -> void:
 	side = Global.dict.mirror.side[side]
 	set_visible_side()
 
-
-func roll_clashes() -> void:
-	var gladiator = stadium.teams.front().mains.back()
-	var clashes_ = []
-	
-	for _side in gladiator.marker.spot.clashes:
-		for clash in gladiator.marker.spot.clashes[_side]:
-			if !clash.single:
-				var spot = clash.get_opponent_spot(gladiator.marker.spot)
-				
-				if spot.marker != null:
-					clashes_.append(clash)
-	
-	stadium.encounter.set_clash(clashes_.front())
+#
+#func roll_clashes() -> void:
+#	var gladiator = stadium.teams.front().mains.back()
+#	var clashes_ = []
+#
+#	for _side in gladiator.marker.spot.clashes:
+#		for clash in gladiator.marker.spot.clashes[_side]:
+#			if !clash.single:
+#				var spot = clash.get_opponent_spot(gladiator.marker.spot)
+#
+#				if spot.marker != null:
+#					clashes_.append(clash)
+#
+#	stadium.encounter.set_clash(clashes_.front())
 
 
 func get_clash_based_on_spots(spots_: Array) -> Variant:

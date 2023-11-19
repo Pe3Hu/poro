@@ -1,0 +1,114 @@
+[
+ {
+  "title": "knockdown",
+  "counter": 1,
+  "type": "turn",
+  "roll min": 39,
+  "roll max": 48,
+  "count": 9
+ },
+ {
+  "title": "knockdown",
+  "counter": 2,
+  "type": "turn",
+  "roll min": 32,
+  "roll max": 39,
+  "count": 7
+ },
+ {
+  "title": "knockdown",
+  "counter": 3,
+  "type": "turn",
+  "roll min": 27,
+  "roll max": 32,
+  "count": 5
+ },
+ {
+  "title": "knockdown",
+  "counter": 4,
+  "type": "turn",
+  "roll min": 24,
+  "roll max": 27,
+  "count": 3
+ },
+ {
+  "title": "knockout",
+  "counter": 3,
+  "type": "round",
+  "roll min": 19,
+  "roll max": 24,
+  "count": 5
+ },
+ {
+  "title": "knockout",
+  "counter": 4,
+  "type": "round",
+  "roll min": 15,
+  "roll max": 19,
+  "count": 4
+ },
+ {
+  "title": "knockout",
+  "counter": 5,
+  "type": "round",
+  "roll min": 12,
+  "roll max": 15,
+  "count": 3
+ },
+ {
+  "title": "knockout",
+  "counter": 6,
+  "type": "round",
+  "roll min": 10,
+  "roll max": 12,
+  "count": 2
+ },
+ {
+  "title": "injury",
+  "counter": 5,
+  "type": "games",
+  "roll min": 8,
+  "roll max": 10,
+  "count": 2
+ },
+ {
+  "title": "injury",
+  "counter": 6,
+  "type": "games",
+  "roll min": 6,
+  "roll max": 8,
+  "count": 2
+ },
+ {
+  "title": "injury",
+  "counter": 7,
+  "type": "games",
+  "roll min": 5,
+  "roll max": 6,
+  "count": 1
+ },
+ {
+  "title": "injury",
+  "counter": 8,
+  "type": "games",
+  "roll min": 4,
+  "roll max": 5,
+  "count": 1
+ },
+ {
+  "title": "wound",
+  "counter": 0,
+  "type": "permanently",
+  "roll min": 1,
+  "roll max": 4,
+  "count": 3
+ },
+ {
+  "title": "death",
+  "counter": 0,
+  "type": "permanently",
+  "roll min": 0,
+  "roll max": 1,
+  "count": 1
+ }
+]

@@ -16,3 +16,12 @@ res://scene/3/pool.gd
 res://scene/2/encounter.gd
 res://script/Global.gd
 res://scene/3/dice.gd
+res://scene/0/icon.gd
+res://scene/2/clash.gd
+res://scene/2/stadium.gd
+res://scene/1/team.gd
+res://scene/0/game.gd
+res://scene/2/field.gd
+res://scene/1/gladiator.gd
+res://scene/2/marker.gd
+res://asset/json/poro_damage.json

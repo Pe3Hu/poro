@@ -12,7 +12,7 @@ var tick = null
 var time = null
 var counter = 0
 var faces = 6
-var skip = false#false true
+var skip = true#false true
 var anchor = null
 var temp = true
 
@@ -46,7 +46,12 @@ func update_size() -> void:
 
 
 func roll() -> void:
-	timer.start()
+	if skip:
+		skip_animation()
+		pool.dice_stopped(self)
+	else:
+		timer.start()
+	
 	reset()
 
 
@@ -113,9 +118,6 @@ func pop_up() -> void:
 func skip_animation() -> void:
 	var facet = facets.get_children().pick_random()
 	flip_to_value(facet.value)
-	
-	#get_parent().remove_child(self)
-	#queue_free()
 
 
 func flip_to_value(value_) -> void:

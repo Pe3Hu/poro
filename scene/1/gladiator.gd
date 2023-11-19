@@ -19,6 +19,7 @@ var effort = null
 var action = null
 var target = null
 var clash = null
+var destination = null
 
 
 func set_attributes(input_: Dictionary) -> void:
@@ -88,8 +89,8 @@ func verify_intent() -> void:
 			var paths = Global.get_paths_based_on_side_and_grid(team.stadium.field.side, marker.spot.grid)
 			
 			for path in paths:
-				var destination = path.back()
-				var spot = team.stadium.field.grids.spot[destination]
+				var grid = path.back()
+				var spot = team.stadium.field.grids.spot[grid]
 				
 				if spot.marker == null and spot.declaration == null:
 					options.append(path)
@@ -119,6 +120,7 @@ func intent_declaration() -> void:
 			spots.append(spot)
 			clash = team.stadium.field.get_clash_based_on_spots(spots)
 			spot.declaration = self
+			destination = spot
 		"onslaught":
 			var option = options.pick_random()
 			var spots = []
@@ -140,3 +142,8 @@ func exert_effort() -> void:
 	
 	endurance.current -= Global.dict.effort[effort]
 	update_state()
+
+
+func get_damage() -> void:
+	var key = Global.get_random_key(Global.dict.damage.rnd)
+	print(key)

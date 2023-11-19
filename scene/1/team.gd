@@ -20,7 +20,6 @@ func set_attributes(input_: Dictionary) -> void:
 	var input = {}
 	input.team = self
 	coach.set_attributes(input)
-	
 
 
 func init_gladiators() -> void:

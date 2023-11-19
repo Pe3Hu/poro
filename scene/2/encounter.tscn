@@ -46,10 +46,14 @@ layout_mode = 2
 visible = false
 layout_mode = 2
 
+[node name="Winner" parent="Gladiators/Left" instance=ExtResource("2_kuscj")]
+visible = false
+layout_mode = 2
+
 [node name="Pool" parent="Gladiators/Left" instance=ExtResource("3_tuhhi")]
 layout_mode = 2
 
-[node name="Winner" parent="Gladiators/Left" instance=ExtResource("2_kuscj")]
+[node name="Icon" parent="Gladiators" instance=ExtResource("2_kuscj")]
 layout_mode = 2
 
 [node name="Right" type="VBoxContainer" parent="Gladiators"]
@@ -66,8 +70,9 @@ layout_mode = 2
 visible = false
 layout_mode = 2
 
-[node name="Pool" parent="Gladiators/Right" instance=ExtResource("3_tuhhi")]
+[node name="Winner" parent="Gladiators/Right" instance=ExtResource("2_kuscj")]
+visible = false
 layout_mode = 2
 
-[node name="Winner" parent="Gladiators/Right" instance=ExtResource("2_kuscj")]
+[node name="Pool" parent="Gladiators/Right" instance=ExtResource("3_tuhhi")]
 layout_mode = 2

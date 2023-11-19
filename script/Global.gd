@@ -50,6 +50,9 @@ func init_num() -> void:
 	
 	num.team = {}
 	num.team.markers = 6
+	
+	num.round = {}
+	num.round.turns = 5
 
 
 func init_dict() -> void:
@@ -62,6 +65,7 @@ func init_dict() -> void:
 	init_temperament()
 	init_tactic()
 	init_action()
+	init_damage()
 
 
 func init_mirror() -> void:
@@ -321,7 +325,6 @@ func init_action() -> void:
 	dict.action.title = {}
 	arr.order = []
 	
-	
 	var path = "res://asset/json/poro_action.json"
 	var array = load_data(path)
 	
@@ -336,6 +339,40 @@ func init_action() -> void:
 		arr.order.append(action.title)
 	
 	arr.order.sort_custom(func(a, b): return dict.action.title[a].order < dict.action.title[b].order)
+	arr.order.append("waiting")
+
+
+func init_damage() -> void:
+	dict.damage = {}
+	dict.damage.title = {}
+	dict.damage.rnd = {}
+	
+	var path = "res://asset/json/poro_damage.json"
+	var array = load_data(path)
+	
+	for damage in array:
+		if !dict.damage.title.has(damage.title):
+			dict.damage.title[damage.title] = {}
+			dict.damage.title[damage.title].counters = {}
+			dict.damage.title[damage.title].type = damage.type
+			dict.damage.title[damage.title].count = 0
+		
+		var data = {}
+		
+		for key in damage:
+			var words = []
+			words = key.split(" ")
+			
+			if words.has("roll"):
+				if !data.has(words[0]):
+					data[words[0]] = {}
+				
+				data[words[0]][words[1]] = damage[key]
+		
+		dict.damage.title[damage.title].counters[damage.counter] = data
+		var key = damage.title + " " + str(damage.counter)
+		dict.damage.rnd[key] = damage.count
+		dict.damage.title[damage.title].count += damage.count
 
 
 func init_node() -> void:
