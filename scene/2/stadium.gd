@@ -66,7 +66,7 @@ func next_turn() -> void:
 
 func markers_walkout() -> void:
 	for team in teams:
-		var arrangements = team.arrangements[field.side][team.role]
+		var arrangements = team.coach.arrangements[field.side][team.role]
 		
 		for gladiator in team.mains:
 			var grid = arrangements[gladiator.marker.order]

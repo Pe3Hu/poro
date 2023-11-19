@@ -1,19 +1,20 @@
 extends MarginContainer
 
 
-@onready var leftMarker = $Gladiators/Left/Marker
-@onready var leftMax = $Gladiators/Left/Max
-@onready var leftRoll = $Gladiators/Left/Roll
+@onready var leftMarker = $Gladiators/Left/HBox/Marker
+@onready var leftMax = $Gladiators/Left/HBox/Max
+@onready var leftPool = $Gladiators/Left/Pool
 @onready var leftWinner = $Gladiators/Left/Winner
-@onready var rightMarker = $Gladiators/Right/Marker
-@onready var rightMax = $Gladiators/Right/Max
-@onready var rightRoll = $Gladiators/Right/Roll
+@onready var rightMarker = $Gladiators/Right/HBox/Marker
+@onready var rightMax = $Gladiators/Right/HBox/Max
+@onready var rightPool = $Gladiators/Right/Pool
 @onready var rightWinner = $Gladiators/Right/Winner
 
 var stadium = null
 var clash = null
 var left = null
 var right = null
+var results = []
 
 
 func set_attributes(input_: Dictionary) -> void:
@@ -41,12 +42,18 @@ func set_clash(clash_: Node2D) -> void:
 		input.subtype = "2"
 		icon = get(side+"Winner")
 		icon.set_attributes(input)
+		
+		input.encounter = self
+		input.side = side
+		var pool = get(side+"Pool")
+		pool.set_attributes(input)
 	
-	roll()
+	roll_pool()
+	reroll_pool()
 
 
-func roll() -> void:
-	var datas = []
+func roll_pool() -> void:
+	results = []
 	
 	for side in Global.arr.side:
 		var gladiator = get(side)
@@ -58,27 +65,30 @@ func roll() -> void:
 		var icon = get(side+"Max")
 		icon.set_attributes(input)
 		
-		Global.rng.randomize()
-		input.subtype = Global.rng.randi_range(0, input.subtype)
-		
-		icon = get(side+"Roll")
-		icon.set_attributes(input)
-		
-		var data = {}
-		data.side = side
-		data.value = input.subtype
-		datas.append(data)
+		var pool = get(side+"Pool")
+		pool.init_dices(1, input.subtype)
+		pool.roll_dices()
+
+
+func check_results() -> void:
+	if results.size() == 2:
+		if results.front().value == results.back().value:
+			reroll_pool()
+		else:
+			results.sort_custom(func(a, b): return a.value > b.value)
+			
+			#var gladiator = get(results.front().side)
+			var input = {}
+			input.type = "prize"
+			input.subtype = "1"
+			var icon = get(results.front().side+"Winner")
+			icon.set_attributes(input)
+			icon.visible = true
+
+
+func reroll_pool() -> void:
+	results = []
 	
-	if datas.front().value == datas.back().value:
-		roll()
-	else:
-		datas.sort_custom(func(a, b): return a.value > b.value)
-		
-		var gladiator = get(datas.front().side)
-		var input = {}
-		input.type = "prize"
-		input.subtype = "1"
-		var icon = get(datas.front().side+"Winner")
-		icon.set_attributes(input)
-
-
+	for side in Global.arr.side:
+		var pool = get(side+"Pool")
+		pool.roll_dices()

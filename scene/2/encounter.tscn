@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://hetf20d6go8n"]
+[gd_scene load_steps=5 format=3 uid="uid://hetf20d6go8n"]
 
 [ext_resource type="Script" path="res://scene/2/encounter.gd" id="1_32f62"]
 [ext_resource type="PackedScene" uid="uid://ciw38iqel0v5a" path="res://scene/0/icon.tscn" id="2_kuscj"]
+[ext_resource type="PackedScene" uid="uid://dxmnh0dul7103" path="res://scene/3/pool.tscn" id="3_tuhhi"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7paps"]
 
@@ -35,13 +36,17 @@ alignment = 1
 layout_mode = 2
 alignment = 1
 
-[node name="Marker" parent="Gladiators/Left" instance=ExtResource("2_kuscj")]
+[node name="HBox" type="HBoxContainer" parent="Gladiators/Left"]
 layout_mode = 2
 
-[node name="Max" parent="Gladiators/Left" instance=ExtResource("2_kuscj")]
+[node name="Marker" parent="Gladiators/Left/HBox" instance=ExtResource("2_kuscj")]
 layout_mode = 2
 
-[node name="Roll" parent="Gladiators/Left" instance=ExtResource("2_kuscj")]
+[node name="Max" parent="Gladiators/Left/HBox" instance=ExtResource("2_kuscj")]
+visible = false
+layout_mode = 2
+
+[node name="Pool" parent="Gladiators/Left" instance=ExtResource("3_tuhhi")]
 layout_mode = 2
 
 [node name="Winner" parent="Gladiators/Left" instance=ExtResource("2_kuscj")]
@@ -51,13 +56,17 @@ layout_mode = 2
 layout_mode = 2
 alignment = 1
 
-[node name="Marker" parent="Gladiators/Right" instance=ExtResource("2_kuscj")]
+[node name="HBox" type="HBoxContainer" parent="Gladiators/Right"]
 layout_mode = 2
 
-[node name="Max" parent="Gladiators/Right" instance=ExtResource("2_kuscj")]
+[node name="Marker" parent="Gladiators/Right/HBox" instance=ExtResource("2_kuscj")]
 layout_mode = 2
 
-[node name="Roll" parent="Gladiators/Right" instance=ExtResource("2_kuscj")]
+[node name="Max" parent="Gladiators/Right/HBox" instance=ExtResource("2_kuscj")]
+visible = false
+layout_mode = 2
+
+[node name="Pool" parent="Gladiators/Right" instance=ExtResource("3_tuhhi")]
 layout_mode = 2
 
 [node name="Winner" parent="Gladiators/Right" instance=ExtResource("2_kuscj")]

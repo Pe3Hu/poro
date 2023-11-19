@@ -119,7 +119,6 @@ func intent_declaration() -> void:
 			spots.append(spot)
 			clash = team.stadium.field.get_clash_based_on_spots(spots)
 			spot.declaration = self
-			print([option[option.size()-2], option.back() ])
 		"onslaught":
 			var option = options.pick_random()
 			var spots = []

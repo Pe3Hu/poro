@@ -356,6 +356,9 @@ func init_scene() -> void:
 	scene.path = load("res://scene/2/path.tscn")
 	scene.marker = load("res://scene/2/marker.tscn")
 	
+	scene.dice = load("res://scene/3/dice.tscn")
+	scene.facet = load("res://scene/3/facet.tscn")
+	
 
 
 func init_vec():
@@ -368,6 +371,8 @@ func init_vec():
 	vec.size.hex = Vector2(64, 64) * 1.66
 	vec.size.action = Vector2(64, 64) * 0.75
 	vec.size.spot = Vector2(num.spot.w * 0.75, num.spot.h)
+	
+	vec.size.facet = Vector2(64, 64) * 0.5
 	
 	init_window_size()
 
