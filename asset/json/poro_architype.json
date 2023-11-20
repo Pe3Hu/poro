@@ -1,0 +1,109 @@
+[
+ {
+  "title": "catcher",
+  "priority": 0,
+  "act": "ambition",
+  "trigger verge": "mid",
+  "trigger layer": 1,
+  "trigger subject": "self",
+  "trigger carrier": "yes",
+  "role": "catcher"
+ },
+ {
+  "title": "catcher",
+  "priority": 1,
+  "act": "dodge",
+  "trigger verge": "mid",
+  "trigger layer": 1,
+  "trigger subject": "self",
+  "trigger carrier": "no",
+  "role": "catcher"
+ },
+ {
+  "title": "catcher",
+  "priority": 2,
+  "act": "movement",
+  "trigger verge": "mid",
+  "trigger layer": 1,
+  "role": "catcher"
+ },
+ {
+  "title": "twin thrower",
+  "priority": 0,
+  "act": "long pass",
+  "trigger verge": "any",
+  "trigger layer": 1,
+  "trigger subject": "teamate",
+  "trigger carrier": "yes",
+  "victim": "catcher",
+  "role": "thrower"
+ },
+ {
+  "title": "twin thrower",
+  "priority": 1,
+  "act": "short pass",
+  "trigger subject": "self",
+  "trigger carrier": "yes",
+  "victim": "thrower",
+  "role": "thrower"
+ },
+ {
+  "title": "twin thrower",
+  "priority": 2,
+  "act": "dodge",
+  "trigger verge": "any",
+  "trigger layer": 5,
+  "trigger subject": "self",
+  "role": "thrower"
+ },
+ {
+  "title": "twin thrower",
+  "priority": 3,
+  "act": "movement",
+  "trigger verge": "any",
+  "trigger layer": 5,
+  "role": "thrower"
+ },
+ {
+  "title": "blitzer",
+  "priority": 0,
+  "act": "ram",
+  "trigger verge": "mid",
+  "trigger layer": 3,
+  "trigger subject": "self",
+  "victim": "profound",
+  "role": "fighter"
+ },
+ {
+  "title": "blitzer",
+  "priority": 1,
+  "act": "movement",
+  "trigger verge": "mid",
+  "trigger layer": 3,
+  "role": "fighter"
+ },
+ {
+  "title": "blitzer",
+  "priority": 2,
+  "act": "ram",
+  "victim": "profound",
+  "role": "fighter"
+ },
+ {
+  "title": "guard",
+  "priority": 0,
+  "act": "theft",
+  "trigger verge": "any",
+  "trigger layer": "any",
+  "trigger subject": "carrier",
+  "victim": "carrier",
+  "role": "fighter"
+ },
+ {
+  "title": "guard",
+  "priority": 1,
+  "act": "ram",
+  "victim": "profound",
+  "role": "fighter"
+ }
+]

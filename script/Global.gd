@@ -66,6 +66,8 @@ func init_dict() -> void:
 	init_tactic()
 	init_action()
 	init_damage()
+	init_ambition()
+	init_architype()
 
 
 func init_mirror() -> void:
@@ -373,6 +375,65 @@ func init_damage() -> void:
 		var key = damage.title + " " + str(damage.counter)
 		dict.damage.rnd[key] = damage.count
 		dict.damage.title[damage.title].count += damage.count
+
+
+func init_ambition() -> void:
+	dict.ambition = {}
+	dict.ambition.type = {}
+	
+	var path = "res://asset/json/poro_ambition.json"
+	var array = load_data(path)
+	
+	for ambition in array:
+		var data = {}
+		
+		if !dict.ambition.type.has(ambition.type):
+			dict.ambition.type[ambition.type] = {}
+		
+		for key in ambition:
+			if key != "type" and key != "distance":
+				var words = []
+				words = key.split(" ")
+				
+				if words.has("chance"):
+					if !data.has(words[1]):
+						data[words[1]] = {}
+					
+					data[words[1]][words[0]] = ambition[key]
+				else:
+					data[key] = ambition[key]
+		
+		dict.ambition.type[ambition.type][ambition.distance] = data
+
+
+func init_architype() -> void:
+	dict.architype = {}
+	dict.architype.title = {}
+	
+	var path = "res://asset/json/poro_architype.json"
+	var array = load_data(path)
+	
+	for architype in array:
+		var data = {}
+		
+		if !dict.architype.title.has(architype.title):
+			dict.architype.title[architype.title] = {}
+		
+		for key in architype:
+			if key != "type" and key != "priority":
+				var words = []
+				words = key.split(" ")
+				
+				if words.has("trigger"):
+					if !data.has(words[0]):
+						data[words[0]] = {}
+					
+					data[words[0]][words[1]] = architype[key]
+				else:
+					data[key] = architype[key]
+		
+		
+		dict.architype.title[architype.title][architype.priority] = data
 
 
 func init_node() -> void:

@@ -1,0 +1,60 @@
+[
+ {
+  "type": "pass",
+  "distance": 0,
+  "success chance": 95,
+  "fail chance": 5
+ },
+ {
+  "type": "pass",
+  "distance": 2,
+  "success chance": 85,
+  "fail chance": 15
+ },
+ {
+  "type": "pass",
+  "distance": 3,
+  "success chance": 70,
+  "fail chance": 30
+ },
+ {
+  "type": "pass",
+  "distance": 4,
+  "success chance": 50,
+  "fail chance": 50
+ },
+ {
+  "type": "pass",
+  "distance": 5,
+  "success chance": 20,
+  "fail chance": 80
+ },
+ {
+  "type": "throw",
+  "distance": 1,
+  "success chance": 90,
+  "fail chance": 10,
+  "points": 2
+ },
+ {
+  "type": "throw",
+  "distance": 3,
+  "success chance": 60,
+  "fail chance": 40,
+  "points": 2
+ },
+ {
+  "type": "throw",
+  "distance": 5,
+  "success chance": 30,
+  "fail chance": 70,
+  "points": 3
+ },
+ {
+  "type": "throw",
+  "distance": 6,
+  "success chance": 15,
+  "fail chance": 85,
+  "points": 3
+ }
+]

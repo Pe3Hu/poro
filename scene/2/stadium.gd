@@ -31,6 +31,9 @@ func set_attributes(input_: Dictionary) -> void:
 	
 	counter.round = 0
 	next_round()
+	
+	for _i in 7:
+		next_clash()
 
 
 func add_team(team_: MarginContainer) -> void:
@@ -85,12 +88,6 @@ func load_balance() -> void:
 		for gladiator in team.mains:
 			gladiator.select_action()
 			gladiator.exert_effort()
-
-
-#func end_of_clash(clash_: Sprite2D) -> void:
-#	#clashes[clash_.action].erase(clash_)
-#	if clashes[clash_.action].is_empty():
-#		next_phase()
 
 
 func next_phase() -> void:

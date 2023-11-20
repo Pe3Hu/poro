@@ -120,18 +120,43 @@ func reroll_pool() -> void:
 func apply_result() -> void:
 	if clash.action != "waiting" and clash.action != "empty":
 		var description = Global.dict.action.title[clash.action]
+		var data = {}
+		data.subtype = description.subtype
 		
 		match description.subtype:
 			"movement":
 				if winner.destination != null:
 					winner.marker.set_spot(winner.destination)
 					winner.destination = null
+					data.gladiator = winner
 				else:
-					loser.get_damage()
+					data.subtype = "onslaught"
+					data.gladiator = loser
+					data.damage = loser.roll_damage()
 			"onslaught":
-					loser.get_damage()
+					data.gladiator = loser
+					data.damage = loser.roll_damage()
+			"transfer":
+					data.gladiator = winner
+					data.damage = loser.roll_damage()
+		
+		if !description.subtype != "transfer":
+			data_out(data)
 		
 		leftPool.reset()
 		rightPool.reset()
 	
 	clash.reset()
+
+
+func data_out(data_: Dictionary) -> void:
+	var text = data_.gladiator.team.status + " " + str(data_.gladiator.marker.order)
+	
+	match data_.subtype:
+		"movement":
+			text += " moved to " + str(data_.gladiator.marker.spot.grid)
+		"movement":
+			text += " get damage " + data_.damage
+		
+		
+	print(text)

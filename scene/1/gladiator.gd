@@ -144,6 +144,5 @@ func exert_effort() -> void:
 	update_state()
 
 
-func get_damage() -> void:
-	var key = Global.get_random_key(Global.dict.damage.rnd)
-	print(key)
+func roll_damage() -> String:
+	return Global.get_random_key(Global.dict.damage.rnd)
