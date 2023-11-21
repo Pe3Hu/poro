@@ -9,6 +9,7 @@ var center = null
 var declaration = null
 var clashes = {}
 var neighbors = {}
+var layers = {}
 
 
 func set_attributes(input_: Dictionary) -> void:
@@ -37,6 +38,10 @@ func set_gird(grid_: Vector2) -> void:
 	
 	position = (grid + shift) * Global.vec.size.spot
 	center = position + Vector2(Global.num.spot.w, Global.num.spot.h) * 0.5
+	
+	
+	for side in Global.dict.spot.grid[grid]:
+		layers[side] = Global.dict.spot.grid[grid][side].layer
 
 
 func remove_check() -> bool:
@@ -56,6 +61,10 @@ func remove_check() -> bool:
 func update_based_on_side() -> void:
 	visible = true
 	var key = null
+	
+	if marker != null:
+		if marker.carrier:
+			key = "ball"
 
 	if field.grids[field.side].goal.front() == grid:
 		key = "goal"
@@ -82,3 +91,22 @@ func add_clash(clash_: Node2D) -> void:
 	
 	if !clashes[clash_.side].has(clash_):
 		clashes[clash_.side][clash_] = clash_.get_opponent_spot(self)
+
+
+
+func check_carrier_is_neighbor() -> bool:
+	for neighbor in neighbors[field.side]:
+		if neighbor.marker != null:
+			if neighbor.marker.carrier:
+				return true
+	
+	return false
+
+
+func get_neighbor_carrier() -> Variant:
+	for neighbor in neighbors[field.side]:
+		if neighbor.marker != null:
+			if neighbor.marker.carrier:
+				return neighbor
+	
+	return null

@@ -5,6 +5,7 @@ var field = null
 var gladiator = null
 var spot = null
 var order = null
+var carrier = false
 
 
 func set_attributes(input_: Dictionary) -> void:
@@ -32,3 +33,9 @@ func set_spot(spot_: Sprite2D) -> void:
 	spot = spot_
 	spot.marker = self
 	position = spot.center
+
+
+func set_carrier() -> void:
+	carrier = true
+	field.carrier = self
+	#spot.

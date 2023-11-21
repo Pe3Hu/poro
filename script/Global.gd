@@ -182,14 +182,15 @@ func init_aspect() -> void:
 
 func init_spot() -> void:
 	dict.spot = {}
-	dict.spot.index = {}
+	dict.spot.grid = {}
 	
 	var path = "res://asset/json/poro_spot.json"
 	var array = load_data(path)
 	
 	for spot in array:
 		var data = {}
-		data.grid = Vector2()
+		var grid = Vector2()
+		var side = null
 		
 		for key in spot:
 			if key != "index":
@@ -197,17 +198,19 @@ func init_spot() -> void:
 				words = key.split(" ")
 				
 				if words.has("grid"):
-					data.grid[words[1]] = spot[key]
-					
-					data[words[0]][words[1]] = spot[key]
+					grid[words[1]] = spot[key]
+				
 				elif words.has("layer"):
 					data.layer = spot[key]
 				else:
-					data.side = words[0]
+					side = words[0]
 					data.role = words[1]
 					data.order = spot[key]
-				
-		dict.spot.index[int(spot.index)] = data
+		
+		if !dict.spot.grid.has(grid):
+			dict.spot.grid[grid] = {}
+		
+		dict.spot.grid[grid][side] = data
 
 
 func init_clash() -> void:
@@ -315,11 +318,9 @@ func init_tactic() -> void:
 			words = key.split(" ")
 			
 			if words.has("marker"):
-				var actions = []
-				actions = tactic[key].split("/")
-				data[int(words[1])] = actions
+				data[int(words[1])] = tactic[key]
 		
-		dict.tactic.role[tactic.role][tactic.title][tactic.turn] = data
+		dict.tactic.role[tactic.role][tactic.title] = data
 
 
 func init_action() -> void:
@@ -338,7 +339,9 @@ func init_action() -> void:
 				data[key] = action[key]
 		
 		dict.action.title[action.title] = data
-		arr.order.append(action.title)
+		
+		if action.has("order"):
+			arr.order.append(action.title)
 	
 	arr.order.sort_custom(func(a, b): return dict.action.title[a].order < dict.action.title[b].order)
 	arr.order.append("waiting")
@@ -417,10 +420,10 @@ func init_architype() -> void:
 		var data = {}
 		
 		if !dict.architype.title.has(architype.title):
-			dict.architype.title[architype.title] = {}
+			dict.architype.title[architype.title] = []
 		
 		for key in architype:
-			if key != "type" and key != "priority":
+			if key != "title" and key != "priority":
 				var words = []
 				words = key.split(" ")
 				
@@ -432,8 +435,8 @@ func init_architype() -> void:
 				else:
 					data[key] = architype[key]
 		
-		
-		dict.architype.title[architype.title][architype.priority] = data
+		#dict.architype.title[architype.title][architype.priority] = data
+		dict.architype.title[architype.title].append(data)
 
 
 func init_node() -> void:

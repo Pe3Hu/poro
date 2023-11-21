@@ -93,8 +93,8 @@
   "title": "guard",
   "priority": 0,
   "act": "theft",
-  "trigger verge": "any",
-  "trigger layer": "any",
+  "trigger verge": "neighbor",
+  "trigger layer": "neighbor",
   "trigger subject": "carrier",
   "victim": "carrier",
   "role": "fighter"

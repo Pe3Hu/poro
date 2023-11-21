@@ -157,6 +157,5 @@ func data_out(data_: Dictionary) -> void:
 			text += " moved to " + str(data_.gladiator.marker.spot.grid)
 		"movement":
 			text += " get damage " + data_.damage
-		
-		
+	
 	print(text)

@@ -9,6 +9,7 @@ extends MarginContainer
 var stadium = null
 var grids = {} 
 var side = null
+var carrier = null
 
 
 func set_attributes(input_: Dictionary) -> void:
@@ -30,16 +31,17 @@ func init_grids() -> void:
 	grids = {}
 	grids.spot = {}
 	
-	for index in Global.dict.spot.index:
-		var description = Global.dict.spot.index[index]
-		
-		if !grids.has(description.side):
-			grids[description.side] = {}
-		
-		if !grids[description.side].has(description.role):
-			grids[description.side][description.role] = []
-		
-		grids[description.side][description.role].append(description.grid)
+	for grid in Global.dict.spot.grid:
+		for _side in Global.dict.spot.grid[grid]:
+			var description = Global.dict.spot.grid[grid][_side]
+			
+			if !grids.has(_side):
+				grids[_side] = {}
+			
+			if !grids[_side].has(description.role):
+				grids[_side][description.role] = []
+			
+			grids[_side][description.role].append(grid)
 
 
 func init_spots() -> void:
@@ -48,10 +50,11 @@ func init_spots() -> void:
 			var input = {}
 			input.field = self
 			input.grid = Vector2(_j, _i)
-	
-			var spot = Global.scene.spot.instantiate()
-			spots.add_child(spot)
-			spot.set_attributes(input)
+			
+			if Global.dict.spot.grid.has(input.grid):
+				var spot = Global.scene.spot.instantiate()
+				spots.add_child(spot)
+				spot.set_attributes(input)
 	
 	init_spot_neighbors()
 
@@ -62,8 +65,12 @@ func init_spot_neighbors() -> void:
 			for _i in path.size() - 1:
 				var spot = grids.spot[path[_i]]
 				var neighbor = grids.spot[path[_i + 1]]
-				spot.neighbors[_side].append(neighbor)
-				neighbor.neighbors[_side].append(spot)
+				
+				if !spot.neighbors[_side].has(neighbor):
+					spot.neighbors[_side].append(neighbor)
+					
+				if !neighbor.neighbors[_side].has(spot):
+					neighbor.neighbors[_side].append(spot)
 
 
 func init_clashes() -> void:
@@ -147,21 +154,6 @@ func set_visible_side() -> void:
 func switch_side() -> void:
 	side = Global.dict.mirror.side[side]
 	set_visible_side()
-
-#
-#func roll_clashes() -> void:
-#	var gladiator = stadium.teams.front().mains.back()
-#	var clashes_ = []
-#
-#	for _side in gladiator.marker.spot.clashes:
-#		for clash in gladiator.marker.spot.clashes[_side]:
-#			if !clash.single:
-#				var spot = clash.get_opponent_spot(gladiator.marker.spot)
-#
-#				if spot.marker != null:
-#					clashes_.append(clash)
-#
-#	stadium.encounter.set_clash(clashes_.front())
 
 
 func get_clash_based_on_spots(spots_: Array) -> Variant:

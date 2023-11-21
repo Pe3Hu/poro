@@ -8,7 +8,7 @@
   "layer": 6,
   "attack": "yes",
   "phase": "movement",
-  "order": 7,
+  "order": 4,
   "target": "several"
  },
  {
@@ -20,7 +20,7 @@
   "layer": 6,
   "attack": "yes",
   "phase": "movement",
-  "order": 6,
+  "order": 3,
   "target": "several"
  },
  {
@@ -32,7 +32,7 @@
   "layer": 6,
   "attack": "yes",
   "phase": "movement",
-  "order": 5,
+  "order": 2,
   "target": "several"
  },
  {
@@ -44,7 +44,6 @@
   "layer": 2,
   "defense": "yes",
   "phase": "movement",
-  "order": 4,
   "target": "single"
  },
  {
@@ -56,31 +55,29 @@
   "layer": 2,
   "defense": "yes",
   "phase": "movement",
-  "order": 3,
-  "target": "single"
- },
- {
-  "title": "suppression",
-  "type": "reaction",
-  "subtype": "ambition",
-  "aspect": "strength",
-  "sign": "equal",
-  "layer": 2,
-  "defense": "yes",
-  "phase": "ambition",
-  "order": 10,
   "target": "single"
  },
  {
   "title": "cover",
   "type": "reaction",
   "subtype": "ambition",
+  "aspect": "strength",
+  "sign": "more",
+  "layer": 0,
+  "defense": "yes",
+  "phase": "ambition",
+  "target": "single"
+ },
+ {
+  "title": "theft",
+  "type": "initiation",
+  "subtype": "onslaught",
   "aspect": "dexterity",
   "sign": "more",
   "layer": 1,
   "defense": "yes",
   "phase": "ambition",
-  "order": 9,
+  "order": 1,
   "target": "single"
  },
  {
@@ -92,7 +89,7 @@
   "layer": 0,
   "attack": "yes",
   "phase": "ambition",
-  "order": 11,
+  "order": 5,
   "target": "single"
  },
  {
@@ -103,8 +100,8 @@
   "sign": "more",
   "layer": 0,
   "attack": "yes",
+  "defense": "yes",
   "phase": "ambition",
-  "order": 8,
   "target": "single"
  },
  {
@@ -116,7 +113,7 @@
   "layer": 1,
   "attack": "yes",
   "phase": "ambition",
-  "order": 12,
+  "order": 6,
   "target": "single"
  },
  {
@@ -128,7 +125,7 @@
   "layer": 1,
   "attack": "yes",
   "phase": "ambition",
-  "order": 14,
+  "order": 8,
   "target": "single"
  },
  {
@@ -140,7 +137,7 @@
   "layer": 1,
   "attack": "yes",
   "phase": "ambition",
-  "order": 13,
+  "order": 7,
   "target": "single"
  },
  {
@@ -153,7 +150,7 @@
   "attack": "yes",
   "defense": "yes",
   "phase": "onslaught",
-  "order": 2,
+  "order": 0,
   "target": "several"
  },
  {
@@ -166,7 +163,6 @@
   "attack": "yes",
   "defense": "yes",
   "phase": "onslaught",
-  "order": 1,
   "target": "single"
  },
  {
@@ -179,7 +175,6 @@
   "attack": "yes",
   "defense": "yes",
   "phase": "onslaught",
-  "order": 0,
   "target": "single"
  }
 ]

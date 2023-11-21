@@ -21,12 +21,13 @@ func init_arrangements() -> void:
 			arrangements[side][role] = {}
 			
 			for _i in Global.num.team.markers:
-				for _j in Global.dict.spot.index:
-					var description = Global.dict.spot.index[_j]
-					
-					if description.side == side and description.role == role and description.order == _i + 1:
-						arrangements[side][role][_i + 1] = description.grid
-						break
+				for grid in Global.dict.spot.grid:
+					if Global.dict.spot.grid[grid].has(side):
+						var description = Global.dict.spot.grid[grid][side]
+						
+						if description.role == role and description.order == _i + 1:
+							arrangements[side][role][_i + 1] = grid
+							break
 
 
 func fill_main_gladiators() -> void:
@@ -43,8 +44,6 @@ func instruct_gladiators() -> void:
 	var description = Global.dict.tactic.role[team.role][tactic]
 	
 	for gladiator in team.mains:
-		gladiator.guidance = {}
-		
-		for turn in description:
-			gladiator.guidance[int(turn)] = []
-			gladiator.guidance[int(turn)].append_array(description[turn][gladiator.marker.order])
+		gladiator.architype = description[gladiator.marker.order]
+		gladiator.guidance = []
+		gladiator.guidance.append_array(Global.dict.architype.title[gladiator.architype])

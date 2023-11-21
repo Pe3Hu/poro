@@ -1,6 +1,4 @@
 res://scene/2/stadium.tscn
-res://script/Global.gd
-res://scene/2/spot.gd
 res://scene/2/field.tscn
 res://scene/2/marker.tscn
 res://scene/2/spot.tscn
@@ -12,3 +10,14 @@ res://scene/1/gladiator.tscn
 res://scene/3/dice.tscn
 res://scene/3/facet.tscn
 res://scene/3/pool.tscn
+res://script/Global.gd
+res://scene/1/coach.gd
+res://scene/1/gladiator.gd
+res://asset/json/poro_architype.json
+res://scene/2/field.gd
+res://scene/2/encounter.gd
+res://scene/2/stadium.gd
+res://scene/2/marker.gd
+res://scene/2/spot.gd
+res://asset/json/poro_action.json
+res://asset/json/poro_spot.json

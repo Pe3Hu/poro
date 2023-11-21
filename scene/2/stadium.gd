@@ -32,8 +32,8 @@ func set_attributes(input_: Dictionary) -> void:
 	counter.round = 0
 	next_round()
 	
-	for _i in 7:
-		next_clash()
+	#for _i in 7:
+	#	next_clash()
 
 
 func add_team(team_: MarginContainer) -> void:
@@ -61,7 +61,7 @@ func next_round() -> void:
 		team.coach.provide_guidance()
 	
 	markers_walkout()
-	next_turn()
+	#next_turn()
 
 
 func next_turn() -> void:
@@ -81,6 +81,10 @@ func markers_walkout() -> void:
 			var grid = arrangements[gladiator.marker.order]
 			var spot = field.grids.spot[grid]
 			gladiator.marker.set_spot(spot)
+			gladiator.marker.carrier = false
+			
+			if team.role == "attack" and gladiator.marker.order == 1:
+				gladiator.marker.set_carrier()
 
 
 func load_balance() -> void:

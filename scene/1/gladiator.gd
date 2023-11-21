@@ -20,6 +20,8 @@ var action = null
 var target = null
 var clash = null
 var destination = null
+var architype = null
+var priority = null
 
 
 func set_attributes(input_: Dictionary) -> void:
@@ -67,11 +69,19 @@ func update_state() -> void:
 
 func select_action() -> void:
 	action = null
+	priority = 0
 	
-	while action == null and !guidance[team.stadium.counter.turn].is_empty():
-		action = guidance[team.stadium.counter.turn].pop_front()
-		verify_intent()
-		intent_declaration()
+	while action == null and !guidance.is_empty():
+		#act = guidance[priority].act
+		
+		if check_trigger():
+			get_action_based_on_act()
+		else:
+			priority += 1
+		
+		#check_trigger()
+		#verify_intent()
+		#intent_declaration()
 	
 	if action == null:
 		action = "waiting"
@@ -80,8 +90,9 @@ func select_action() -> void:
 
 
 func verify_intent() -> void:
-	if Global.dict.action.title[action].target != "several":
+	if Global.dict.action.title[action.title].target != "several":
 		return
+	
 	options = []
 	
 	match Global.dict.action.title[action].subtype:
@@ -127,6 +138,31 @@ func intent_declaration() -> void:
 			spots.append(marker.spot)
 			spots.append(option)
 			clash = team.stadium.field.get_clash_based_on_spots(spots)
+
+
+func check_trigger() -> bool:
+	var trigger = guidance[priority].trigger
+	
+	match trigger.subject:
+		"carrier":
+			if trigger.layer == "neighbor" and  trigger.verge == "neighbor":
+				var spot = marker.field.carrier.spot
+				return spot.check_carrier_is_neighbor()
+	
+	
+	return true
+
+
+func get_action_based_on_act() -> void:
+	var act = guidance[priority].act
+	
+	if Global.arr.order.has(act):
+		action = act
+	else:
+		match act:
+			"ambition":
+				pass
+				#if marker.spot 
 
 
 func update_clash() -> void:
