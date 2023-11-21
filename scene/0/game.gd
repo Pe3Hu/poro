@@ -9,7 +9,6 @@ func _ready() -> void:
 	#datas.sort_custom(func(a, b): return a.value < b.value)
 	#012 description
 	
-	
 	var input = {}
 	input.game = self
 	cradle.set_attributes(input)

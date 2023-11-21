@@ -117,12 +117,15 @@ func check_trigger(trigger_: Dictionary) -> bool:
 	var flag = true
 	
 	if trigger_.has("layer"):
-		flag = flag and trigger_.layer == layers[field.side]
+		if trigger_.layer != -1:
+			flag = flag and trigger_.layer == layers[field.side]
 		
 	if trigger_.has("verge"):
-		flag = flag and trigger_.verge == verge
+		if trigger_.layer != -1:
+			flag = flag and trigger_.verge == verge
 	
-	if trigger_.has("carrier"):
-		flag = flag and marker.carrier == trigger_.carrier
+	if trigger_.subject != "teamate":
+		if trigger_.has("carrier"):
+			flag = flag and marker.carrier == trigger_.carrier
 	
 	return flag

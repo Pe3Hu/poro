@@ -25,6 +25,8 @@ func set_attributes(input_: Dictionary) -> void:
 
 
 func set_clash(clash_: Node2D) -> void:
+	leftPool.reset()
+	rightPool.reset()
 	visible = true
 	clash = clash_
 	
@@ -65,6 +67,13 @@ func set_clash(clash_: Node2D) -> void:
 	
 		roll_pool()
 		reroll_pool()
+		
+		match input.subtype:
+			"pass":
+				leftWinner.visible = false
+				rightMarker.visible = false
+				rightPool.visible = false
+				rightWinner.visible = false
 	else:
 		apply_result()
 
@@ -115,6 +124,8 @@ func reroll_pool() -> void:
 	for side in Global.arr.side:
 		var pool = get(side+"Pool")
 		pool.roll_dices()
+	
+	check_results()
 
 
 func apply_result() -> void:
@@ -137,14 +148,13 @@ func apply_result() -> void:
 					data.gladiator = loser
 					data.damage = loser.roll_damage()
 			"transfer":
+					stadium.field.trajectory.set_markers(left.marker, left.transferee.marker)
 					data.gladiator = winner
 					data.damage = loser.roll_damage()
 		
 		if !description.subtype != "transfer":
 			data_out(data)
 		
-		leftPool.reset()
-		rightPool.reset()
 	
 	clash.reset()
 

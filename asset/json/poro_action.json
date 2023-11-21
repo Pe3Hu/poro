@@ -8,7 +8,7 @@
   "layer": 6,
   "attack": "yes",
   "phase": "movement",
-  "order": 4,
+  "order": 5,
   "target": "several"
  },
  {
@@ -20,7 +20,7 @@
   "layer": 6,
   "attack": "yes",
   "phase": "movement",
-  "order": 3,
+  "order": 4,
   "target": "several"
  },
  {
@@ -32,7 +32,7 @@
   "layer": 6,
   "attack": "yes",
   "phase": "movement",
-  "order": 2,
+  "order": 3,
   "target": "several"
  },
  {
@@ -60,12 +60,12 @@
  {
   "title": "cover",
   "type": "reaction",
-  "subtype": "ambition",
+  "subtype": "apotheosis",
   "aspect": "strength",
   "sign": "more",
   "layer": 0,
   "defense": "yes",
-  "phase": "ambition",
+  "phase": "apotheosis",
   "target": "single"
  },
  {
@@ -76,9 +76,9 @@
   "sign": "more",
   "layer": 1,
   "defense": "yes",
-  "phase": "ambition",
-  "order": 1,
-  "target": "single"
+  "phase": "onslaught",
+  "order": 0,
+  "target": "several"
  },
  {
   "title": "pass",
@@ -88,9 +88,9 @@
   "sign": "more",
   "layer": 0,
   "attack": "yes",
-  "phase": "ambition",
-  "order": 5,
-  "target": "single"
+  "phase": "transfer",
+  "order": 1,
+  "target": "several"
  },
  {
   "title": "catch",
@@ -101,42 +101,42 @@
   "layer": 0,
   "attack": "yes",
   "defense": "yes",
-  "phase": "ambition",
+  "phase": "transfer",
   "target": "single"
  },
  {
   "title": "throw",
   "type": "initiation",
-  "subtype": "ambition",
+  "subtype": "apotheosis",
   "aspect": "dexterity",
   "sign": "more",
   "layer": 1,
   "attack": "yes",
-  "phase": "ambition",
+  "phase": "apotheosis",
   "order": 6,
   "target": "single"
  },
  {
   "title": "dunk",
   "type": "initiation",
-  "subtype": "ambition",
+  "subtype": "apotheosis",
   "aspect": "strength",
   "sign": "equal",
   "layer": 1,
   "attack": "yes",
-  "phase": "ambition",
+  "phase": "apotheosis",
   "order": 8,
   "target": "single"
  },
  {
   "title": "trick",
   "type": "initiation",
-  "subtype": "ambition",
+  "subtype": "apotheosis",
   "aspect": "dexterity",
   "sign": "equal",
   "layer": 1,
   "attack": "yes",
-  "phase": "ambition",
+  "phase": "apotheosis",
   "order": 7,
   "target": "single"
  },
@@ -150,7 +150,7 @@
   "attack": "yes",
   "defense": "yes",
   "phase": "onslaught",
-  "order": 0,
+  "order": 2,
   "target": "several"
  },
  {

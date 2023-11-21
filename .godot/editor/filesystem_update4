@@ -22,3 +22,7 @@ res://scene/2/spot.gd
 res://asset/json/poro_action.json
 res://asset/json/poro_spot.json
 res://scene/1/team.gd
+res://scene/0/trajectory.tscn
+res://scene/2/trajectory.gd
+res://scene/2/trajectory.tscn
+res://scene/0/game.gd

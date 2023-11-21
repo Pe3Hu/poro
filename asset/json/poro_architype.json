@@ -31,7 +31,7 @@
   "title": "twin thrower",
   "priority": 0,
   "act": "long pass",
-  "trigger verge": "any",
+  "trigger verge": -1,
   "trigger layer": 1,
   "trigger subject": "teamate",
   "trigger carrier": "yes",
@@ -42,6 +42,9 @@
   "title": "twin thrower",
   "priority": 1,
   "act": "short pass",
+  "trigger verge": -1,
+  "trigger layer": -1,
+  "trigger subject": "teamate",
   "trigger carrier": "yes",
   "trigger victim": "thrower",
   "role": "thrower"
@@ -50,7 +53,7 @@
   "title": "twin thrower",
   "priority": 2,
   "act": "dodge",
-  "trigger verge": "any",
+  "trigger verge": -1,
   "trigger layer": 5,
   "trigger subject": "self",
   "role": "thrower"
@@ -59,7 +62,7 @@
   "title": "twin thrower",
   "priority": 3,
   "act": "movement",
-  "trigger verge": "any",
+  "trigger verge": -1,
   "trigger layer": 5,
   "trigger subject": "self",
   "role": "thrower"

@@ -23,6 +23,8 @@ var destination = null
 var architype = null
 var role = null
 var priority = null
+var measure = null
+var transferee = null
 
 
 func set_attributes(input_: Dictionary) -> void:
@@ -61,13 +63,6 @@ func roll_temperament() -> void:
 	temperament = "administrator"
 
 
-func update_state() -> void:
-	for _state in Global.arr.state:
-		if endurance.current > limits[_state] * endurance.max:
-			state = _state
-			break
-
-
 func select_action() -> void:
 	action = null
 	priority = 0
@@ -84,61 +79,6 @@ func select_action() -> void:
 	update_clash()
 
 
-func verify_intent() -> void:
-	if action == null:
-		return
-	
-	if Global.dict.action.title[action].target != "several":
-		return
-	
-	options = []
-	
-	match Global.dict.action.title[action].subtype:
-		"movement":
-			var paths = Global.get_paths_based_on_side_and_grid(team.stadium.field.side, marker.spot.grid)
-			
-			for path in paths:
-				var grid = path.back()
-				var spot = team.stadium.field.grids.spot[grid]
-				
-				if spot.marker == null and spot.declaration == null:
-					options.append(path)
-		"onslaught":
-			for _clash in marker.spot.clashes[team.stadium.field.side]:
-				var spot = marker.spot.clashes[team.stadium.field.side][_clash]
-				
-				if spot.marker != null:
-					if spot.marker.gladiator.team != team:
-						options.append(spot)
-	
-	if options.is_empty():
-		action = null
-
-
-func intent_declaration() -> void:
-	if action == null:
-		priority += 1
-		return
-	
-	match Global.dict.action.title[action].subtype:
-		"movement":
-			var option = options.pick_random()
-			var spots = []
-			var spot = team.stadium.field.grids.spot[option[option.size()-2]]
-			spots.append(spot)
-			spot = team.stadium.field.grids.spot[option.back()]
-			spots.append(spot)
-			clash = team.stadium.field.get_clash_based_on_spots(spots)
-			spot.declaration = self
-			destination = spot
-		"onslaught":
-			var option = options.pick_random()
-			var spots = []
-			spots.append(marker.spot)
-			spots.append(option)
-			clash = team.stadium.field.get_clash_based_on_spots(spots)
-
-
 func check_trigger() -> bool:
 	if !guidance[priority].has("trigger"):
 		return true
@@ -147,6 +87,10 @@ func check_trigger() -> bool:
 	
 	if !trigger.has("subject"):
 		return true
+	
+	if trigger.has("carrier"):
+		if trigger.carrier != marker.carrier:
+			return false
 	
 	match trigger.subject:
 		"carrier":
@@ -174,12 +118,124 @@ func set_action_based_on_act() -> void:
 			"apotheosis":
 				set_apotheosis_action()
 			"long pass":
-				set_options_based_on_victim_and_distance("furthest")
+				action = "pass"
+				measure = "nearest"
 			"short pass":
-				set_options_based_on_victim_and_distance("nearest")
+				action = "pass"
+				measure = "furthest"
 	
 	verify_intent()
-	intent_declaration()
+
+
+func verify_intent() -> void:
+	if Global.dict.action.title[action].target != "several":
+		intent_declaration()
+		return
+	
+	options = []
+	
+	match Global.dict.action.title[action].subtype:
+		"movement":
+			var paths = Global.get_paths_based_on_side_and_grid(team.stadium.field.side, marker.spot.grid)
+			
+			for path in paths:
+				var grid = path.back()
+				var spot = team.stadium.field.grids.spot[grid]
+				
+				if spot.marker == null and spot.declaration == null:
+					options.append(path)
+		"onslaught":
+			for _clash in marker.spot.clashes[team.stadium.field.side]:
+				var spot = marker.spot.clashes[team.stadium.field.side][_clash]
+				
+				if spot.marker != null:
+					if spot.marker.gladiator.team != team:
+						options.append(spot)
+		"transfer":
+			set_options_based_on_victim_and_distance()
+	
+	if options.is_empty():
+		action = null
+		priority += 1
+	else:
+		intent_declaration()
+
+
+func intent_declaration() -> void:
+	match Global.dict.action.title[action].subtype:
+		"movement":
+			var option = options.pick_random()
+			var spots = []
+			var spot = team.stadium.field.grids.spot[option[option.size()-2]]
+			spots.append(spot)
+			spot = team.stadium.field.grids.spot[option.back()]
+			spots.append(spot)
+			clash = team.stadium.field.get_clash_based_on_spots(spots)
+			spot.declaration = self
+			destination = spot
+		"onslaught":
+			var option = options.pick_random()
+			var spots = []
+			spots.append(marker.spot)
+			spots.append(option)
+			clash = team.stadium.field.get_clash_based_on_spots(spots)
+		"transfer":
+			transferee = options.pick_random()
+
+
+func get_teamates_based_on_trigger() -> Array:
+	var teamates = []
+	var trigger = guidance[priority].trigger
+	
+	for teamate in team.mains:
+		if teamate != self:
+			if teamate.marker.spot.check_trigger(trigger):
+				teamates.append(teamate)
+	
+	return teamates
+
+
+func set_movement_action() -> void:
+	if marker.spot.layers[marker.spot.field.side] == 6:
+		action = "step"
+	else:
+		action = "slip"
+
+
+func set_apotheosis_action() -> void:
+	if marker.spot.layers[marker.spot.field.side] == 1:
+		action = "trick"
+	else:
+		action = "throw"
+
+
+func set_options_based_on_victim_and_distance() -> void:
+	var datas = []
+	var trigger = guidance[priority].trigger
+	
+	for teamate in team.mains:
+		if teamate != self:
+			if teamate.role == trigger.victim:
+				var data = {}
+				data.gladiator = teamate
+				data.distance = get_distance_to_gladiators(teamate) 
+				datas.append(data)
+	
+	if measure != null:
+		match measure:
+			"nearest":
+				datas.sort_custom(func(a, b): return a.distance < b.distance)
+			"furthest":
+				datas.sort_custom(func(a, b): return a.distance > b.distance)
+	
+	for data in datas:
+		if data.distance == datas.front().distance:
+			options.append(data.gladiator)
+
+
+func get_distance_to_gladiators(gladiator_: MarginContainer) -> int:
+	var side = marker.spot.field.side
+	return abs(gladiator_.marker.spot.layers[side] - marker.spot.layers[side])
 
 
 func update_clash() -> void:
@@ -201,57 +257,8 @@ func roll_damage() -> String:
 	return Global.get_random_key(Global.dict.damage.rnd)
 
 
-func get_teamates_based_on_trigger() -> Array:
-	var teamates = []
-	var trigger = guidance[priority].trigger
-	
-	for teamate in team.mains:
-		if teamate != self:
-			if teamate.marker.spot.check_trigger(trigger):
-				teamates.append(teamate)
-	
-	print(["get_teamates_based_on_trigger", teamates.size()])
-	return teamates
-
-
-func set_movement_action() -> void:
-	if marker.spot.layers[marker.spot.field.side] == 6:
-		action = "step"
-	else:
-		action = "slip"
-
-
-func set_apotheosis_action() -> void:
-	if marker.spot.layers[marker.spot.field.side] == 1:
-		action = "trick"
-	else:
-		action = "throw"
-
-
-func set_options_based_on_victim_and_distance(measure_: Variant) -> void:
-	var datas = []
-	var trigger = guidance[priority].trigger
-	
-	for teamate in team.mains:
-		if teamate != self:
-			if teamate.role == trigger.victim:
-				var data = {}
-				data.gladiator = teamate
-				data.distance = get_distance_to_gladiators(teamate) 
-				datas.append(data)
-	
-	if measure_ != null:
-		match measure_:
-			"nearest":
-				datas.sort_custom(func(a, b): return a.distance < b.distance)
-			"furthest":
-				datas.sort_custom(func(a, b): return a.distance > b.distance)
-	
-	for data in datas:
-		if data.distance == datas.front().distance:
-			options.append(data.gladiator)
-
-
-func get_distance_to_gladiators(gladiator_: MarginContainer) -> int:
-	var side = marker.spot.field.side
-	return abs(gladiator_.marker.spot.layers[side] - marker.spot.layers[side])
+func update_state() -> void:
+	for _state in Global.arr.state:
+		if endurance.current > limits[_state] * endurance.max:
+			state = _state
+			break

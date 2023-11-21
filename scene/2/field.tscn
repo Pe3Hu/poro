@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://dgldxp78jbgie"]
+[gd_scene load_steps=4 format=3 uid="uid://dgldxp78jbgie"]
 
 [ext_resource type="Script" path="res://scene/2/field.gd" id="1_0hbps"]
+[ext_resource type="PackedScene" uid="uid://cyl0hrvdlh03h" path="res://scene/2/trajectory.tscn" id="2_7t2w6"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m51nc"]
 bg_color = Color(0.529412, 0.623529, 0.603922, 1)
@@ -25,6 +26,8 @@ layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_m51nc")
 
 [node name="Paths" type="Node2D" parent="."]
+
+[node name="Trajectory" parent="." instance=ExtResource("2_7t2w6")]
 
 [node name="Spots" type="Node2D" parent="."]
 

@@ -5,6 +5,7 @@ extends MarginContainer
 @onready var clashes = $Clashes
 @onready var paths = $Paths
 @onready var markers = $Markers
+@onready var trajectory = $Trajectory
 
 var stadium = null
 var grids = {} 
@@ -15,6 +16,10 @@ var carrier = null
 func set_attributes(input_: Dictionary) -> void:
 	stadium = input_.stadium
 	side = "right"
+	
+	var input = {}
+	input.field = self
+	trajectory.set_attributes(input)
 	
 	init_grids()
 	init_spots()
@@ -156,3 +161,51 @@ func get_clash_based_on_spots(spots_: Array) -> Variant:
 				return clash
 	
 	return null
+
+
+func get_all_routes_based_on_spots(spots_: Array) -> Array:
+	var start = spots_.front()
+	var end = spots_.back()
+	var visited = [start]
+	var waves = [[start]]
+	var routes = []
+	var stop = false
+	var _i = 0
+	
+	while !stop and _i < 5:
+		var previuos = waves.back()
+		var next = []
+		
+		for spot in previuos:
+			for neighbor in spot.neighbors[side]:
+				if !visited.has(neighbor):
+					next.append(neighbor)
+					
+					if end == neighbor:
+						stop = true
+		
+		for spot in next:
+			if !visited.has(spot):
+				visited.append(spot)
+		
+		waves.append(next)
+	
+#	var routes = [[[start]]]
+#	
+#	var _i = 0
+#
+#	while !stop and _i < 5:
+#		var branches = []
+#
+#		for ends in routes.back():
+#			for grids in Global.dict.path.side[side]:
+#				if grids.front() == ends.back():
+#					branches.append(grids)
+#
+#					if grids.back() == spots_.back().grid:
+#						stop = true
+#
+#		routes.append(branches)
+#		_i += 1
+	
+	return routes
