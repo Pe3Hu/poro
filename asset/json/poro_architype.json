@@ -2,7 +2,7 @@
  {
   "title": "catcher",
   "priority": 0,
-  "act": "ambition",
+  "act": "apotheosis",
   "trigger verge": "mid",
   "trigger layer": 1,
   "trigger subject": "self",
@@ -35,16 +35,15 @@
   "trigger layer": 1,
   "trigger subject": "teamate",
   "trigger carrier": "yes",
-  "victim": "catcher",
+  "trigger victim": "catcher",
   "role": "thrower"
  },
  {
   "title": "twin thrower",
   "priority": 1,
   "act": "short pass",
-  "trigger subject": "self",
   "trigger carrier": "yes",
-  "victim": "thrower",
+  "trigger victim": "thrower",
   "role": "thrower"
  },
  {
@@ -62,6 +61,7 @@
   "act": "movement",
   "trigger verge": "any",
   "trigger layer": 5,
+  "trigger subject": "self",
   "role": "thrower"
  },
  {
@@ -71,7 +71,7 @@
   "trigger verge": "mid",
   "trigger layer": 3,
   "trigger subject": "self",
-  "victim": "profound",
+  "trigger victim": "profound",
   "role": "fighter"
  },
  {
@@ -80,13 +80,14 @@
   "act": "movement",
   "trigger verge": "mid",
   "trigger layer": 3,
+  "trigger subject": "self",
   "role": "fighter"
  },
  {
   "title": "blitzer",
   "priority": 2,
   "act": "ram",
-  "victim": "profound",
+  "trigger victim": "profound",
   "role": "fighter"
  },
  {
@@ -96,14 +97,14 @@
   "trigger verge": "neighbor",
   "trigger layer": "neighbor",
   "trigger subject": "carrier",
-  "victim": "carrier",
+  "trigger victim": "carrier",
   "role": "fighter"
  },
  {
   "title": "guard",
   "priority": 1,
   "act": "ram",
-  "victim": "profound",
+  "trigger victim": "profound",
   "role": "fighter"
  }
 ]

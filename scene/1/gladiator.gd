@@ -21,6 +21,7 @@ var target = null
 var clash = null
 var destination = null
 var architype = null
+var role = null
 var priority = null
 
 
@@ -71,17 +72,11 @@ func select_action() -> void:
 	action = null
 	priority = 0
 	
-	while action == null and !guidance.is_empty():
-		#act = guidance[priority].act
-		
+	while action == null and priority < guidance.size():
 		if check_trigger():
-			get_action_based_on_act()
+			set_action_based_on_act()
 		else:
 			priority += 1
-		
-		#check_trigger()
-		#verify_intent()
-		#intent_declaration()
 	
 	if action == null:
 		action = "waiting"
@@ -90,7 +85,10 @@ func select_action() -> void:
 
 
 func verify_intent() -> void:
-	if Global.dict.action.title[action.title].target != "several":
+	if action == null:
+		return
+	
+	if Global.dict.action.title[action].target != "several":
 		return
 	
 	options = []
@@ -106,8 +104,8 @@ func verify_intent() -> void:
 				if spot.marker == null and spot.declaration == null:
 					options.append(path)
 		"onslaught":
-			for clash in marker.spot.clashes[team.stadium.field.side]:
-				var spot = marker.spot.clashes[team.stadium.field.side][clash]
+			for _clash in marker.spot.clashes[team.stadium.field.side]:
+				var spot = marker.spot.clashes[team.stadium.field.side][_clash]
 				
 				if spot.marker != null:
 					if spot.marker.gladiator.team != team:
@@ -119,6 +117,7 @@ func verify_intent() -> void:
 
 func intent_declaration() -> void:
 	if action == null:
+		priority += 1
 		return
 	
 	match Global.dict.action.title[action].subtype:
@@ -141,28 +140,46 @@ func intent_declaration() -> void:
 
 
 func check_trigger() -> bool:
+	if !guidance[priority].has("trigger"):
+		return true
+	
 	var trigger = guidance[priority].trigger
+	
+	if !trigger.has("subject"):
+		return true
 	
 	match trigger.subject:
 		"carrier":
-			if trigger.layer == "neighbor" and  trigger.verge == "neighbor":
+			if trigger.layer == "neighbor" and trigger.verge == "neighbor":
 				var spot = marker.field.carrier.spot
 				return spot.check_carrier_is_neighbor()
-	
+		"teamate":
+			var teamates = get_teamates_based_on_trigger()
+			return !teamates.is_empty()
+		"self":
+			return marker.spot.check_trigger(trigger)
 	
 	return true
 
 
-func get_action_based_on_act() -> void:
+func set_action_based_on_act() -> void:
 	var act = guidance[priority].act
 	
 	if Global.arr.order.has(act):
 		action = act
 	else:
 		match act:
-			"ambition":
-				pass
-				#if marker.spot 
+			"movement":
+				set_movement_action()
+			"apotheosis":
+				set_apotheosis_action()
+			"long pass":
+				set_options_based_on_victim_and_distance("furthest")
+			"short pass":
+				set_options_based_on_victim_and_distance("nearest")
+	
+	verify_intent()
+	intent_declaration()
 
 
 func update_clash() -> void:
@@ -182,3 +199,59 @@ func exert_effort() -> void:
 
 func roll_damage() -> String:
 	return Global.get_random_key(Global.dict.damage.rnd)
+
+
+func get_teamates_based_on_trigger() -> Array:
+	var teamates = []
+	var trigger = guidance[priority].trigger
+	
+	for teamate in team.mains:
+		if teamate != self:
+			if teamate.marker.spot.check_trigger(trigger):
+				teamates.append(teamate)
+	
+	print(["get_teamates_based_on_trigger", teamates.size()])
+	return teamates
+
+
+func set_movement_action() -> void:
+	if marker.spot.layers[marker.spot.field.side] == 6:
+		action = "step"
+	else:
+		action = "slip"
+
+
+func set_apotheosis_action() -> void:
+	if marker.spot.layers[marker.spot.field.side] == 1:
+		action = "trick"
+	else:
+		action = "throw"
+
+
+func set_options_based_on_victim_and_distance(measure_: Variant) -> void:
+	var datas = []
+	var trigger = guidance[priority].trigger
+	
+	for teamate in team.mains:
+		if teamate != self:
+			if teamate.role == trigger.victim:
+				var data = {}
+				data.gladiator = teamate
+				data.distance = get_distance_to_gladiators(teamate) 
+				datas.append(data)
+	
+	if measure_ != null:
+		match measure_:
+			"nearest":
+				datas.sort_custom(func(a, b): return a.distance < b.distance)
+			"furthest":
+				datas.sort_custom(func(a, b): return a.distance > b.distance)
+	
+	for data in datas:
+		if data.distance == datas.front().distance:
+			options.append(data.gladiator)
+
+
+func get_distance_to_gladiators(gladiator_: MarginContainer) -> int:
+	var side = marker.spot.field.side
+	return abs(gladiator_.marker.spot.layers[side] - marker.spot.layers[side])

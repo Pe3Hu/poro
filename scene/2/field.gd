@@ -92,7 +92,6 @@ func init_clashes() -> void:
 			if role != "goal":
 				for grid in grids[_side][role]:
 					var input = {}
-					var a = grids[_side][role]
 					input.field = self
 					input.side = _side
 					input.spots = {}
@@ -132,12 +131,6 @@ func init_markers() -> void:
 			var marker = Global.scene.marker.instantiate()
 			markers.add_child(marker)
 			marker.set_attributes(input)
-
-
-func place_markers() -> void:
-	for team in stadium.teams:
-		for _i in team.mains.size():
-			var marker = team.mains[_i].marker
 
 
 func set_visible_side() -> void:

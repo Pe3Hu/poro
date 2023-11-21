@@ -38,4 +38,10 @@ func set_spot(spot_: Sprite2D) -> void:
 func set_carrier() -> void:
 	carrier = true
 	field.carrier = self
-	#spot.
+	spot.update_based_on_side()
+
+
+func reset_carrier() -> void:
+	carrier = false
+	field.carrier = null
+	spot.update_based_on_side()

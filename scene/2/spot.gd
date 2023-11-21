@@ -10,6 +10,7 @@ var declaration = null
 var clashes = {}
 var neighbors = {}
 var layers = {}
+var verge = null
 
 
 func set_attributes(input_: Dictionary) -> void:
@@ -39,9 +40,9 @@ func set_gird(grid_: Vector2) -> void:
 	position = (grid + shift) * Global.vec.size.spot
 	center = position + Vector2(Global.num.spot.w, Global.num.spot.h) * 0.5
 	
-	
 	for side in Global.dict.spot.grid[grid]:
 		layers[side] = Global.dict.spot.grid[grid][side].layer
+		verge = Global.dict.spot.grid[grid][side].verge
 
 
 func remove_check() -> bool:
@@ -65,15 +66,16 @@ func update_based_on_side() -> void:
 	if marker != null:
 		if marker.carrier:
 			key = "ball"
+	
+	if key == null:
+		if field.grids[field.side].goal.front() == grid:
+			key = "goal"
 
-	if field.grids[field.side].goal.front() == grid:
-		key = "goal"
+		if field.grids[field.side].attack.has(grid):
+			key = "attack"
 
-	if field.grids[field.side].attack.has(grid):
-		key = "attack"
-
-	if field.grids[field.side].defense.has(grid):
-		key = "defense"
+		if field.grids[field.side].defense.has(grid):
+			key = "defense"
 	
 	if key != null:
 		var path = "res://asset/png/icon/hex/" + key + ".png"
@@ -93,7 +95,6 @@ func add_clash(clash_: Node2D) -> void:
 		clashes[clash_.side][clash_] = clash_.get_opponent_spot(self)
 
 
-
 func check_carrier_is_neighbor() -> bool:
 	for neighbor in neighbors[field.side]:
 		if neighbor.marker != null:
@@ -110,3 +111,18 @@ func get_neighbor_carrier() -> Variant:
 				return neighbor
 	
 	return null
+
+
+func check_trigger(trigger_: Dictionary) -> bool:
+	var flag = true
+	
+	if trigger_.has("layer"):
+		flag = flag and trigger_.layer == layers[field.side]
+		
+	if trigger_.has("verge"):
+		flag = flag and trigger_.verge == verge
+	
+	if trigger_.has("carrier"):
+		flag = flag and marker.carrier == trigger_.carrier
+	
+	return flag

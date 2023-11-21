@@ -37,7 +37,6 @@ func init_gladiators() -> void:
 		gladiator.set_attributes(input)
 
 
-
 func switch_role() -> void:
 	if role == null:
 		match status:

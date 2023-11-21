@@ -30,7 +30,7 @@ func init_arr() -> void:
 	arr.side = ["left", "right"]
 	arr.role = ["attack", "defense"]
 	arr.status = ["keeper", "guest"]
-	arr.phase = ["onslaught", "movement", "ambition"]
+	arr.phase = ["onslaught", "movement", "transfer", "apotheosis"]
 
 
 func init_num() -> void:
@@ -189,11 +189,12 @@ func init_spot() -> void:
 	
 	for spot in array:
 		var data = {}
+		data.verge = spot.verge
 		var grid = Vector2()
 		var side = null
 		
 		for key in spot:
-			if key != "index":
+			if key != "verge":
 				var words = []
 				words = key.split(" ")
 				
@@ -420,7 +421,9 @@ func init_architype() -> void:
 		var data = {}
 		
 		if !dict.architype.title.has(architype.title):
-			dict.architype.title[architype.title] = []
+			dict.architype.title[architype.title] = {}
+			dict.architype.title[architype.title].guidance = []
+			dict.architype.title[architype.title].role = architype.role
 		
 		for key in architype:
 			if key != "title" and key != "priority":
@@ -431,12 +434,17 @@ func init_architype() -> void:
 					if !data.has(words[0]):
 						data[words[0]] = {}
 					
+					match architype[key]:
+						"yes":
+							architype[key] = true
+						"no":
+							architype[key] = false
+					
 					data[words[0]][words[1]] = architype[key]
 				else:
 					data[key] = architype[key]
 		
-		#dict.architype.title[architype.title][architype.priority] = data
-		dict.architype.title[architype.title].append(data)
+		dict.architype.title[architype.title].guidance.append(data)
 
 
 func init_node() -> void:

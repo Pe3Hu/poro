@@ -45,5 +45,6 @@ func instruct_gladiators() -> void:
 	
 	for gladiator in team.mains:
 		gladiator.architype = description[gladiator.marker.order]
+		gladiator.role = Global.dict.architype.title[gladiator.architype].role
 		gladiator.guidance = []
-		gladiator.guidance.append_array(Global.dict.architype.title[gladiator.architype])
+		gladiator.guidance.append_array(Global.dict.architype.title[gladiator.architype].guidance)

@@ -61,7 +61,7 @@ func next_round() -> void:
 		team.coach.provide_guidance()
 	
 	markers_walkout()
-	#next_turn()
+	next_turn()
 
 
 func next_turn() -> void:
