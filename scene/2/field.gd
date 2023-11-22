@@ -15,7 +15,7 @@ var carrier = null
 
 func set_attributes(input_: Dictionary) -> void:
 	stadium = input_.stadium
-	side = "right"
+	side = "left"
 	
 	var input = {}
 	input.field = self
@@ -167,45 +167,103 @@ func get_all_routes_based_on_spots(spots_: Array) -> Array:
 	var start = spots_.front()
 	var end = spots_.back()
 	var visited = [start]
-	var waves = [[start]]
-	var routes = []
+	var data = {}
+	data.parent = start
+	data.child = start
+	var datas = [[data]]
 	var stop = false
 	var _i = 0
 	
-	while !stop and _i < 5:
-		var previuos = waves.back()
+	while !stop and _i < 6:
+		_i += 1
+		var previuos = datas.back()
 		var next = []
 		
-		for spot in previuos:
-			for neighbor in spot.neighbors[side]:
+		for _data in previuos:
+			for neighbor in _data.child.neighbors[side]:
 				if !visited.has(neighbor):
-					next.append(neighbor)
+					data = {}
+					data.parent = _data.child
+					data.child = neighbor
+					
+					if !next.has(data):
+						next.append(data)
 					
 					if end == neighbor:
 						stop = true
 		
-		for spot in next:
-			if !visited.has(spot):
-				visited.append(spot)
+		for _data in next:
+			if !visited.has(_data.child):
+				visited.append(_data.child)
 		
-		waves.append(next)
+		datas.append(next)
 	
-#	var routes = [[[start]]]
-#	
-#	var _i = 0
-#
-#	while !stop and _i < 5:
-#		var branches = []
-#
-#		for ends in routes.back():
-#			for grids in Global.dict.path.side[side]:
-#				if grids.front() == ends.back():
-#					branches.append(grids)
-#
-#					if grids.back() == spots_.back().grid:
-#						stop = true
-#
-#		routes.append(branches)
-#		_i += 1
+	_i = datas.size() - 1
+	var mainlines = [end]
+	var branches = []
+	stop = false
+	
+	while !stop:
+		for _data in datas[_i]:
+			if mainlines.has(_data.child) and !mainlines.has(_data.parent):
+				mainlines.append(_data.parent)
+			
+			if !mainlines.has(_data.child) and !branches.has(_data.parent):
+				branches.append(_data.parent)
+		
+		for _j in range(branches.size()-1,-1,-1):
+			var branch = branches[_j]
+			
+			if mainlines.has(branch):
+				branches.erase(branch)
+		
+		for _j in range(datas[_i].size()-1,-1,-1):
+			data = datas[_i][_j]
+			
+			if !mainlines.has(data.child):
+				datas[_i].erase(data)
+		
+		branches = []
+		_i -= 1
+		
+		if mainlines.has(start):
+			stop = true
+	
+	var weights = {}
+	
+	for _j in datas.size() - 1:
+		var parents = datas[_j]
+		var childs = datas[_j + 1]
+		
+		for parent in parents:
+			weights[parent.child.grid] = 0
+			
+			for child in childs:
+				if child.parent == parent.child:
+					weights[parent.child.grid] += 1
+	
+	_i = 1
+	stop = false
+	var routes = {}
+	routes.previous = [[start]]
+	routes.next = []
+	
+	while !stop:
+		for _route in routes.previous:
+			for _data in datas[_i]:
+				if _data.parent == _route.back():
+					var route = []
+					route.append_array(_route)
+					route.append(_data.child)
+					routes.next.append(route)
+					
+					if _data.child == end:
+						stop = true
+		
+		routes.previous = []
+		routes.previous.append_array(routes.next)
+		routes.next = []
+		_i += 1
+	print(weights)
 	
 	return routes
