@@ -3,18 +3,20 @@ extends Sprite2D
 
 @onready var anchor = $Anchor
 
-
 var field = null
 var spots = null
 var side = null
 var action = null
 var single = false
+var values = {}
 
 
 func set_attributes(input_: Dictionary) -> void:
 	field = input_.field
 	spots = input_.spots
 	side = input_.side
+	values.mince = 0
+	values.shell = 0
 	
 	position = (spots.attack.center + spots.defense.center) / 2
 	

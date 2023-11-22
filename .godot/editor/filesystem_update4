@@ -7,3 +7,12 @@ res://scene/2/encounter.tscn
 res://scene/1/gladiator.tscn
 res://scene/2/trajectory.tscn
 res://scene/2/field.gd
+res://scene/2/marker.gd
+res://scene/2/trajectory.gd
+res://scene/2/encounter.gd
+res://scene/2/clash.gd
+res://scene/3/dice.gd
+res://scene/3/pool.gd
+res://scene/2/stadium.gd
+res://scene/0/game.gd
+res://scene/1/gladiator.gd

@@ -3,7 +3,6 @@ extends MarginContainer
 
 @onready var dices = $Dices
 
-
 var encounter = null
 var side = null
 var result = null
@@ -67,3 +66,8 @@ func reset() -> void:
 		var dice = dices.get_child(0)
 		dices.remove_child(dice)
 		dice.queue_free()
+
+
+func set_fixed_value(value_: int) -> void:
+	var dice = dices.get_child(0)
+	dice.flip_to_value(value_)

@@ -60,7 +60,7 @@ func set_attributes(input_: Dictionary) -> void:
 
 
 func roll_temperament() -> void:
-	temperament = "administrator"
+	temperament = "virtuoso"
 
 
 func select_action() -> void:

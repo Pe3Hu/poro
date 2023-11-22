@@ -45,3 +45,7 @@ func reset_carrier() -> void:
 	carrier = false
 	field.carrier = null
 	spot.update_based_on_side()
+
+
+func check_teamate(marker_: Sprite2D) -> bool:
+	return marker_.gladiator.team == gladiator.team

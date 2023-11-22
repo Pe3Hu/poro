@@ -120,7 +120,7 @@ func skip_animation() -> void:
 	flip_to_value(facet.value)
 
 
-func flip_to_value(value_) -> void:
+func flip_to_value(value_: int) -> void:
 	for facet in facets.get_children():
 		if facet.value == value_:
 			var index = facet.get_index()

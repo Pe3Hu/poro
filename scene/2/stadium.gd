@@ -113,7 +113,7 @@ func next_clash() -> void:
 			next_clash()
 		else:
 			var clash = clashes[phase].pop_front()
-			encounter.set_clash(clash)
+			encounter.set_initiation(clash)
 	else:
 		end_of_turn()
 
