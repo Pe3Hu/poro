@@ -57,6 +57,7 @@ func update_result() -> void:
 	var data = {}
 	data.side = side
 	data.value = result
+	print(data)
 	encounter.results.append(data)
 	encounter.check_results()
 

@@ -1,8 +1,9 @@
 extends MarginContainer
 
 
-@onready var strength = $Aspects/Strength
-@onready var dexterity = $Aspects/Dexterity
+@onready var strength = $VBox/Aspects/Strength
+@onready var dexterity = $VBox/Aspects/Dexterity
+@onready var stamina = $VBox/Stamina
 
 var team = null
 var marker = null
@@ -47,6 +48,9 @@ func set_attributes(input_: Dictionary) -> void:
 	var secondary = get(Global.dict.aspect.reflection[input_.primary])
 	secondary.set_performances()
 	
+	var input = {}
+	input.gladiator = self
+	stamina.set_attributes(input)
 	endurance = {}
 	endurance.max = 100
 	endurance.current = 100
@@ -262,3 +266,15 @@ func update_state() -> void:
 		if endurance.current > limits[_state] * endurance.max:
 			state = _state
 			break
+
+
+func choose_reaction() -> void:
+	var encounter = team.stadium.encounter
+	
+	match encounter.initiation.action:
+		"pass":
+			marker.spot.clash.set_action("catch")
+		"breakthrough":
+			marker.spot.clash.set_action("push")#hook
+		"slip":
+			marker.spot.clash.set_action("push")#hook

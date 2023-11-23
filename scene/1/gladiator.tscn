@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://cpdo8x5exj8yr"]
+[gd_scene load_steps=5 format=3 uid="uid://cpdo8x5exj8yr"]
 
 [ext_resource type="Script" path="res://scene/1/gladiator.gd" id="1_7cuyx"]
+[ext_resource type="PackedScene" uid="uid://matxhurqygh0" path="res://scene/4/stamina.tscn" id="2_50xgt"]
 [ext_resource type="PackedScene" uid="uid://d0sdjofw8ildj" path="res://scene/1/aspect.tscn" id="2_awn4e"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7paps"]
@@ -28,12 +29,20 @@ visible = false
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_7paps")
 
-[node name="Aspects" type="HBoxContainer" parent="."]
+[node name="VBox" type="VBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="Stamina" parent="VBox" instance=ExtResource("2_50xgt")]
+layout_mode = 2
+
+[node name="Aspects" type="HBoxContainer" parent="VBox"]
 layout_mode = 2
 alignment = 1
 
-[node name="Strength" parent="Aspects" instance=ExtResource("2_awn4e")]
+[node name="Strength" parent="VBox/Aspects" instance=ExtResource("2_awn4e")]
 layout_mode = 2
 
-[node name="Dexterity" parent="Aspects" instance=ExtResource("2_awn4e")]
+[node name="Dexterity" parent="VBox/Aspects" instance=ExtResource("2_awn4e")]
 layout_mode = 2

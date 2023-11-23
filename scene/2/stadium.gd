@@ -31,6 +31,7 @@ func set_attributes(input_: Dictionary) -> void:
 	
 	counter.round = 0
 	next_round()
+	#encounter.next_reaction()
 	
 	#for _i in 7:
 	#	next_clash()

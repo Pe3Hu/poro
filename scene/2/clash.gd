@@ -38,8 +38,11 @@ func set_action(action_: String) -> void:
 	scale = Global.vec.size.action / Vector2(texture.get_width(), texture.get_height())
 	visible = true
 	
-	if action != "empty" and !field.stadium.clashes[action].has(self):
-		field.stadium.clashes[action].append(self)
+	if action != "empty" and action != "waiting":
+		var description = Global.dict.action.title[action_]
+		
+		if description.type == "initiation" and !field.stadium.clashes[action].has(self):
+			field.stadium.clashes[action].append(self)
 
 
 func init_vertexs() -> void:

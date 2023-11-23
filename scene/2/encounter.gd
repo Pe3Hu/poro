@@ -13,6 +13,7 @@ extends MarginContainer
 
 var stadium = null
 var initiation = null
+var reaction = null
 var left = null
 var right = null
 var winner = null
@@ -29,9 +30,6 @@ func set_attributes(input_: Dictionary) -> void:
 
 func set_initiation(initiation_: Node2D) -> void:
 	kind = "initiation"
-	fixed = []
-	leftPool.reset()
-	rightPool.reset()
 	visible = true
 	initiation = initiation_
 	
@@ -63,8 +61,6 @@ func set_initiation(initiation_: Node2D) -> void:
 				rightMarker.visible = false
 				rightPool.visible = false
 				rightWinner.visible = false
-	
-	apply_result()
 
 
 func update_side_icons(side_: String) -> void:
@@ -91,8 +87,6 @@ func update_side_icons(side_: String) -> void:
 
 
 func roll_pool() -> void:
-	results = []
-	
 	for side in Global.arr.side:
 		var pool = get(side+"Pool")
 		
@@ -108,43 +102,15 @@ func roll_pool() -> void:
 		
 			pool.init_dices(1, input.subtype)
 			pool.roll_dices()
-		#else:
-		#	var value = left.marker.spot.clash.values.mince
-		#	pool.init_dices(1, value)
-		#	pool.set_fixed_value(value)
-
-
-func check_results() -> void:
-	if left == right:
-		apply_result()
-		return
-	
-	if results.size() == 2:
-		if results.front().value == results.back().value and kind == "initiation":
-			reroll_pool()
-		else:
-			results.sort_custom(func(a, b): return a.value > b.value)
-			winner = get(results.front().side)
-			loser = get(results.back().side)
-			
-			if winner == loser:
-				winner = "left"
-				loser = "right"
-			
-			var input = {}
-			input.type = "prize"
-			input.subtype = "1"
-			
-			var icon = get(results.front().side+"Winner")
-			icon.set_attributes(input)
-			icon.visible = true
-			
-			icon = get(results.back().side+"Winner")
-			icon.visible = false
-			apply_result()
 
 
 func reroll_pool() -> void:
+	if left == right:
+		return
+	
+	if kind == "reaction":
+		return
+	
 	results = []
 	
 	for side in Global.arr.side:
@@ -152,7 +118,43 @@ func reroll_pool() -> void:
 			var pool = get(side+"Pool")
 			pool.roll_dices()
 	
-	check_results()
+	#check_results()
+
+
+func check_results() -> void:
+	if results.size() == 2:
+		results.sort_custom(func(a, b): return a.value > b.value)
+		
+		if results.front().value == results.back().value:
+			match kind:
+				"initiation":
+					reroll_pool()
+					return
+				"reaction":
+					if initiation.action == "pass" and left.marker.check_teamate(right.marker):
+						if results.front().side == "left":
+							var result = results.pop_front()
+							results.append(result)
+							pass
+		
+		if right == left and results.front().side == "right":
+			var result = results.pop_front()
+			results.append(result)
+	
+		winner = get(results.front().side)
+		loser = get(results.back().side)
+		
+		var input = {}
+		input.type = "prize"
+		input.subtype = "1"
+		
+		var icon = get(results.front().side+"Winner")
+		icon.set_attributes(input)
+		icon.visible = true
+		
+		icon = get(results.back().side+"Winner")
+		icon.visible = false
+		apply_result()
 
 
 func apply_result() -> void:
@@ -161,22 +163,27 @@ func apply_result() -> void:
 		var data = {}
 		data.subtype = description.subtype
 		
-		match description.subtype:
-			"movement":
-				if winner.destination != null:
-					winner.marker.set_spot(winner.destination)
-					winner.destination = null
-					data.gladiator = winner
-				else:
-					data.subtype = "onslaught"
-					data.gladiator = loser
-					data.damage = loser.roll_damage()
-			"onslaught":
-					data.gladiator = loser
-					data.damage = loser.roll_damage()
-			"transfer":
-					left.marker.spot.clash.values.mince = results.front().value
-					stadium.field.trajectory.set_markers(left.marker, left.transferee.marker)
+		if winner.destination != null:
+			winner.marker.set_spot(winner.destination)
+			winner.destination = null
+			data.gladiator = winner
+		
+		match description.type:
+			"initiation":
+				match description.subtype:
+					"movement":
+						if initiation.action != "step":
+							stadium.field.trajectory.set_spots(initiation.action, left.marker.spot, winner.destination)
+					"onslaught":
+						data.gladiator = loser
+						data.damage = loser.roll_damage()
+					"transfer":
+						match right.action:
+							"pass":
+								left.marker.spot.clash.values.mince = results.front().value
+								stadium.field.trajectory.set_spots(initiation.action, left.marker.spot, left.transferee.marker.spot)
+							"catch":
+								pass
 		
 		#if !description.subtype != "transfer":
 		#	data_out(data)
@@ -198,18 +205,28 @@ func data_out(data_: Dictionary) -> void:
 
 func set_reaction(clash_: Sprite2D) -> void:
 	kind = "reaction"
-	#leftPool.reset()
-	rightPool.reset()
+	winner = null
+	loser = null
+	
+	for result in results:
+		if result.side == "right": 
+			results.erase(result)
+	
 	fixed = ["left"]
+	rightPool.reset()
 	right = clash_.spots.defense.marker.gladiator
+	
+	right.choose_reaction()
 	update_side_icons("right")
 	roll_pool()
-	check_results()
 
 
 func next_reaction() -> void:
+	if reaction != null:
+		reaction.reset()
+	
 	if !reactions.is_empty():
-		var reaction = reactions.pop_front()
+		reaction = reactions.pop_front()
 		set_reaction(reaction)
 	else:
 		end_of_encounter()
@@ -217,3 +234,14 @@ func next_reaction() -> void:
 
 func end_of_encounter() -> void:
 	initiation.reset()
+	reset()
+	stadium.next_clash()
+
+
+func reset() -> void:
+	winner = null
+	loser = null
+	results = []
+	fixed = []
+	leftPool.reset()
+	rightPool.reset()

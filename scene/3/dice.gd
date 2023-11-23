@@ -12,7 +12,7 @@ var tick = null
 var time = null
 var counter = 0
 var faces = 6
-var skip = true#false true
+var skip = false#false true
 var anchor = null
 var temp = true
 
@@ -56,7 +56,7 @@ func roll() -> void:
 
 
 func reset() -> void:
-	shuffle_facets()
+	#shuffle_facets()
 	pace = 20
 	tick = 0
 	facets.position.y = -Global.vec.size.facet.y * 1
@@ -132,11 +132,12 @@ func flip_to_value(value_: int) -> void:
 			for _j in step:
 				pop_up()
 			
+			print(get_current_facet_value())
 			return
 
 
 func get_current_facet_value() -> int:
-	var facet =  facets.get_child(1)
+	var facet = facets.get_child(1)
 	return facet.value
 
 
