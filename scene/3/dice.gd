@@ -10,8 +10,9 @@ var tween = null
 var pace = null
 var tick = null
 var time = null
+var faces = null
 var counter = 0
-var faces = 6
+var window = 3
 var skip = false#false true
 var anchor = null
 var temp = true
@@ -40,23 +41,24 @@ func init_facets() -> void:
 
 
 func update_size() -> void:
-	var vector = Global.vec.size.facet#Vector2(facets.get_child(0).size)
-	vector.y *= 1
+	var vector = Global.vec.size.facet #Vector2(facets.get_child(0).size)
+	vector.y *= window
 	custom_minimum_size = vector
 
 
 func roll() -> void:
-	if skip:
-		skip_animation()
-		pool.dice_stopped(self)
-	else:
-		timer.start()
+	if !pool.fixed:
+		if skip:
+			skip_animation()
+			pool.dice_stopped(self)
+		else:
+			timer.start()
 	
 	reset()
 
 
 func reset() -> void:
-	#shuffle_facets()
+	shuffle_facets()
 	pace = 20
 	tick = 0
 	facets.position.y = -Global.vec.size.facet.y * 1
@@ -137,7 +139,7 @@ func flip_to_value(value_: int) -> void:
 
 
 func get_current_facet_value() -> int:
-	var facet = facets.get_child(1)
+	var facet = facets.get_child(2)
 	return facet.value
 
 

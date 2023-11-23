@@ -127,11 +127,11 @@ func init_paths() -> void:
 
 func init_markers() -> void:
 	for team in stadium.teams:
-		for _i in team.mains.size():
+		for _i in 6:
 			var input = {}
 			input.field = self
+			input.team = team
 			input.order = _i + 1
-			input.gladiator = team.mains[_i]
 			
 			var marker = Global.scene.marker.instantiate()
 			markers.add_child(marker)
@@ -228,19 +228,6 @@ func get_all_routes_based_on_spots(spots_: Array) -> Array:
 		
 		if mainlines.has(start):
 			stop = true
-	
-#	var weights = {}
-#
-#	for _j in datas.size() - 1:
-#		var parents = datas[_j]
-#		var childs = datas[_j + 1]
-#
-#		for parent in parents:
-#			weights[parent.child.grid] = 0
-#
-#			for child in childs:
-#				if child.parent == parent.child:
-#					weights[parent.child.grid] += 1
 	
 	_i = 1
 	stop = false

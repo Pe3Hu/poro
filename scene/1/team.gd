@@ -9,6 +9,7 @@ var stadium = null
 var status = null
 var role = null
 var mains = []
+var markers = []
 var substitutes = []
 
 

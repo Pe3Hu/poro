@@ -473,7 +473,7 @@ func init_scene() -> void:
 func init_vec():
 	vec.size = {}
 	vec.size.letter = Vector2(20, 20)
-	vec.size.icon = Vector2(48, 48)
+	vec.size.icon = Vector2(30, 30)
 	vec.size.number = Vector2(5, 32)
 	
 	vec.size.marker = Vector2(64, 64) * 0.75
@@ -481,7 +481,9 @@ func init_vec():
 	vec.size.action = Vector2(64, 64) * 0.75
 	vec.size.spot = Vector2(num.spot.w * 0.75, num.spot.h)
 	
+	vec.size.bar = Vector2(210, 10)
 	vec.size.facet = Vector2(64, 64) * 0.5
+	vec.size.encounter = Vector2(128, 200)
 	
 	init_window_size()
 
@@ -496,16 +498,16 @@ func init_window_size():
 func init_color():
 	var h = 360.0
 	
-	color.indicator = {}
-	color.indicator.health = {}
-	color.indicator.health.fill = Color.from_hsv(0, 1, 0.9)
-	color.indicator.health.background = Color.from_hsv(0, 0.25, 0.9)
-	color.indicator.endurance = {}
-	color.indicator.endurance.fill = Color.from_hsv(0.33, 1, 0.9)
-	color.indicator.endurance.background = Color.from_hsv(0.33, 0.25, 0.9)
-	color.indicator.barrier = {}
-	color.indicator.barrier.fill = Color.from_hsv(0.5, 1, 0.9)
-	color.indicator.barrier.background = Color.from_hsv(0.5, 0.25, 0.9)
+	color.stamina = {}
+	color.stamina.vigor = {}
+	color.stamina.vigor.fill = Color.from_hsv(120.0 / h, 0.8, 0.9)
+	color.stamina.vigor.background = Color.from_hsv(120.0 / h, 0.25, 0.9)
+	color.stamina.standard = {}
+	color.stamina.standard.fill = Color.from_hsv(60.0 / h, 0.8, 0.9)
+	color.stamina.standard.background = Color.from_hsv(60.0 / h, 0.25, 0.9)
+	color.stamina.fatigue = {}
+	color.stamina.fatigue.fill = Color.from_hsv(0.0 / h, 0.8, 0.9)
+	color.stamina.fatigue.background = Color.from_hsv(0.0 / h, 0.25, 0.9)
 	
 	color.spot = {}
 	color.spot.attack = Color.from_hsv(0.0 / h, 0.8, 0.9)

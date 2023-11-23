@@ -7,6 +7,7 @@ var encounter = null
 var side = null
 var result = null
 var rolls = []
+var fixed = false
 
 
 func set_attributes(input_: Dictionary) -> void:

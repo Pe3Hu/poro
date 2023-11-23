@@ -3,7 +3,8 @@ extends MarginContainer
 
 @onready var strength = $VBox/Aspects/Strength
 @onready var dexterity = $VBox/Aspects/Dexterity
-@onready var stamina = $VBox/Stamina
+@onready var iconMarker = $VBox/HBox/Marker
+@onready var stamina = $VBox/HBox/Stamina
 
 var team = null
 var marker = null
@@ -15,8 +16,6 @@ var clashes = null
 var temperament = null
 var endurance = null
 var limits = null
-var state = null
-var effort = null
 var action = null
 var target = null
 var clash = null
@@ -50,17 +49,15 @@ func set_attributes(input_: Dictionary) -> void:
 	
 	var input = {}
 	input.gladiator = self
-	stamina.set_attributes(input)
-	endurance = {}
-	endurance.max = 100
-	endurance.current = 100
+	input.value = 1000
 	
-	limits = {}
-	limits.vigor = 0.75
-	limits.standard = 0.25
-	limits.fatigue = 0
+	input.limits = {}
+	input.limits.vigor = 0.25
+	input.limits.standard = 0.5
+	input.limits.fatigue = 0.25
+	stamina.set_attributes(input)
+	
 	roll_temperament()
-	update_state()
 
 
 func roll_temperament() -> void:
@@ -249,23 +246,8 @@ func update_clash() -> void:
 	clash.set_action(action)
 
 
-func exert_effort() -> void:
-	var chances = Global.dict.temperament.title[temperament].chances[state]
-	effort = Global.get_random_key(chances)
-	
-	endurance.current -= Global.dict.effort[effort]
-	update_state()
-
-
 func roll_damage() -> String:
 	return Global.get_random_key(Global.dict.damage.rnd)
-
-
-func update_state() -> void:
-	for _state in Global.arr.state:
-		if endurance.current > limits[_state] * endurance.max:
-			state = _state
-			break
 
 
 func choose_reaction() -> void:
@@ -278,3 +260,16 @@ func choose_reaction() -> void:
 			marker.spot.clash.set_action("push")#hook
 		"slip":
 			marker.spot.clash.set_action("push")#hook
+
+
+func set_marker(marker_: Variant) -> void:
+	if marker_ == null:
+		pass
+	
+	marker = marker_
+	
+	var input = {}
+	input.type = "marker"
+	input.subtype = team.status + " " + str(marker.order)
+	iconMarker.set_attributes(input)
+	#iconMarker.custom_minimum_size = Gl

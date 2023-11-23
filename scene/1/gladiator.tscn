@@ -1,13 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://cpdo8x5exj8yr"]
+[gd_scene load_steps=6 format=3 uid="uid://cpdo8x5exj8yr"]
 
 [ext_resource type="Script" path="res://scene/1/gladiator.gd" id="1_7cuyx"]
-[ext_resource type="PackedScene" uid="uid://matxhurqygh0" path="res://scene/4/stamina.tscn" id="2_50xgt"]
+[ext_resource type="PackedScene" uid="uid://matxhurqygh0" path="res://scene/3/stamina.tscn" id="2_50xgt"]
 [ext_resource type="PackedScene" uid="uid://d0sdjofw8ildj" path="res://scene/1/aspect.tscn" id="2_awn4e"]
+[ext_resource type="PackedScene" uid="uid://ciw38iqel0v5a" path="res://scene/0/icon.tscn" id="2_twj47"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7paps"]
 
 [node name="Gladiator" type="MarginContainer"]
-visible = false
 custom_minimum_size = Vector2(5, 5)
 anchors_preset = 8
 anchor_left = 0.5
@@ -34,7 +34,15 @@ layout_mode = 2
 theme_override_constants/separation = 0
 alignment = 1
 
-[node name="Stamina" parent="VBox" instance=ExtResource("2_50xgt")]
+[node name="HBox" type="HBoxContainer" parent="VBox"]
+layout_mode = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="Marker" parent="VBox/HBox" instance=ExtResource("2_twj47")]
+layout_mode = 2
+
+[node name="Stamina" parent="VBox/HBox" instance=ExtResource("2_50xgt")]
 layout_mode = 2
 
 [node name="Aspects" type="HBoxContainer" parent="VBox"]

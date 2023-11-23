@@ -59,6 +59,7 @@ func next_round() -> void:
 	
 	for team in teams:
 		team.switch_role()
+		team.coach.fill_main_gladiators()
 		team.coach.provide_guidance()
 	
 	markers_walkout()
@@ -83,6 +84,7 @@ func markers_walkout() -> void:
 			var spot = field.grids.spot[grid]
 			gladiator.marker.set_spot(spot)
 			gladiator.marker.carrier = false
+			gladiator.iconMarker.set
 			
 			if team.role == "attack" and gladiator.marker.order == 1:
 				gladiator.marker.set_carrier()
@@ -92,7 +94,7 @@ func load_balance() -> void:
 	for team in teams:
 		for gladiator in team.mains:
 			gladiator.select_action()
-			gladiator.exert_effort()
+			gladiator.stamina.exert_effort()
 
 
 func next_phase() -> void:

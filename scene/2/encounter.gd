@@ -26,6 +26,8 @@ var kind = null
 
 func set_attributes(input_: Dictionary) -> void:
 	stadium = input_.stadium
+	
+	custom_minimum_size = Global.vec.size.encounter
 
 
 func set_initiation(initiation_: Node2D) -> void:
@@ -95,7 +97,7 @@ func roll_pool() -> void:
 			var aspect = gladiator.get("strength")
 			var input = {}
 			input.type = "number"
-			input.subtype = aspect.get_performance_value(gladiator.state, gladiator.effort) 
+			input.subtype = aspect.get_performance_value(gladiator.stamina.state, gladiator.stamina.effort) 
 			
 			var icon = get(side+"Max")
 			icon.set_attributes(input)
@@ -212,6 +214,7 @@ func set_reaction(clash_: Sprite2D) -> void:
 		if result.side == "right": 
 			results.erase(result)
 	
+	leftPool.fixed = true
 	fixed = ["left"]
 	rightPool.reset()
 	right = clash_.spots.defense.marker.gladiator

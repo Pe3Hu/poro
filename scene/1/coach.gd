@@ -10,7 +10,6 @@ func set_attributes(input_: Dictionary) -> void:
 	team  = input_.team
 	
 	init_arrangements()
-	fill_main_gladiators()
 
 
 func init_arrangements() -> void:
@@ -31,8 +30,15 @@ func init_arrangements() -> void:
 
 
 func fill_main_gladiators() -> void:
+	team.mains = []
+	
 	for gladiator in team.gladiators.get_children():
 		team.mains.append(gladiator)
+	
+	for _i in team.mains.size():
+		var marker = team.markers[_i]
+		var gladiator = team.mains[_i]
+		marker.set_gladiator(gladiator)
 
 
 func provide_guidance() -> void:
