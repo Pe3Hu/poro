@@ -52,7 +52,7 @@ func set_interceptors() -> void:
 func allow_interceptors_to_reaction() -> void:
 	if !interceptors.keys().is_empty():
 		for interceptor in interceptors:
-			field.stadium.encounter.reactions.append(interceptor.clash)
+			field.stadium.encounter.reactions.append(interceptor.spot.clash)
 
 
 func allow_transferee_to_reaction() -> void:

@@ -64,6 +64,10 @@ func update_result() -> void:
 
 
 func reset() -> void:
+	fixed = false
+	result = 0
+	rolls = []
+	
 	while dices.get_child_count() > 0:
 		var dice = dices.get_child(0)
 		dices.remove_child(dice)

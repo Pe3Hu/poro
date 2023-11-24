@@ -52,7 +52,15 @@ layout_mode = 2
 [node name="Pool" parent="Gladiators/Left" instance=ExtResource("3_tuhhi")]
 layout_mode = 2
 
-[node name="Icon" parent="Gladiators" instance=ExtResource("2_kuscj")]
+[node name="Icons" type="VBoxContainer" parent="Gladiators"]
+layout_mode = 2
+alignment = 1
+
+[node name="Initiation" parent="Gladiators/Icons" instance=ExtResource("2_kuscj")]
+layout_mode = 2
+
+[node name="Reaction" parent="Gladiators/Icons" instance=ExtResource("2_kuscj")]
+visible = false
 layout_mode = 2
 
 [node name="Right" type="VBoxContainer" parent="Gladiators"]

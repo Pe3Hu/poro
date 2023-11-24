@@ -242,6 +242,9 @@ func update_clash() -> void:
 	if clash == null:
 		clash = marker.spot.clash
 	
+	if action == "slip" or action == "breakthrough":
+		clash = marker.spot.clash
+	
 	clash.set_action(action)
 
 

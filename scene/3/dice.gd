@@ -13,7 +13,7 @@ var time = null
 var faces = null
 var counter = 0
 var window = 3
-var skip = false#false true
+var skip = true#false true
 var anchor = null
 var temp = true
 
@@ -58,7 +58,7 @@ func roll() -> void:
 
 
 func reset() -> void:
-	shuffle_facets()
+	#shuffle_facets()
 	pace = 20
 	tick = 0
 	facets.position.y = -Global.vec.size.facet.y * 1

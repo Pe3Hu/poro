@@ -32,16 +32,17 @@ func set_attributes(input_: Dictionary) -> void:
 
 
 func init_states() -> void:
-	for state in Global.arr.state:
-		var indicator = get(state)
+	for _state in Global.arr.state:
+		var indicator = get(_state)
 		
 		var input = {}
 		input.stamina = self
-		input.state = state
-		input.max = limits[state] * value.total
+		input.state = _state
+		input.max = limits[_state] * value.total
 		indicator.set_attributes(input)
 	
 	update_state()
+	make_an_effort(0)
 
 
 func update_state() -> void:
@@ -62,7 +63,7 @@ func make_an_effort(effort_: int) -> void:
 func exert_effort() -> void:
 	var chances = Global.dict.temperament.title[gladiator.temperament].chances[state]
 	effort = Global.get_random_key(chances)
-	make_an_effort(Global.dict.effort[effort])
+	#make_an_effort(Global.dict.effort[effort])
 
 
 func reset_overheat() -> void:

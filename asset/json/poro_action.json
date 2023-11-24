@@ -32,7 +32,7 @@
   "layer": 6,
   "attack": "yes",
   "phase": "movement",
-  "order": 3,
+  "order": -1,
   "target": "several"
  },
  {

@@ -9,7 +9,8 @@ extends MarginContainer
 @onready var rightMax = $Gladiators/Right/HBox/Max
 @onready var rightPool = $Gladiators/Right/Pool
 @onready var rightWinner = $Gladiators/Right/Winner
-@onready var titleIcon = $Gladiators/Icon
+@onready var initiationIcon = $Gladiators/Icons/Initiation
+@onready var reactionIcon = $Gladiators/Icons/Reaction
 
 var stadium = null
 var initiation = null
@@ -21,6 +22,7 @@ var loser = null
 var results = []
 var fixed = []
 var reactions = []
+var hides = []
 var kind = null
 
 
@@ -28,6 +30,7 @@ func set_attributes(input_: Dictionary) -> void:
 	stadium = input_.stadium
 	
 	custom_minimum_size = Global.vec.size.encounter
+	hides = ["pass", "slip", "breakthrough"]
 
 
 func set_initiation(initiation_: Node2D) -> void:
@@ -46,23 +49,25 @@ func set_initiation(initiation_: Node2D) -> void:
 			
 			set(Global.arr.side[_i], gladiator)
 		
+		if left == right:
+			fixed.append("right")
+		
 		for side in Global.arr.side:
 			update_side_icons(side)
 		
 		var input = {}
 		input.type = "action"
 		input.subtype = initiation.action
-		titleIcon.set_attributes(input)
+		initiationIcon.set_attributes(input)
 	
 		roll_pool()
 		reroll_pool()
 		
-		match input.subtype:
-			"pass":
-				leftWinner.visible = false
-				rightMarker.visible = false
-				rightPool.visible = false
-				rightWinner.visible = false
+		if hides.has(input.subtype):
+			leftWinner.visible = false
+			rightMarker.visible = false
+			rightPool.visible = false
+			rightWinner.visible = false
 
 
 func update_side_icons(side_: String) -> void:
@@ -124,71 +129,87 @@ func reroll_pool() -> void:
 
 
 func check_results() -> void:
-	if results.size() == 2:
-		results.sort_custom(func(a, b): return a.value > b.value)
+	var a = results.size()
+	match results.size():
+		1:
+			if fixed.size() == 1:
+				for side in Global.arr.side:
+					if !fixed.has(side):
+						winner = get(side)
+			
+				apply_result()
+		2:
+			results.sort_custom(func(a, b): return a.value > b.value)
+			
+			if results.front().value == results.back().value:
+				match kind:
+					"initiation":
+						reroll_pool()
+						return
+					"reaction":
+						if initiation.action == "pass" and left.marker.check_teamate(right.marker):
+							if results.front().side == "left":
+								var result = results.pop_front()
+								results.append(result)
+								pass
+			
+			if right == left and results.front().side == "right":
+				var result = results.pop_front()
+				results.append(result)
 		
-		if results.front().value == results.back().value:
-			match kind:
-				"initiation":
-					reroll_pool()
-					return
-				"reaction":
-					if initiation.action == "pass" and left.marker.check_teamate(right.marker):
-						if results.front().side == "left":
-							var result = results.pop_front()
-							results.append(result)
-							pass
-		
-		if right == left and results.front().side == "right":
-			var result = results.pop_front()
-			results.append(result)
-	
-		winner = get(results.front().side)
-		loser = get(results.back().side)
-		
-		var input = {}
-		input.type = "prize"
-		input.subtype = "1"
-		
-		var icon = get(results.front().side+"Winner")
-		icon.set_attributes(input)
-		icon.visible = true
-		
-		icon = get(results.back().side+"Winner")
-		icon.visible = false
-		apply_result()
+			winner = get(results.front().side)
+			loser = get(results.back().side)
+			
+			var input = {}
+			input.type = "prize"
+			input.subtype = "1"
+			
+			var icon = get(results.front().side+"Winner")
+			icon.set_attributes(input)
+			icon.visible = true
+			
+			icon = get(results.back().side+"Winner")
+			icon.visible = false
+			apply_result()
 
 
 func apply_result() -> void:
-	if initiation.action != "waiting" and initiation.action != "empty":
+	if reaction == null:
+		if initiation.action != "waiting" and initiation.action != "empty":
+			var description = Global.dict.action.title[initiation.action]
+			var data = {}
+			data.subtype = description.subtype
+			
+			match description.subtype:
+				"movement":
+					if initiation.action != "step":
+						stadium.field.trajectory.set_spots(initiation.action, left.marker.spot, left.destination)
+				"onslaught":
+					data.gladiator = loser
+					data.damage = loser.roll_damage()
+				"transfer":
+					match right.action:
+						"pass":
+							left.marker.spot.clash.values.mince = results.front().value
+							stadium.field.trajectory.set_spots(initiation.action, left.marker.spot, left.transferee.marker.spot)
+	else:
 		var description = Global.dict.action.title[initiation.action]
-		var data = {}
-		data.subtype = description.subtype
 		
-		if winner.destination != null:
-			winner.marker.set_spot(winner.destination)
-			winner.destination = null
-			data.gladiator = winner
+		match description.subtype:
+			"movement":
+				if winner == left:
+					winner.marker.set_spot(winner.destination)
+				else:
+					loser.roll_damage()
+					
+				winner.destination = null
+			#if !description.subtype != "transfer":
+			#	data_out(data)
 		
-		match description.type:
-			"initiation":
-				match description.subtype:
-					"movement":
-						if initiation.action != "step":
-							stadium.field.trajectory.set_spots(initiation.action, left.marker.spot, winner.destination)
-					"onslaught":
-						data.gladiator = loser
-						data.damage = loser.roll_damage()
-					"transfer":
-						match right.action:
-							"pass":
-								left.marker.spot.clash.values.mince = results.front().value
-								stadium.field.trajectory.set_spots(initiation.action, left.marker.spot, left.transferee.marker.spot)
-							"catch":
-								pass
-		
-		#if !description.subtype != "transfer":
-		#	data_out(data)
+	for side in Global.arr.side:
+		if !fixed.has(side):
+			var gladiator = get(side)
+			gladiator.stamina.make_an_effort(Global.dict.effort[gladiator.stamina.effort])
 	
 	#next_reaction()
 
@@ -203,6 +224,20 @@ func data_out(data_: Dictionary) -> void:
 			text += " get damage " + data_.damage
 	
 	print(text)
+
+
+func next_reaction() -> void:
+	if reaction != null:
+		reaction.reset()
+	
+	if !reactions.is_empty():
+		var b = reactions.size()
+		reaction = reactions.pop_front()
+		var a = reactions.size()
+		set_reaction(reaction)
+		
+	else:
+		end_of_encounter()
 
 
 func set_reaction(clash_: Sprite2D) -> void:
@@ -220,22 +255,23 @@ func set_reaction(clash_: Sprite2D) -> void:
 	right = clash_.spots.defense.marker.gladiator
 	
 	right.choose_reaction()
+	
+	var input = {}
+	input.type = "action"
+	input.subtype = reaction.action
+	reactionIcon.set_attributes(input)
+	reactionIcon.visible = true
+	
 	update_side_icons("right")
 	roll_pool()
 
 
-func next_reaction() -> void:
-	if reaction != null:
-		reaction.reset()
-	
-	if !reactions.is_empty():
-		reaction = reactions.pop_front()
-		set_reaction(reaction)
-	else:
-		end_of_encounter()
-
-
 func end_of_encounter() -> void:
+#	var description = Global.dict.action.title[initiation.action]
+#
+#	match description.subtype:
+#		"movement":
+	
 	initiation.reset()
 	reset()
 	stadium.next_clash()
@@ -248,3 +284,4 @@ func reset() -> void:
 	fixed = []
 	leftPool.reset()
 	rightPool.reset()
+	reactionIcon.visible = false

@@ -36,13 +36,13 @@ alignment = 1
 [node name="Overheat" parent="VBox" instance=ExtResource("4_7f7un")]
 layout_mode = 2
 
-[node name="Fatigue" parent="VBox" instance=ExtResource("2_mjypn")]
+[node name="Vigor" parent="VBox" instance=ExtResource("2_mjypn")]
 layout_mode = 2
 
 [node name="Standard" parent="VBox" instance=ExtResource("2_mjypn")]
 layout_mode = 2
 
-[node name="Vigor" parent="VBox" instance=ExtResource("2_mjypn")]
+[node name="Fatigue" parent="VBox" instance=ExtResource("2_mjypn")]
 layout_mode = 2
 
 [node name="Damage" parent="VBox" instance=ExtResource("4_7f7un")]
