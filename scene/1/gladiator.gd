@@ -1,10 +1,9 @@
 extends MarginContainer
 
 
-@onready var strength = $VBox/Aspects/Strength
-@onready var dexterity = $VBox/Aspects/Dexterity
-@onready var iconMarker = $VBox/HBox/Marker
-@onready var stamina = $VBox/HBox/Stamina
+@onready var strength = $HBox/Aspects/Strength
+@onready var dexterity = $HBox/Aspects/Dexterity
+@onready var stamina = $HBox/Stamina
 
 var team = null
 var marker = null
@@ -269,7 +268,9 @@ func set_marker(marker_: Variant) -> void:
 	marker = marker_
 	
 	var input = {}
+	input.proprietor = stamina
 	input.type = "marker"
 	input.subtype = team.status + " " + str(marker.order)
-	iconMarker.set_attributes(input)
+	input.value = 1
+	stamina.overheat.set_attributes(input)
 	#iconMarker.custom_minimum_size = Gl

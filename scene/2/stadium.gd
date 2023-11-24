@@ -84,7 +84,7 @@ func markers_walkout() -> void:
 			var spot = field.grids.spot[grid]
 			gladiator.marker.set_spot(spot)
 			gladiator.marker.carrier = false
-			gladiator.iconMarker.set
+			#gladiator.iconMarker.set
 			
 			if team.role == "attack" and gladiator.marker.order == 1:
 				gladiator.marker.set_carrier()

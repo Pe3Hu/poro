@@ -475,13 +475,15 @@ func init_vec():
 	vec.size.letter = Vector2(20, 20)
 	vec.size.icon = Vector2(30, 30)
 	vec.size.number = Vector2(5, 32)
+	vec.size.sixteen = Vector2(16, 16)
 	
 	vec.size.marker = Vector2(64, 64) * 0.75
 	vec.size.hex = Vector2(64, 64) * 1.66
 	vec.size.action = Vector2(64, 64) * 0.75
 	vec.size.spot = Vector2(num.spot.w * 0.75, num.spot.h)
 	
-	vec.size.bar = Vector2(210, 10)
+	#vec.size.bar = Vector2(150, vec.size.letter.y)
+	vec.size.bar = Vector2(32, 48)
 	vec.size.facet = Vector2(64, 64) * 0.5
 	vec.size.encounter = Vector2(128, 200)
 	

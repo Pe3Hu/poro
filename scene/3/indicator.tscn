@@ -15,6 +15,7 @@ corner_detail = 1
 bg_color = Color(0.231373, 0.231373, 0.231373, 1)
 
 [node name="Indicator" type="MarginContainer"]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -26,6 +27,7 @@ offset_right = -30.0
 offset_bottom = 9.5
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 4
 script = ExtResource("1_xwx25")
 
 [node name="BG" type="Panel" parent="."]
@@ -41,10 +43,10 @@ theme_override_styles/background = SubResource("StyleBoxFlat_q3sqh")
 theme_override_styles/fill = SubResource("StyleBoxFlat_neula")
 max_value = 0.0
 step = 1.0
+fill_mode = 3
 show_percentage = false
 
 [node name="Value" type="Label" parent="."]
-visible = false
 layout_mode = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("2_w1eil")

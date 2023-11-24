@@ -32,13 +32,13 @@ func update_value(value_: String, shift_: int) -> void:
 	match value_:
 		"current":
 			bar.value += shift_
-			value.visible = true
+			visible = true
 			
 			if bar.value < 0:
 				stamina.update_state()
 				stamina.make_an_effort(-bar.value)
 				bar.value = 0
-				value.visible = false
+				visible = false
 			
 			value.text = str(bar.value)
 		"maximum":

@@ -1,9 +1,11 @@
 extends MarginContainer
 
 
-@onready var vigor = $HBox/Vigor
-@onready var standard = $HBox/Standard
-@onready var fatigue = $HBox/Fatigue
+@onready var vigor = $VBox/Vigor
+@onready var standard = $VBox/Standard
+@onready var fatigue = $VBox/Fatigue
+@onready var overheat = $VBox/Overheat
+@onready var damage = $VBox/Damage
 
 var gladiator = null
 var value = {}
@@ -20,6 +22,13 @@ func set_attributes(input_: Dictionary) -> void:
 	value.total = input_.value
 	value.current = int(input_.value)
 	init_states()
+	
+	var input = {}
+	input.proprietor = self
+	input.type = "damage"
+	input.subtype = "lack"
+	input.value = 0
+	set_damage(input)
 
 
 func init_states() -> void:
@@ -43,6 +52,7 @@ func update_state() -> void:
 			state = _state
 			break
 
+
 func make_an_effort(effort_: int) -> void:
 	var indicator = get(state) 
 	indicator.update_value("current", -effort_)
@@ -53,3 +63,17 @@ func exert_effort() -> void:
 	var chances = Global.dict.temperament.title[gladiator.temperament].chances[state]
 	effort = Global.get_random_key(chances)
 	make_an_effort(Global.dict.effort[effort])
+
+
+func reset_overheat() -> void:
+	overheat.stack.set_number(1)
+
+
+func rise_overheat() -> void:
+	overheat.stack.change_number(1)
+
+
+func set_damage(input_: Dictionary) -> void:
+	input_.proprietor = self
+	damage.set_attributes(input_)
+	damage.stack.visible = input_.value > 0

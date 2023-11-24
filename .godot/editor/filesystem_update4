@@ -3,8 +3,12 @@ res://scene/2/field.tscn
 res://scene/2/encounter.tscn
 res://scene/1/aspect.tscn
 res://scene/1/gladiator.tscn
-res://scene/1/aspect.gd
+res://scene/3/indicator.tscn
+res://scene/3/stamina.gd
+res://scene/3/stamina.tscn
 res://script/Global.gd
 res://scene/1/gladiator.gd
-res://scene/3/indicator.tscn
+res://scene/2/stadium.gd
+res://scene/0/couple.gd
+res://scene/0/icon.gd
 res://scene/3/indicator.gd
